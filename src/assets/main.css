@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'DB Ozone X';
+    src: url('./fonts/DB Ozone X.ttf');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'DB Ozone X';
+    src: url('./fonts/DB Ozone X Ultra Light.ttf');
+    font-style: normal;
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: 'DB Ozone X';
+    src: url('./fonts/DB Ozone X Ultra Light Italic.ttf');
+    font-style: italic;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'DB Ozone X';
+    src: url('./fonts/DB Ozone X Light.ttf');
+    font-style: normal;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'DB Ozone X';
+    src: url('./fonts/DB Ozone X Light Italic.ttf');
+    font-style: italic;
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'DB Ozone X';
+    src: url('./fonts/DB Ozone X Medium.ttf');
+    font-style: normal;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'DB Ozone X';
+    src: url('./fonts/DB Ozone X Medium Italic.ttf');
+    font-style: italic;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'DB Ozone X';
+    src: url('./fonts/DB Ozone X Bold.ttf');
+    font-style: normal;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'DB Ozone X';
+    src: url('./fonts/DB Ozone X Bold Italic.ttf');
+    font-style: italic;
+    font-weight: 700;
+}
+
+
+html {
+    font-family: 'DB Ozone X';
+    font-size: 22px;
+}
