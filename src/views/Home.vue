@@ -1,8 +1,13 @@
-<script setup lang="ts">
-
+<script setup la
+  components: { Navbar },ng="ts">
+import MapZone from '@/components/MapZone.vue';
+import Navbar from '@/components/Navbar.vue';
 </script>
 
 <template>
-    <RouterLink :to="{ name: 'welcome' }">Welcome</RouterLink><br/>
-    <RouterLink :to="{ name: 'trois' }">Trois</RouterLink>
+    <div>
+        <h1>แผนที่</h1>
+        <MapZone/>
+        <Navbar />
+    </div>
 </template>
