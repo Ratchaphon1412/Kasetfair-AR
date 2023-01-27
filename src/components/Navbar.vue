@@ -3,9 +3,14 @@ import NavbarButton from './NavbarButton.vue';
 </script>
 
 <template>
-    <div>
+    <div class="bg-[#AFC2AC]  bg-nav">
         <NavbarButton />
-        <div class="p-8 bg-[#AFC2AC]">
-        </div>
     </div>
 </template>
+
+<style scoped>
+.bg-nav {
+    background-size: 50px 100px !important;
+}
+
+</style>
