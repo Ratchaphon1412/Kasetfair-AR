@@ -1,5 +1,4 @@
-<script setup la
-  components: { Navbar },ng="ts">
+<script setup lang="ts">
 import MapZone from '@/components/MapZone.vue';
 import Navbar from '@/components/Navbar.vue';
 import Annoucement from '@/components/Annoucement.vue'
@@ -7,7 +6,9 @@ import Annoucement from '@/components/Annoucement.vue'
 
 <template>
     <div>
-        <h1>แผนที่</h1>
+		<div class="px-3 py-2">
+			<h1>แผนที่</h1>
+		</div>
         <MapZone/>
         <Annoucement/>
         <Navbar />
