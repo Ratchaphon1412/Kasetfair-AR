@@ -4,6 +4,6 @@
 
 <template>
     <div>
-        MapZone
+        <img src="@/assets/images/basemapKU1-01.png" alt="">
     </div>
 </template>

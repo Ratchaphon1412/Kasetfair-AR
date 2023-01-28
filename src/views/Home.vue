@@ -6,7 +6,7 @@ import Navbar from '@/components/Navbar.vue';
 <template>
     <div>
 		<div class="px-3 py-2">
-			<h1>แผนที่</h1>
+			<h1 class="font-bold text-3xl">แผนที่</h1>
 		</div>
         <MapZone/>
         <Navbar />
