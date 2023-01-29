@@ -6,8 +6,9 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div>
-        <h4>{{ text }}</h4>
-        <h4>{{ author }}</h4>
-    </div>
+
+        <ul class="list-disc list-inside">
+            <li>{{ text }}</li>
+            <h4 class="pl-6">{{ author }}</h4>
+        </ul>
 </template>
