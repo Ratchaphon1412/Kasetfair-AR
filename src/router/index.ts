@@ -17,6 +17,11 @@ const router = createRouter({
       path: '/trois',
       name: 'trois',
       component: () => import('../views/Trois.vue')
+    },
+    {
+      path: '/timeline',
+      name: 'timeline',
+      component: () => import('../views/TimelineTable.vue')
     }
   ]
 })
