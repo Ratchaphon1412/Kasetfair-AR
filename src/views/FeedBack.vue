@@ -71,14 +71,16 @@
 
         <!-- score event -->
         <br><label class="pl-10">ให้คะแนนการจัดงานเกษตรแฟร์</label><br>
-        <div class="pl-10 pr-10">
-            <input v-model="scoreEvent" type="text" class="w-full pl-10 rounded">
-        </div>
+        <i class="pl-10" style="color:gray">เพิ่มเติม ปุ่มทางซ้ายเป็น ลด 0.5 และ ทางขวา เพิ่ม 0.5</i>
+        
+        <vue3starRatings v-model="scoreEvent" starSize="50" controlSize="30" controlBg="#ffffff" controlColor="#000000" starColor="#57855E"/>
+        
         <!-- score application -->
         <br><label class="pl-10">ให้คะแนนแอพพลิเคชั่น</label><br>
-        <div class="pl-10 pr-10">
-            <input v-model="scoreApp" type="text" class="w-full pl-10 rounded">
-        </div>
+        <i class="pl-10" style="color:gray">เพิ่มเติม ปุ่มทางซ้ายเป็น ลด 0.5 และ ทางขวา เพิ่ม 0.5</i>
+        
+        <vue3starRatings v-model="scoreApp" starSize="50" controlSize="30" controlBg="#ffffff" controlColor="#000000" starColor="#57855E"/>
+
         <!-- add more detail -->
         <br><label class="pl-10">ข้อเสนอแนะเพิ่ม</label><br>
         <div class="text-center pl-10 pr-10">
@@ -96,10 +98,12 @@
 </template>
 
 <script>
+import { defineComponent } from "vue";
+import vue3starRatings from "vue3-star-ratings";
+
 export default {
     data() {
         return {
-            picture: '',
             scoreEvent: 0,
             scoreApp: 0,
             moreDetail: ''
@@ -109,11 +113,16 @@ export default {
         confirm(){
             if (this.moreDetail !== '' && this.scoreEvent !== 0 && this.scoreApp !== 0) {
                 alert("ใส่ข้อมูลครบทวนแล้ว")
+                console.log(this.scoreEvent);
+                console.log(this.scoreApp);
                 window.location.reload()
             }else{
                 alert("กรุณาใส่ให้ครบ")
             }
-        }   
+        }
+    },
+    components: {
+        vue3starRatings,
     }
 }
 </script>
