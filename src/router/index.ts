@@ -17,6 +17,16 @@ const router = createRouter({
       path: '/trois',
       name: 'trois',
       component: () => import('../views/Trois.vue')
+    },
+    {
+      path: '/form',
+      name: 'form',
+      component: () => import('../views/Form.vue')
+    },
+    {
+      path: '/feedback',
+      name: 'feedback',
+      component: () => import('../views/FeedBack.vue')
     }
   ]
 })
