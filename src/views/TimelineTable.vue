@@ -33,8 +33,9 @@ export default defineComponent({
         headerToolbar: {
           left: "title",
 
-          right: "prev today next",
+          right: "",
         },
+        initialDate: new Date(), // current date
         initialView: "timeGridDay", // start with the timeGridWeek view
         initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
         themeSystem: "bootstrap5", // bootstrap5 theme
@@ -43,23 +44,38 @@ export default defineComponent({
 
         editable: false, // don't allow editing of events
         handleWindowResize: true, // allow the calendar to be responsive
-        weekends: true, // show weekends mon - sun
 
         selectable: false, // don't allow selection of dates
         selectMirror: false, // when dragging, don't show the original event
         dayMaxEvents: true, // allow "more" link when too many events
         allDaySlot: false, // hide the all-day slot
         slotEventOverlap: false, //don't allow events to overlap
+
+        views: {
+          timeGrid: {
+            // options apply to timeGridWeek and timeGridDay views
+            slotLabelFormat: [
+              {
+                hour: "numeric",
+                minute: "2-digit",
+                omitZeroMinute: false,
+                meridiem: "short",
+              },
+            ],
+            slotDuration: "00:10:00", // 30 minutes
+            slotMinTime: "08:00:00", // 8:00 AM
+            slotMaxTime: "20:00:00", // 8:00 PM
+            weekends: true, // show weekends mon - sun
+            dayHeaders: false, // hide the day header
+          },
+        },
+
         eventMinHeight: 100, // minimum height of an event
         eventShortHeight: 100, // minimum height of an event
-        views: {},
-
         //select: this.handleDateSelect, // this is the function that will be called when a date is selected
         eventClick: this.handleEventClick, // this is the function that will be called when an event is clicked
         // eventSet: this.handleEvents, // this is the function that will be called when events are set or reset
-
         events: [], // this is the array of events that will be displayed on the calendar
-
         /* you can update a remote database when these fire:
         eventAdd:
         eventChange:
@@ -100,7 +116,20 @@ export default defineComponent({
       this.currentEvents = events;
     },
     getDate(date) {
-      console.log(date);
+      //   let stringDate =
+      //     date.getDate().toString() +
+      //     "-" +
+      //     (date.getMonth() + 1).toString() +
+      //     "-" +
+      //     date.getFullYear().toString();
+
+      let calendarApi = this.$refs.fullCalendar.getApi();
+      calendarApi.next();
+      calendarApi.gotoDate(date);
+
+      //   this.calendarOptions.initialDate = stringDate;
+      //   console.log(stringDate);
+      //   console.log(date);
     },
   },
 });
@@ -121,6 +150,7 @@ export default defineComponent({
     <div class="grid grid-cols-12 grid-rows-1">
       <div class="col-start-1 col-span-12 row-span-12">
         <FullCalendar
+          ref="fullCalendar"
           :options="calendarOptions"
           :buttonIcons="{
             prev: 'bi bi-arrow-left-circle-fill',
@@ -145,6 +175,10 @@ export default defineComponent({
   background-color: #a0a8a0;
 }
 
+.fc-header {
+  border-radius: 25px;
+}
+
 .fc-state-highlight {
   opacity: 0;
   border: none;
@@ -152,12 +186,13 @@ export default defineComponent({
 
 /* Styling for each event from Schedule */
 .fc-time-grid-event.fc-v-event.fc-event {
-  border-radius: 4px;
   border: none;
   padding: 5px;
   opacity: 0.65;
   left: 5% !important;
   right: 5% !important;
+  border-radius: 25px !important;
+  /*border-radius: 4px;*/
 }
 
 /* Bolds the name of the event and inherits the font size */
@@ -169,13 +204,14 @@ export default defineComponent({
 /* Remove the header border from Schedule */
 .fc td,
 .fc th {
-  border-style: none !important;
-  border-color: black !important;
-  border-width: 1px !important;
+  /*border-style: none !important;*/
+  border-radius: 25px !important; /*rounds the corners of the calendar*/
+  /*border-color: black !important;*/
+  /*border-width: 1px !important;*/
   padding: 0 !important;
   vertical-align: top !important;
   background-color: #b6c3c2 !important;
-  color: #ffffff;
+  color: #000000;
 }
 
 /* Inherits background for each event from Schedule. */
@@ -183,6 +219,7 @@ export default defineComponent({
   z-index: 1 !important;
   background: inherit !important;
   opacity: 0.25 !important;
+  border-radius: 25px !important;
 }
 
 /* Normal font weight for the time in each event */

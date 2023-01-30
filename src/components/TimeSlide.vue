@@ -13,7 +13,10 @@
                 class="flex group bg-[#69B19B] shadow-lg dark-shadow rounded-lg mx-1 cursor-pointer justify-center relative w-16"
                 @click="clickDate(date)"
               >
-                <span class="flex h-3 w-3 absolute -top-1 -right-1">
+                <span
+                  ref="targetDiv"
+                  class="flex h-3 w-3 absolute -top-1 -right-1"
+                >
                   <span
                     class="animate-ping absolute group-hover:opacity-75 opacity-0 inline-flex h-full w-full rounded-full bg-purple-400"
                   ></span>
@@ -103,6 +106,14 @@ export default {
     clickDate(date) {
       this.callback(date);
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$refs.targetDiv.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    });
   },
 };
 </script>
