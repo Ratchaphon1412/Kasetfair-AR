@@ -19,6 +19,11 @@ const router = createRouter({
       path: BASE_URL + '/trois',
       name: 'trois',
       component: () => import('../views/Trois.vue')
+    },
+    {
+      path: '/notification',
+      name: 'notification',
+      component: () => import('../views/Notification.vue')
     }
   ]
 })
