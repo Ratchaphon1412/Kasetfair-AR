@@ -13,12 +13,14 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 
 import MapZone from "../components/MapZone.vue";
 import TimeSlide from "../components/TimeSlide.vue";
+import PopupTimeTable from "../components/PopupTimeTable.vue";
 
 export default defineComponent({
   components: {
     FullCalendar,
     MapZone,
     TimeSlide,
+    PopupTimeTable,
   },
   data() {
     return {
@@ -31,14 +33,15 @@ export default defineComponent({
         ],
         // headerToolbar: false, // hide the header
         headerToolbar: {
-          left: "title",
+          left: "",
 
           right: "",
         },
         initialDate: new Date(), // current date
         initialView: "timeGridDay", // start with the timeGridWeek view
         initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-        themeSystem: "bootstrap5", // bootstrap5 theme
+        themeSystem: "standard", // standard theme
+        //themeSystem: "bootstrap5", // bootstrap5 theme
         nowIndicator: true, // show the current time
         locale: thLocale, // locale for the calendar (thai)
 
@@ -73,16 +76,17 @@ export default defineComponent({
         eventMinHeight: 100, // minimum height of an event
         eventShortHeight: 100, // minimum height of an event
         //select: this.handleDateSelect, // this is the function that will be called when a date is selected
-        eventClick: this.handleEventClick, // this is the function that will be called when an event is clicked
-        // eventSet: this.handleEvents, // this is the function that will be called when events are set or reset
-        events: [], // this is the array of events that will be displayed on the calendar
+        //eventClick: this.handleEventClick, // this is the function that will be called when an event is clicked
+        //eventSet: this.handleEvents, // this is the function that will be called when events are set or reset
+        // events: [], // this is the array of events that will be displayed on the calendar
         /* you can update a remote database when these fire:
         eventAdd:
         eventChange:
         eventRemove:
         */
       },
-      currentEvents: [],
+      events: [],
+      dateSelect: new Date(),
     };
   },
   methods: {
@@ -116,56 +120,102 @@ export default defineComponent({
       this.currentEvents = events;
     },
     getDate(date) {
-      //   let stringDate =
-      //     date.getDate().toString() +
-      //     "-" +
-      //     (date.getMonth() + 1).toString() +
-      //     "-" +
-      //     date.getFullYear().toString();
-
       let calendarApi = this.$refs.fullCalendar.getApi();
       calendarApi.next();
       calendarApi.gotoDate(date);
-
-      //   this.calendarOptions.initialDate = stringDate;
-      //   console.log(stringDate);
-      //   console.log(date);
+      this.dateSelect = date;
     },
   },
 });
 </script>
 
 <template>
-  <TimeSlide :callback="getDate" />
+  <div class="page-timetable">
+    <!--header date slide-->
+    <div class="text-center p-4">
+      <!--title date-->
+      <span class="month-head">
+        <h5>
+          <p>
+            <b>{{ dateSelect.toLocaleString("th-th", { month: "long" }) }}</b>
+          </p>
+        </h5>
+      </span>
+      <!--time date -->
+      <TimeSlide :callback="getDate" />
 
-  <div class="container mx-auto">
-    <div class="grid grid-rows-1 grid-cols-12 grap-3">
-      <div class="col-start-2 col-span-9 row-span-6">
-        <MapZone />
+      <!--title timetable-->
+      <div class="text-center p-4">
+        <span class="timetable-title">
+          <h6>
+            <p>
+              <b> ตารางเวลา </b>
+            </p>
+          </h6>
+        </span>
       </div>
     </div>
-  </div>
-
-  <div class="w-full p-5">
-    <div class="grid grid-cols-12 grid-rows-1">
-      <div class="col-start-1 col-span-12 row-span-12">
-        <FullCalendar
-          ref="fullCalendar"
-          :options="calendarOptions"
-          :buttonIcons="{
-            prev: 'bi bi-arrow-left-circle-fill',
-            next: 'bi bi-arrow-right-circle-fill',
-            prevYear: 'bi bi-arrow-left-circle-fill',
-            nextYear: 'bi bi-arrow-right-circle-fill',
-          }"
-        >
-          <template v-slot:eventContent="arg">
-            <b>{{ arg.timeText }}</b>
-            <i>{{ arg.event.title }}</i>
-          </template>
-        </FullCalendar>
+    <!--map-->
+    <div class="container mx-auto">
+      <div class="grid grid-rows-1 grid-cols-12 grap-3">
+        <div class="col-start-2 col-span-9 row-span-6">
+          <MapZone />
+        </div>
       </div>
     </div>
+    <!--calendar Group-->
+    <div class="w-full p-3">
+      <div class="grid grid-cols-12 grid-rows-1">
+        <div class="col-start-1 col-span-12 row-span-12">
+          <!--title date-mount-year-->
+          <div class="text-center">
+            <span class="datefull-text">
+              <h4>
+                <p>
+                  {{
+                    dateSelect.toLocaleString("th-th", {
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                    })
+                  }}
+                </p>
+              </h4>
+            </span>
+          </div>
+          <!--calendar-->
+          <div class="calendar-container">
+            <FullCalendar ref="fullCalendar" :options="calendarOptions">
+              <template class="rounded shadow" v-slot:eventContent="arg">
+                <div class="content pl-2 pt-2">
+                  <p class="text-gray-600 font-semibold">{{ arg.timeText }}</p>
+                  <h5 class="text font-semibold">
+                    {{ arg.event.title }}
+                  </h5>
+                  <div class="mt-6 flex items-center">
+                    <span class="flex flex-row">
+                      <div class="icon">
+                        <i class="bi bi-geo-alt-fill"></i>
+                      </div>
+                      <div class="location pl-2">
+                        <p class="text-gray-600 font-medium">
+                          {{ arg.event.extendedProps.location }}
+                        </p>
+                      </div>
+                    </span>
+                  </div>
+                </div>
+              </template>
+            </FullCalendar>
+          </div>
+          <!--end-->
+        </div>
+      </div>
+    </div>
+
+    <!--popup-->
+    <PopupTimeTable />
+    <!--nav-->
   </div>
 </template>
 
@@ -198,20 +248,36 @@ export default defineComponent({
 /* Bolds the name of the event and inherits the font size */
 .fc-event {
   font-size: inherit !important;
-  font-weight: bold !important;
+  /*font-weight: bold !important;
+  padding: 10px; /*padding for the event*/
+  /*rounds the corners of the event*/
+  border-radius: 25px;
+  margin-left: 10px; /*margin left for the event*/
+  margin-right: 10px; /*margin right for the event*/
 }
 
 /* Remove the header border from Schedule */
 .fc td,
 .fc th {
   /*border-style: none !important;*/
-  border-radius: 25px !important; /*rounds the corners of the calendar*/
-  /*border-color: black !important;*/
+  /*rounds the corners of the calendar*/
+  border-radius: 25px !important;
+  border-color: #2a5e5c !important;
   /*border-width: 1px !important;*/
-  padding: 0 !important;
+
+  padding: 5 !important;
   vertical-align: top !important;
   background-color: #b6c3c2 !important;
   color: #000000;
+}
+
+.calendar-container {
+  overflow: auto !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.calendar-container::-webkit-scrollbar {
+  display: none;
 }
 
 /* Inherits background for each event from Schedule. */
@@ -220,6 +286,16 @@ export default defineComponent({
   background: inherit !important;
   opacity: 0.25 !important;
   border-radius: 25px !important;
+}
+
+.fc-now-indicator {
+  border-top: 2px solid #072024 !important;
+  z-index: 1;
+  position: absolute;
+}
+
+.fc-scroller {
+  overflow: auto !important;
 }
 
 /* Normal font weight for the time in each event */
