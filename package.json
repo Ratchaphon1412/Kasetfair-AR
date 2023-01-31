@@ -12,6 +12,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@fortawesome/vue-fontawesome": "^3.0.3",
+    "axios": "^1.2.6",
     "flowbite": "^1.6.3",
     "pinia": "^2.0.28",
     "three": "^0.134.0",
