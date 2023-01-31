@@ -2,26 +2,30 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const BASE_URL = '/timepod'
 
+const routePath = (path: string) => {
+  return BASE_URL + path
+}
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: BASE_URL + '/',
+      path: routePath('/'),
       name: 'welcome',
       component: () => import('../views/Welcome.vue')
     },
     {
-      path: BASE_URL + '/home',
+      path: routePath('/home'),
       name: 'home',
       component: () => import('../views/Home.vue')
     },
     {
-      path: BASE_URL + '/trois',
+      path: routePath('/trois'),
       name: 'trois',
       component: () => import('../views/Trois.vue')
     },
     {
-      path: '/notification',
+      path: routePath('/notification'),
       name: 'notification',
       component: () => import('../views/Notification.vue')
     }
