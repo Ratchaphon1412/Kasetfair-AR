@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  icon: string;
-  text: string;
-  size?: string;
-  linkPage: string;
+	icon: string;
+	text: string;
+	size?: string;
+	linkPage: string;
 }>(), {
 	size: 'md'
 });
