@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import NavbarLayout from '@/components/NavbarLayout.vue';
 </script>
 
 <template>
