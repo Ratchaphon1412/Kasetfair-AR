@@ -3,10 +3,10 @@ import Navbar from '@/components/Navbar.vue';
 import NotifyList from '@/components/NotifyList.vue';
 import {reactive} from 'vue'
 const notifies = reactive([
-                {id:1, text:'เด็กชายติหลงทางผู้ปกครองมารับได้ที่ส่วนประชาสัมพันธ์', author: 'ไอโฟน 21 สีทอง'},
-                {id:2, text:'น้องกราฟมองสาวอีกแล้วครับ!!', author: 'นกกก'},
-                {id:3, text:'สาวมนุษย์บูธ B20 สวยมากครับ', author: 'น้องกราฟ'},
-            ])
+    {id:1, text:'เด็กชายติหลงทางผู้ปกครองมารับได้ที่ส่วนประชาสัมพันธ์', author: 'ไอโฟน 21 สีทอง'},
+    {id:2, text:'น้องกราฟมองสาวอีกแล้วครับ!!', author: 'นกกก'},
+    {id:3, text:'สาวมนุษย์บูธ B20 สวยมากครับ', author: 'น้องกราฟ'},
+])
 
 </script>
 
