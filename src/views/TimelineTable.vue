@@ -14,6 +14,8 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import MapZone from "../components/MapZone.vue";
 import TimeSlide from "../components/TimeSlide.vue";
 import PopupTimeTable from "../components/PopupTimeTable.vue";
+import Navbar from "@/components/Navbar.vue";
+import Annoucement from "@/components/Annoucement.vue";
 
 export default defineComponent({
   components: {
@@ -21,6 +23,8 @@ export default defineComponent({
     MapZone,
     TimeSlide,
     PopupTimeTable,
+    Navbar,
+    Annoucement,
   },
   data() {
     return {
@@ -44,10 +48,11 @@ export default defineComponent({
         //themeSystem: "bootstrap5", // bootstrap5 theme
         nowIndicator: true, // show the current time
         locale: thLocale, // locale for the calendar (thai)
-        aspectRatio: 1, // set the aspect ratio
+        aspectRatio: 0.8, // set the aspect ratio
         expandRows: true, // expand the row to fit the content
         editable: false, // don't allow editing of events
         handleWindowResize: true, // allow the calendar to be responsive
+        // contentHeight: "auto", // set the height of the calendar
 
         selectable: false, // don't allow selection of dates
         selectMirror: false, // when dragging, don't show the original event
@@ -232,6 +237,10 @@ export default defineComponent({
       :close="popUpClose"
     />
     <!--nav-->
+    <div class="bottom-0 w-full">
+      <annoucement />
+      <navbar />
+    </div>
   </div>
 </template>
 
@@ -339,6 +348,9 @@ export default defineComponent({
   opacity: 0.65 !important;
   margin-left: 12px !important;
   padding: 5px !important;
+}
+.fc-time-grid .fc-slats td {
+  height: 1.5rem !important;
 }
 
 /* Material design button */

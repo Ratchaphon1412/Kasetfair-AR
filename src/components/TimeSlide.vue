@@ -4,7 +4,7 @@
       <div className="bg-gray-100">
         <!-- { /*variation dark set*/ } -->
         <div
-          class="flex bg-white shadow-md justify-start md:justify-center rounded-lg overflow-x-scroll mx-auto py-4 px-2 md:mx-12"
+          class="flex bg-white shadow-md justify-start md:justify-center rounded-lg overflow-x-scroll mx-auto md:mx-12"
         >
           <div v-for="date in arrayDate">
             <div v-if="date.getTime() === dateCurrent.getTime()">
