@@ -8,8 +8,10 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div>
-		<slot></slot>
+    <div >
+        <div class="mb-[144.5px]">
+            <slot />
+        </div>
         <div class="bottom-0 w-full fixed">
             <annoucement v-if="showAnnouce"/>
             <navbar />
