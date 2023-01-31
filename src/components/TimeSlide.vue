@@ -10,7 +10,7 @@
             <div v-if="date.getTime() === dateCurrent.getTime()">
               <!--- current day-->
               <div
-                class="flex group bg-[#69B19B] shadow-lg dark-shadow rounded-lg mx-1 cursor-pointer justify-center relative w-16"
+                class="flex group bg-[#69B19B] hover:bg-[#80D2B9] shadow-lg dark-shadow rounded-lg mx-1 cursor-pointer justify-center relative w-16"
                 @click="clickDate(date)"
               >
                 <span

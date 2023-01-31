@@ -44,7 +44,8 @@ export default defineComponent({
         //themeSystem: "bootstrap5", // bootstrap5 theme
         nowIndicator: true, // show the current time
         locale: thLocale, // locale for the calendar (thai)
-
+        aspectRatio: 1, // set the aspect ratio
+        expandRows: true, // expand the row to fit the content
         editable: false, // don't allow editing of events
         handleWindowResize: true, // allow the calendar to be responsive
 
@@ -76,7 +77,7 @@ export default defineComponent({
         eventMinHeight: 100, // minimum height of an event
         eventShortHeight: 100, // minimum height of an event
         //select: this.handleDateSelect, // this is the function that will be called when a date is selected
-        //eventClick: this.handleEventClick, // this is the function that will be called when an event is clicked
+        eventClick: this.handleEventClick, // this is the function that will be called when an event is clicked
         //eventSet: this.handleEvents, // this is the function that will be called when events are set or reset
         // events: [], // this is the array of events that will be displayed on the calendar
         /* you can update a remote database when these fire:
@@ -87,6 +88,8 @@ export default defineComponent({
       },
       events: [],
       dateSelect: new Date(),
+      eventSelect: null,
+      show: false,
     };
   },
   methods: {
@@ -108,13 +111,19 @@ export default defineComponent({
       }
     },
     handleEventClick(clickInfo) {
-      if (
-        confirm(
-          `Are you sure you want to delete the event '${clickInfo.event.title}'`
-        )
-      ) {
-        clickInfo.event.remove();
-      }
+      // if (
+      //   confirm(
+      //     `Are you sure you want to delete the event '${clickInfo.event.title}'`
+      //   )
+      // ) {
+      //   clickInfo.event.remove();
+      // }
+      console.log(clickInfo);
+      console.log(clickInfo.event.extendedProps.location);
+      console.log(clickInfo.event.title);
+      console.log(clickInfo.timeText);
+      this.eventSelect = clickInfo;
+      this.show = !this.show;
     },
     handleEvents(events) {
       this.currentEvents = events;
@@ -124,6 +133,9 @@ export default defineComponent({
       calendarApi.next();
       calendarApi.gotoDate(date);
       this.dateSelect = date;
+    },
+    popUpClose() {
+      this.show = !this.show;
     },
   },
 });
@@ -187,18 +199,18 @@ export default defineComponent({
           <div class="calendar-container">
             <FullCalendar ref="fullCalendar" :options="calendarOptions">
               <template class="rounded shadow" v-slot:eventContent="arg">
-                <div class="content pl-2 pt-2">
-                  <p class="text-gray-600 font-semibold">{{ arg.timeText }}</p>
-                  <h5 class="text font-semibold">
+                <div class="content pl-2 grap-0">
+                  <span class="text md:font-semibold xs:font-small">
+                    {{ arg.timeText }} <br />
                     {{ arg.event.title }}
-                  </h5>
-                  <div class="mt-6 flex items-center">
+                  </span>
+                  <div class="flex items-center">
                     <span class="flex flex-row">
                       <div class="icon">
                         <i class="bi bi-geo-alt-fill"></i>
                       </div>
-                      <div class="location pl-2">
-                        <p class="text-gray-600 font-medium">
+                      <div class="location">
+                        <p class="text-gray-600 md:font-medium xs:font-small">
                           {{ arg.event.extendedProps.location }}
                         </p>
                       </div>
@@ -214,7 +226,11 @@ export default defineComponent({
     </div>
 
     <!--popup-->
-    <PopupTimeTable />
+    <PopupTimeTable
+      v-if="show == true"
+      :event="eventSelect"
+      :close="popUpClose"
+    />
     <!--nav-->
   </div>
 </template>
@@ -247,13 +263,17 @@ export default defineComponent({
 
 /* Bolds the name of the event and inherits the font size */
 .fc-event {
-  font-size: inherit !important;
+  /*font-size: inherit !important;*/
+  font-size: 0.75em !important;
   /*font-weight: bold !important;
   padding: 10px; /*padding for the event*/
   /*rounds the corners of the event*/
   border-radius: 25px;
   margin-left: 10px; /*margin left for the event*/
   margin-right: 10px; /*margin right for the event*/
+}
+.comp-full-calendar {
+  width: auto !important;
 }
 
 /* Remove the header border from Schedule */
@@ -313,6 +333,9 @@ export default defineComponent({
 
 /* Apply same opacity to all day events */
 .fc-day-grid-event.fc-h-event.fc-event.fc-not-start.fc-end {
+  height: auto !important; /*height for the event*/
+
+  overflow-y: auto; /*overflow for the event*/
   opacity: 0.65 !important;
   margin-left: 12px !important;
   padding: 5px !important;
