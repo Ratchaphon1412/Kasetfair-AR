@@ -4,8 +4,10 @@ import Annoucement from '@/components/Annoucement.vue'
 </script>
 
 <template>
-    <div>
-		<slot></slot>
+    <div >
+        <div class="mb-[144.5px]">
+            <slot />
+        </div>
         <div class="bottom-0 w-full fixed">
             <annoucement />
             <navbar />
