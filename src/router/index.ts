@@ -33,6 +33,11 @@ const router = createRouter({
       path: routePath('/ar'),
       name: 'ar',
       component: () => import('../views/AR.vue')
+    },
+    {
+      path: routePath('/time-capsule'),
+      name: 'time-capsule',
+      component: () => import('../views/TimeCapsule.vue')
     }
   ]
 })
