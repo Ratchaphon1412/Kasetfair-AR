@@ -1,0 +1,21 @@
+<script setup lang="ts">
+const props = withDefaults(defineProps<{
+	icon: string;
+	text: string;
+	size?: string;
+	linkPage: string;
+}>(), {
+	size: 'md'
+});
+
+const getIconURL = (path: string): string => {
+	return new URL(`../assets/icons/${path}`, import.meta.url).href;
+};
+</script>
+
+<template>
+	<router-link :to="{ name: props.linkPage }" class="p-1 flex-col mt-auto">
+        <img :src="getIconURL(props.icon)" class="mx-auto" :class="props.size == 'md' ? 'w-[50px]' : 'w-[60px]'" alt="icon" draggable="false">
+        <h1 class="text-center pt-1 font-bold">{{ props.text }}</h1>
+	</router-link>
+</template>
