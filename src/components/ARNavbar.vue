@@ -9,7 +9,7 @@ import NavbarButton from './NavbarButton.vue';
                 icon="icon.camera.svg" 
                 text="ถ่ายภาพ" 
                 size = "lg"
-                linkPage="home"
+                linkPage="share"
             />
         </div>
     </div>
