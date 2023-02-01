@@ -29,11 +29,21 @@ const router = createRouter({
       name: 'notification',
       component: () => import('../views/Notification.vue')
     },
-    {
-      path: routePath('/ar'),
+    {  
+      path: routePath('/ar2'),
       name: 'ar',
-      component: () => import('../views/AR.vue')
-    }
+      component: () => import('../views/ImageTrackCow.vue')
+    },
+    // {
+    //   path: routePath('/ar2'),
+    //   name: 'ar',
+    //   component: () => import('../views/ImageTrackCow.vue')
+    // },
+    // {
+    //   path: routePath('/ar3'),
+    //   name: 'ar',
+    //   component: () => import('../views/ImageTrackCow.vue')
+    // },
   ]
 })
 
