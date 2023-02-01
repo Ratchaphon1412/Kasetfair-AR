@@ -34,6 +34,11 @@ const router = createRouter({
       name: 'ar',
       component: () => import('../views/ImageTrackCow.vue')
     },
+    {  
+      path: routePath('/ar0'),
+      name: 'ar',
+      component: () => import('../views/ARNaka.vue')
+    },
     // {
     //   path: routePath('/ar2'),
     //   name: 'ar',
