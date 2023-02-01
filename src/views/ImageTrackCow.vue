@@ -1,7 +1,17 @@
 <script>
 var screenshot;
+var localstream;
+
 export default {
   methods: {
+    stopVideo() {
+      const vid = document.getElementsByTagName("video")[0];
+      const mediaStream = vid.srcObject;
+      const tracks = mediaStream.getTracks();
+      tracks[0].stop();
+      tracks.forEach(track => track.stop())
+
+    },
     saveFile() {
       this.capture();
       // โหลดไฟล์ภาพ
@@ -35,7 +45,7 @@ export default {
     },
     capture() {
       // document.querySelector("video").pause();
-
+      console.log("capture")
       const video = document.getElementsByTagName("video")[0];
       const canvas = document.createElement("canvas");
 
@@ -76,12 +86,12 @@ navbar-layout{
       <div class="z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute" id="button">
         <!--<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="share_btn" @click="shareFile()">share</button>
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="save_btn" @click="saveFile()">save</button>-->
-          <button type="button" >
+          <button type="button" @click="stopVideo()">
             <img src= "../assets/icons/icon.camera.svg"/>
             <h1 class="text-center pt-1 font-bold">ถ่ายภาพ</h1>
           </button>
        </div>
-
+       
       <a-scene
         embedded
         vr-mode-ui="enabled: false;"
@@ -103,7 +113,7 @@ navbar-layout{
           <a-entity
             id="bowser-model"
             animation-mixer="loop: repeat"
-            gltf-model="/models/Cow.gltf"
+            gltf-model="/models/nakraFullBodyColorUV.glb"
             class="clickable"
             gesture-handler
             rotation="-90 0 0"
