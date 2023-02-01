@@ -40,14 +40,9 @@ const router = createRouter({
       component: () => import('../views/ImageTrackCow.vue')
     },
     {
-      path: routePath('/preview'),
+      path: routePath( '/preview'),
       name: 'preview',
       component: () => import('../views/Preview.vue')
-    },
-    {
-      path: routePath('/ar3'),
-      name: 'ar',
-      component: () => import('../views/ImageTrackCow.vue')
     },
     {
       path: routePath('/share'),

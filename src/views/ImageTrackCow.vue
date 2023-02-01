@@ -61,7 +61,13 @@ export default {
         .components.screenshot.getCanvas("perspective");
       canvas.getContext("2d").drawImage(imgData, 0, 0, width, height);
       screenshot = canvas.toDataURL("image/png");
+       this.$router
+        .push({ path: "/preview", params: { screenshot }})
+        .then(() => { this.$router.go() })
     },
+    home(){
+      window.close();
+    }
   },
 };
 </script>
@@ -80,7 +86,7 @@ video{
 
 <template>
       <div class="z-10 absolute left-0 top-0 " style="position: absolute">
-        <button type="button" class="py-2 px-2">
+        <button type="button" class="py-2 px-2" @click="home()">
             <img src= "../assets/icons/back_to_home.svg"/>
         </button>
       </div>
