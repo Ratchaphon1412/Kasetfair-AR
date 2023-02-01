@@ -74,6 +74,9 @@ a-scene {
 navbar-layout{
   z-index: 50;
 }
+video{
+  margin-left: 0px !important;
+}
 </style>
 
 <template>
@@ -86,7 +89,7 @@ navbar-layout{
       <div class="z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute" id="button">
         <!--<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="share_btn" @click="shareFile()">share</button>
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="save_btn" @click="saveFile()">save</button>-->
-          <button type="button" @click="stopVideo()">
+          <button type="button" @click="capture()">
             <img src= "../assets/icons/icon.camera.svg"/>
             <h1 class="text-center pt-1 font-bold">ถ่ายภาพ</h1>
           </button>
@@ -113,11 +116,11 @@ navbar-layout{
           <a-entity
             id="bowser-model"
             animation-mixer="loop: repeat"
-            gltf-model="/models/nakraFullBodyColorUV.glb"
+            gltf-model="/models/Cow.gltf"
             class="clickable"
             gesture-handler
             rotation="-90 0 0"
-            scale="1 1 1"
+            scale="0.5 0.5 0.5"
           ></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
