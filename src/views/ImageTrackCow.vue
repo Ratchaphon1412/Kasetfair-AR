@@ -1,5 +1,4 @@
 <script>
-import NavbarLayout from '@/components/NavbarARLayout.vue';
 var screenshot;
 export default {
   methods: {
@@ -11,7 +10,7 @@ export default {
       link.href = screenshot;
       link.click();
 
-      console.log("Capture Complete !");
+      //console.log("Capture Complete !");
     },
     async shareFile() {
       // แชร์ไฟล์ภาพ
@@ -28,7 +27,6 @@ export default {
       // เช็คก่อนว่า browser ที่ใช้อยู่แชร์ได้มั้ย
       if (navigator.canShare && navigator.canShare(shareData)) {
         try {
-          console.log("yes");
           navigator.share(shareData);
         } catch (err) {
           console.error(err.name + " " + err.message);
@@ -58,46 +56,60 @@ export default {
   },
 };
 </script>
+
 <style>
 a-scene {
   height: 100vh;
 }
+navbar-layout{
+  z-index: 50;
+}
 </style>
+
 <template>
-  <navbar-layout>
-    <div class="z-50" id="button">
-      <button class="h1" id="share_btn" @click="shareFile()">share</button>
-      <button class="h1" id="save_btn" @click="saveFile()">save</button>
-    </div>
-    <a-scene
-      embedded
-      vr-mode-ui="enabled: false;"
-      loading-screen="enabled: false;"
-      renderer="logarithmicDepthBuffer: true;"
-      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
-      id="scene"
-      gesture-detector
-    >
-      <a-marker
-        id="animated-marker"
-        type="pattern"
-        preset="custom"
-        url="/80logo/finallogo_v2.patt"
-        raycaster="objects: .clickable"
-        emitevents="true"
-        cursor="fuse: false; rayOrigin: mouse;"
+      <div class="z-10 absolute left-0 top-0 " style="position: absolute">
+        <button type="button" class="py-2 px-2">
+            <img src= "../assets/icons/back_to_home.svg"/>
+        </button>
+      </div>
+
+      <div class="z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute" id="button">
+        <!--<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="share_btn" @click="shareFile()">share</button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="save_btn" @click="saveFile()">save</button>-->
+          <button type="button" >
+            <img src= "../assets/icons/icon.camera.svg"/>
+            <h1 class="text-center pt-1 font-bold">ถ่ายภาพ</h1>
+          </button>
+       </div>
+
+      <a-scene
+        embedded
+        vr-mode-ui="enabled: false;"
+        loading-screen="enabled: false;"
+        renderer="logarithmicDepthBuffer: true;"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+        id="scene"
+        gesture-detector
       >
-        <a-entity
-          id="bowser-model"
-          animation-mixer="loop: repeat"
-          gltf-model="/models/Cow.gltf"
-          class="clickable"
-          gesture-handler
-          rotation="-90 0 0"
-          scale="1 1 1"
-        ></a-entity>
-      </a-marker>
-      <a-entity camera></a-entity>
-    </a-scene>
-  </navbar-layout>
+        <a-marker
+          id="animated-marker"
+          type="pattern"
+          preset="custom"
+          url="/80logo/finallogo_v2.patt"
+          raycaster="objects: .clickable"
+          emitevents="true"
+          cursor="fuse: false; rayOrigin: mouse;"
+        >
+          <a-entity
+            id="bowser-model"
+            animation-mixer="loop: repeat"
+            gltf-model="/models/Cow.gltf"
+            class="clickable"
+            gesture-handler
+            rotation="-90 0 0"
+            scale="1 1 1"
+          ></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+      </a-scene>
 </template>
