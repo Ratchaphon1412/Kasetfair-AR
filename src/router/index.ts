@@ -44,11 +44,17 @@ const router = createRouter({
       name: 'preview',
       component: () => import('../views/Preview.vue')
     },
-    // {
-    //   path: routePath('/ar3'),
-    //   name: 'ar',
-    //   component: () => import('../views/ImageTrackCow.vue')
-    // },
+    {
+      path: routePath('/ar3'),
+      name: 'ar',
+      component: () => import('../views/ImageTrackCow.vue')
+    },
+    {
+      path: routePath('/share'),
+      name: 'share',
+      component: () => import('../views/Share.vue')
+    },
+
   ]
 })
 

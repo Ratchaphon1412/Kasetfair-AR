@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import NavbarLayout from '@/components/NavbarLayout.vue';
-import ARNavbarLayout from '@/components/ARNavbarLayout.vue';
+import ShareNavbarLayout from '@/components/ShareNavbarLayout.vue';
 import NavbarButton from '@/components/NavbarButton.vue';
 </script>
+
 
 <template>
   <div class ="flex justify-between pl-2 pt-3">
@@ -18,11 +18,8 @@ import NavbarButton from '@/components/NavbarButton.vue';
     </div>
     <div class="bg-green-200">anotherAR</div>
   </div>
-  <a-r-navbar-layout>
+    <ShareNavbarLayout>
 
-  </a-r-navbar-layout>
+    </ShareNavbarLayout>
+
 </template>
-
-<style
->
-</style>
