@@ -30,15 +30,20 @@ const router = createRouter({
       component: () => import('../views/Notification.vue')
     },
     {  
+      path: routePath('/ar1'),
+      name: 'ar1',
+      component: () => import('../views/ImageTrackChess.vue')
+    },
+    {  
       path: routePath('/ar2'),
       name: 'ar',
       component: () => import('../views/ImageTrackCow.vue')
     },
-    // {
-    //   path: routePath('/ar2'),
-    //   name: 'ar',
-    //   component: () => import('../views/ImageTrackCow.vue')
-    // },
+    {
+      path: routePath('/preview'),
+      name: 'preview',
+      component: () => import('../views/Preview.vue')
+    },
     // {
     //   path: routePath('/ar3'),
     //   name: 'ar',
