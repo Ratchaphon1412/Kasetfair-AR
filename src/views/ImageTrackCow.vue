@@ -10,7 +10,6 @@ export default {
       const tracks = mediaStream.getTracks();
       tracks[0].stop();
       tracks.forEach(track => track.stop())
-
     },
     saveFile() {
       this.capture();
@@ -113,7 +112,7 @@ navbar-layout{
           <a-entity
             id="bowser-model"
             animation-mixer="loop: repeat"
-            gltf-model="/models/nakraFullBodyColorUV.glb"
+            gltf-model="/models/Cow.gltf"
             class="clickable"
             gesture-handler
             rotation="-90 0 0"
