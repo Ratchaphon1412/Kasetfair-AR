@@ -14,8 +14,8 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import MapZone from "../components/MapZone.vue";
 import TimeSlide from "../components/TimeSlide.vue";
 import PopupTimeTable from "../components/PopupTimeTable.vue";
-import Navbar from "@/components/Navbar.vue";
-import Annoucement from "@/components/Annoucement.vue";
+
+import NavbarLayout from "@/components/NavbarLayout.vue";
 
 export default defineComponent({
   components: {
@@ -23,8 +23,7 @@ export default defineComponent({
     MapZone,
     TimeSlide,
     PopupTimeTable,
-    Navbar,
-    Annoucement,
+    NavbarLayout,
   },
   data() {
     return {
@@ -147,101 +146,98 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="page-timetable">
-    <!--header date slide-->
-    <div class="text-center p-4">
-      <!--title date-->
-      <span class="month-head">
-        <h5>
-          <p>
-            <b>{{ dateSelect.toLocaleString("th-th", { month: "long" }) }}</b>
-          </p>
-        </h5>
-      </span>
-      <!--time date -->
-      <TimeSlide :callback="getDate" />
-
-      <!--title timetable-->
+  <navbar-layout>
+    <div class="page-timetable">
+      <!--header date slide-->
       <div class="text-center p-4">
-        <span class="timetable-title">
-          <h6>
-            <p>
-              <b> ตารางเวลา </b>
+        <!--title date-->
+        <span class="month-head">
+          <h5>
+            <p class="xs:font-light ms:font-light">
+              <b>{{ dateSelect.toLocaleString("th-th", { month: "long" }) }}</b>
             </p>
-          </h6>
+          </h5>
         </span>
-      </div>
-    </div>
-    <!--map-->
-    <div class="container mx-auto">
-      <div class="grid grid-rows-1 grid-cols-12 grap-3">
-        <div class="col-start-2 col-span-9 row-span-6">
-          <MapZone />
-        </div>
-      </div>
-    </div>
-    <!--calendar Group-->
-    <div class="w-full p-3">
-      <div class="grid grid-cols-12 grid-rows-1">
-        <div class="col-start-1 col-span-12 row-span-12">
-          <!--title date-mount-year-->
-          <div class="text-center">
-            <span class="datefull-text">
-              <h4>
-                <p>
-                  {{
-                    dateSelect.toLocaleString("th-th", {
-                      day: "2-digit",
-                      month: "long",
-                      year: "numeric",
-                    })
-                  }}
-                </p>
-              </h4>
-            </span>
-          </div>
-          <!--calendar-->
-          <div class="calendar-container">
-            <FullCalendar ref="fullCalendar" :options="calendarOptions">
-              <template class="rounded shadow" v-slot:eventContent="arg">
-                <div class="content pl-2 grap-0">
-                  <span class="text md:font-semibold xs:font-small">
-                    {{ arg.timeText }} <br />
-                    {{ arg.event.title }}
-                  </span>
-                  <div class="flex items-center">
-                    <span class="flex flex-row">
-                      <div class="icon">
-                        <i class="bi bi-geo-alt-fill"></i>
-                      </div>
-                      <div class="location">
-                        <p class="text-gray-600 md:font-medium xs:font-small">
-                          {{ arg.event.extendedProps.location }}
-                        </p>
-                      </div>
-                    </span>
-                  </div>
-                </div>
-              </template>
-            </FullCalendar>
-          </div>
-          <!--end-->
-        </div>
-      </div>
-    </div>
+        <!--time date -->
+        <TimeSlide :callback="getDate" />
 
-    <!--popup-->
-    <PopupTimeTable
-      v-if="show == true"
-      :event="eventSelect"
-      :close="popUpClose"
-    />
-    <!--nav-->
-    <div class="bottom-0 w-full">
-      <annoucement />
-      <navbar />
+        <!--title timetable-->
+        <div class="text-center p-4">
+          <span class="timetable-title">
+            <h6>
+              <p>
+                <b> ตารางเวลา </b>
+              </p>
+            </h6>
+          </span>
+        </div>
+      </div>
+      <!--map-->
+      <div class="container mx-auto">
+        <div class="grid grid-rows-1 grid-cols-12 grap-3">
+          <div class="col-start-2 col-span-9 row-span-6">
+            <MapZone />
+          </div>
+        </div>
+      </div>
+      <!--calendar Group-->
+      <div class="w-full p-3">
+        <div class="grid grid-cols-12 grid-rows-1">
+          <div class="col-start-1 col-span-12 row-span-12">
+            <!--title date-mount-year-->
+            <div class="text-center">
+              <span class="datefull-text">
+                <h4>
+                  <p>
+                    {{
+                      dateSelect.toLocaleString("th-th", {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                      })
+                    }}
+                  </p>
+                </h4>
+              </span>
+            </div>
+            <!--calendar-->
+            <div class="calendar-container">
+              <FullCalendar ref="fullCalendar" :options="calendarOptions">
+                <template class="rounded shadow" v-slot:eventContent="arg">
+                  <div class="content pl-2 grap-0">
+                    <span class="text md:font-semibold xs:font-small">
+                      {{ arg.timeText }} <br />
+                      {{ arg.event.title }}
+                    </span>
+                    <div class="flex items-center">
+                      <span class="flex flex-row">
+                        <div class="icon">
+                          <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div class="location">
+                          <p class="text-gray-600 md:font-medium xs:font-small">
+                            {{ arg.event.extendedProps.location }}
+                          </p>
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+                </template>
+              </FullCalendar>
+            </div>
+            <!--end-->
+          </div>
+        </div>
+      </div>
+
+      <!--popup-->
+      <PopupTimeTable
+        v-if="show == true"
+        :event="eventSelect"
+        :close="popUpClose"
+      />
     </div>
-  </div>
+  </navbar-layout>
 </template>
 
 <style lang="css">
@@ -268,6 +264,9 @@ export default defineComponent({
   right: 5% !important;
   border-radius: 25px !important;
   /*border-radius: 4px;*/
+}
+.fc-time-grid-event .fc-content {
+  font-size: 8px !important;
 }
 
 /* Bolds the name of the event and inherits the font size */
@@ -299,10 +298,11 @@ export default defineComponent({
   background-color: #b6c3c2 !important;
   color: #000000;
 }
-
+/* calendar main setup*/
 .calendar-container {
   overflow: auto !important;
   -ms-overflow-style: none;
+  font-size: 0.5rem;
   scrollbar-width: none;
 }
 .calendar-container::-webkit-scrollbar {
@@ -348,9 +348,6 @@ export default defineComponent({
   opacity: 0.65 !important;
   margin-left: 12px !important;
   padding: 5px !important;
-}
-.fc-time-grid .fc-slats td {
-  height: 1.5rem !important;
 }
 
 /* Material design button */

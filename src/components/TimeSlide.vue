@@ -4,10 +4,10 @@
       <div className="bg-gray-100">
         <!-- { /*variation dark set*/ } -->
         <div
-          class="flex bg-white shadow-md justify-start md:justify-center rounded-lg overflow-x-scroll mx-auto md:mx-12"
+          class="flex bg-white shadow-md justify-start md:justify-center rounded-lg overflow-x-scroll mx-auto md:mx-12 xs:mx-4 xs:justify-center"
         >
           <div v-for="date in arrayDate">
-            <div v-if="date.getTime() === dateCurrent.getTime()">
+            <div ref="nowDate" v-if="date.getTime() === dateCurrent.getTime()">
               <!--- current day-->
               <div
                 class="flex group bg-[#69B19B] hover:bg-[#80D2B9] shadow-lg dark-shadow rounded-lg mx-1 cursor-pointer justify-center relative w-16"
@@ -70,10 +70,13 @@
 </template>
 
 <script>
+import { onMounted, ref } from "vue";
+
 export default {
   setup() {
     let dateToday = new Date();
     let arrayDate = [];
+    let dateCurrent = new Date();
     for (let i = 8; i >= 0; i--) {
       let result = dateToday.setDate(dateToday.getDate() - i);
       arrayDate.push(new Date(result));
@@ -86,15 +89,17 @@ export default {
     }
 
     console.log(arrayDate);
+
     console.log(arrayDate[8].getTime() == dateToday.getTime());
 
     return {
       arrayDate,
+      dateCurrent,
     };
   },
   data() {
     return {
-      dateCurrent: new Date(),
+      renderComplete: false,
     };
   },
   props: {
@@ -107,14 +112,7 @@ export default {
       this.callback(date);
     },
   },
-  mounted() {
-    this.$nextTick(() => {
-      this.$refs.targetDiv.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    });
-  },
+  mounted() {},
 };
 </script>
 

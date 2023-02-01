@@ -83,8 +83,10 @@ export const INITIAL_EVENTS = [
       url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
       location:"เวทีสนามอินทร์",
     },
+    
   
   },
+  
 
     
 
