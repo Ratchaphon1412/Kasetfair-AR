@@ -1,8 +1,11 @@
 <script>
+import ARDropdown from '@/components/ARDropdown.vue';
+
 var screenshot;
 var localstream;
 
 export default {
+  components: {ARDropdown},
   methods: {
     stopVideo() {
       const vid = document.getElementsByTagName("video")[0];
@@ -76,29 +79,31 @@ export default {
 a-scene {
   height: 100vh;
 }
-navbar-layout{
-  z-index: 50;
-}
 video{
   margin-left: 0px !important;
+  position: absolute;
+  margin-top: -100px !important;
 }
 </style>
 
 <template>
-      <div class="z-10 absolute left-0 top-0 " style="position: absolute">
+    <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch">
+      <div>
         <button type="button" class="py-2 px-2" @click="home()">
-            <img src= "../assets/icons/back_to_home.svg"/>
+          <img src="../assets/icons/back_to_home.svg" />
         </button>
       </div>
+      <div class="p-2 justify-self-end">
+        <a-r-dropdown/>
+      </div>
+    </div>
 
-      <div class="z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute" id="button">
-        <!--<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="share_btn" @click="shareFile()">share</button>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="save_btn" @click="saveFile()">save</button>-->
-          <button type="button" @click="capture()">
-            <img src= "../assets/icons/icon.camera.svg"/>
-            <h1 class="text-center pt-1 font-bold">ถ่ายภาพ</h1>
-          </button>
-       </div>
+    <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute">
+      <button type="button" @click="capture()">
+        <img src="../assets/icons/icon.camera.svg" />
+        <h1 class="text-center font-bold">ถ่ายภาพ</h1>
+      </button>
+    </div>
        
       <a-scene
         embedded
