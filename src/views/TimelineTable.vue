@@ -14,8 +14,9 @@ import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 import MapZone from "../components/MapZone.vue";
 import TimeSlide from "../components/TimeSlide.vue";
 import PopupTimeTable from "../components/PopupTimeTable.vue";
-
-import NavbarLayout from "@/components/NavbarLayout.vue";
+import Navbar from "@/components/Navbar.vue";
+import Annoucement from "@/components/Annoucement.vue";
+import NavbarLayer from "@/components/NavbarLayout.vue";
 
 export default defineComponent({
   components: {
@@ -23,7 +24,9 @@ export default defineComponent({
     MapZone,
     TimeSlide,
     PopupTimeTable,
-    NavbarLayout,
+    Navbar,
+    Annoucement,
+    NavbarLayer,
   },
   data() {
     return {
@@ -146,8 +149,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <navbar-layout>
-    <div class="page-timetable">
+  <NavbarLayer>
+    <div class="page-timetable mb-100">
       <!--header date slide-->
       <div class="text-center p-4">
         <!--title date-->
@@ -237,7 +240,12 @@ export default defineComponent({
         :close="popUpClose"
       />
     </div>
-  </navbar-layout>
+  </NavbarLayer>
+  <!--navbar-->
+  <!-- <div class="bottom-0 w-full">
+    <annoucement />
+    <navbar />
+  </div> -->
 </template>
 
 <style lang="css">
