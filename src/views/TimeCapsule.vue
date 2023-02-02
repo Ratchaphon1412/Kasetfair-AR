@@ -60,6 +60,13 @@
                     autoplay
                     id="video">
                     </video>
+
+                    <canvas
+                        v-show="isPhotoTaken"
+                        id="photoTaken"
+                        ref="canvas"
+                        :width="337.5"
+                        :height="450"></canvas>
             </div>
             <!-- <video
                 v-show="!isPhotoTaken"
@@ -72,11 +79,6 @@
                 id="video"
             ></video> -->
     
-            <canvas
-                v-show="isPhotoTaken"
-                id="photoTaken"
-                ref="canvas"
-            ></canvas>
             </div>
         </div> 
   
@@ -176,9 +178,18 @@
             src: "../assets/images/time-capsule/p5.png",
             alt: "PhotoFrame-80-Thailand"
           }
-        ]
-      
-      };
+        ],
+
+        video: null,
+        canvas: null,
+        width: 768,
+        height: 1024,
+        screenshot: null,
+        imgData: null,
+        link: null,
+
+    
+    };
     },
   
     mounted() {
@@ -267,12 +278,7 @@
     //   },
   
       downloadImage() {
-        const download = document.getElementById('downloadPhoto');
-        const canvas = document
-          .getElementById('photoTaken')
-          .toDataURL('image/jpeg')
-          .replace('image/jpeg', 'image/octet-stream');
-        download.setAttribute('href', canvas);
+        this.link.click();
       },
   
       // btnScreenshot(){
@@ -299,34 +305,51 @@
       // },
   
       capture() {
-        // document.querySelector("video").pause();
-  
-        const video = document.getElementsByTagName("video")[0];
-        const canvas = document.createElement("canvas");
-        var width = video.videoWidth;
-        var height = video.videoHeight;
-        canvas.width = width;
-        canvas.height = height;
+        this.video = document.getElementsByTagName("video")[0];
+        this.canvas = document.createElement("canvas");
+        // this.width = this.video.videoWidth;
+        // this.height = this.video.videoHeight;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+
         // alert(width, height);
         //แคปรูป
-        var screenshot;
-        canvas.getContext('2d').drawImage(video, 0, 0, width, height);
+        this.canvas.getContext('2d').drawImage(this.video, 0, 0, this.width, this.height);
         //ผลลัพธ์
-        var imgData = document.querySelector('.image');     
-        canvas.getContext('2d').drawImage(imgData, 0, 0, width, height);
-        screenshot = canvas.toDataURL('image/png');
+        this.imgData = document.querySelector('.image');     
+        this.canvas.getContext('2d').drawImage(this.imgData, 0, 0, this.width, this.height);
+        this.screenshot = this.canvas.toDataURL('image/png');
   
-        var link = document.createElement("a");
-        link.download = "screenshot.png";
-        link.href = screenshot;
-        link.click();
+        this.link = document.createElement("a");
+        this.link.download = "screenshot.png";
+        this.link.href = this.screenshot;
+
+        // link.click();
+
+        if(!this.isPhotoTaken) {
+            this.isShotPhoto = true;
+
+            const FLASH_TIMEOUT = 50;
+
+            setTimeout(() => {
+            this.isShotPhoto = false;
+            }, FLASH_TIMEOUT);
+        }
+      
+        this.isPhotoTaken = !this.isPhotoTaken;
+        
+        //preview
+        this.canvas.width = 337.5
+        this.canvas.width = 450
+        this.context = this.$refs.canvas.getContext('2d');
+        this.context.drawImage(this.$refs.camera, 0, 0, 337.5, 450);
       }
   
     },
   };
   </script>
   
-  <style>
+  <style scoped>
   .button-oc{
     background-color: #006b14; /* Green */
     border-radius: 10px;
