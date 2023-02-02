@@ -13,7 +13,7 @@ const notifies = reactive([
 
 <template>
     <div>
-    <navbar-layout>
+    <navbar-layout :show-annouce=true>
         <div class=" min-h-screen pl-3">
             <div class="font-bold pt-7">การแจ้งเตือน</div>
             <div>
