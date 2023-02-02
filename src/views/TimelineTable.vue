@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 import FullCalendar from "@fullcalendar/vue3";
 // import dayGridPlugin from "@fullcalendar/daygrid";
@@ -74,7 +74,7 @@ export default defineComponent({
             ],
             slotDuration: "00:10:00", // 30 minutes
             slotMinTime: "08:00:00", // 8:00 AM
-            slotMaxTime: "20:00:00", // 8:00 PM
+            slotMaxTime: "21:00:00", // 8:00 PM
             weekends: true, // show weekends mon - sun
             dayHeaders: false, // hide the day header
           },
@@ -148,8 +148,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <NavbarLayer>
-    <div class="page-timetable mb-100">
+  <div class="grap-4">
+    <div class="page-timetable">
       <!--header date slide-->
       <div class="text-center p-4">
         <!--title date-->
@@ -239,7 +239,8 @@ export default defineComponent({
         :close="popUpClose"
       />
     </div>
-  </NavbarLayer>
+    <NavbarLayer class="navbar" />
+  </div>
   <!--navbar-->
   <!-- <div class="bottom-0 w-full">
     <annoucement />
@@ -417,5 +418,9 @@ export default defineComponent({
 }
 .red {
   background-color: red;
+}
+.navbar {
+  position: absolute;
+  z-index: 1 !important;
 }
 </style>

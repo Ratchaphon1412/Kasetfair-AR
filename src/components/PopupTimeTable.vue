@@ -8,18 +8,16 @@
   >
     <div class="relative w-full h-full max-w-md md:h-auto">
       <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+      <div class="relative bg-white rounded-lg shadow">
         <!-- Modal header -->
-        <div
-          class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600"
-        >
+        <div class="flex items-center justify-between p-5 border-b rounded-t">
           <h3 class="text-xl font-medium text-gray-900 dark:text-gray-400">
             {{ event.event.title }}
           </h3>
 
           <button
             type="button"
-            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
             data-modal-hide="small-modal"
             @click="closeModal"
           >
@@ -58,7 +56,7 @@
             {{ event.event.extendedProps.description }}
           </p>
           <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-            <a :href="event.event.extendedProps.url">แผนที่</a>
+            <a :href="event.event.extendedProps.url">คลิกเพื่อดูแผนที่</a>
           </p>
         </div>
       </div>
@@ -66,8 +64,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   props: {
     event: {
       type: Object,
@@ -83,7 +83,7 @@ export default {
       this.close();
     },
   },
-};
+});
 </script>
 
 <style scoped>

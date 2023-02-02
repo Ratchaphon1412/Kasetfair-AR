@@ -66,10 +66,9 @@
   </div>
 </template>
 
-<script>
-import { onMounted, ref } from "vue";
-
-export default {
+<script lang="ts">
+import { defineComponent, onMounted, ref } from "vue";
+export default defineComponent({
   setup() {
     let dateToday = new Date();
     let arrayDate = [];
@@ -122,7 +121,7 @@ export default {
     this.goToNowDate();
   },
   beforeMount() {},
-};
+});
 </script>
 
 <style scoped></style>
