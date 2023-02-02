@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Navbar from '@/components/Navbar.vue';
 import NotifyList from '@/components/NotifyList.vue';
+import NavbarLayout from '@/components/NavbarLayout.vue';
 import {reactive} from 'vue'
 const notifies = reactive([
     {id:1, text:'เด็กชายติหลงทางผู้ปกครองมารับได้ที่ส่วนประชาสัมพันธ์', author: 'ไอโฟน 21 สีทอง'},
@@ -12,6 +13,7 @@ const notifies = reactive([
 
 <template>
     <div>
+    <navbar-layout :show-annouce=true>
         <div class=" min-h-screen pl-3">
             <div class="font-bold pt-7">การแจ้งเตือน</div>
             <div>
@@ -38,6 +40,6 @@ const notifies = reactive([
                 </div>
             </div>
         </div>
-        <Navbar />
+    </navbar-layout>
     </div>
 </template>
