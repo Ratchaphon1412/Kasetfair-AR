@@ -11,17 +11,16 @@ console.log(screenshot);
 
 
 <template>
-  <div class ="flex justify-between pl-2 pt-3">
-    <div class="flex">
-      <NavbarButton
-      icon ="back_to_home.svg"
-      size=""
-      link-page="ar"
-      />
+  <ShareNavbarLayout :show-annouce="false">
+    <div class ="flex justify-between pl-2 pt-3">
+      <div class="flex">
+        <NavbarButton
+          icon ="back_to_home.svg"
+          size=""
+          link-page="ar"
+        />
+      </div>
     </div>
-  </div>
-    <ShareNavbarLayout :show-annouce="false">
-
-    </ShareNavbarLayout>
+  </ShareNavbarLayout>
 
 </template>

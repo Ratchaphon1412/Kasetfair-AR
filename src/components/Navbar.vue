@@ -9,6 +9,7 @@ import NavbarButton from './NavbarButton.vue';
                 icon="ar_icon.svg" 
                 text="AR" 
                 linkPage="ar"
+                :newTab="true"
             />
             <navbar-button 
                 icon="capsule_icon.svg" 
