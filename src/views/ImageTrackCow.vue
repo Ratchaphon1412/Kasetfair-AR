@@ -1,6 +1,5 @@
 <script>
 import ARDropdown from '@/components/ARDropdown.vue';
-
 var screenshot;
 var localstream;
 
@@ -64,6 +63,11 @@ export default {
         .components.screenshot.getCanvas("perspective");
       canvas.getContext("2d").drawImage(imgData, 0, 0, width, height);
       screenshot = canvas.toDataURL("image/png");
+
+  
+
+
+      localStorage.setItem('screenshot', screenshot);
       this.stopVideo();
        this.$router.push({ path: "share", params: { screenshot }}).then(() => { this.$router.go() })
     },
@@ -78,14 +82,23 @@ export default {
 a-scene {
   height: 100vh;
 }
+body{
+  overflow: hidden;
+}
 video{
   margin-left: 0px !important;
   position: absolute;
-  margin-top: -100px !important;
+}
+#pause{
+  width: 100%;
+  height: 100px;
+  margin-top: 200px ;
+  opacity: 75%;
 }
 </style>
 
 <template>
+<div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
@@ -128,10 +141,27 @@ video{
             gltf-model="/models/Cow.gltf"
             class="clickable"
             gesture-handler
+            position="0 0 0"
             rotation="-90 0 0"
-            scale="0.5 0.5 0.5"
+            scale="0.4 0.4 0.4"
           ></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
       </a-scene>
+</div>
+<div class="portrait:hidden">
+  <!--
+  <div class="z-10 absolute inset-0 flex h-screen">
+    <h1>PAUSE SCREEN 123456789</h1>
+  </div>
+  -->
+
+    <div class="flex h-screen justify-center items-center">
+    <div id ="pause" class="text-center bg-[#AFC2AC]"> <!-- ⬅️ THIS DIV WILL BE CENTERED -->
+        <h1 class=" text-3xl">กรุณาใช้มือถือในแนวตั้ง</h1>
+        <h1 class=" text-3xl">Please use your phone in portrait mode</h1>
+    </div>
+  </div>
+  
+</div>
 </template>
