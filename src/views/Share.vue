@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 
 import { defineComponent } from 'vue';
 import ShareNavbarLayout from '@/components/ShareNavbarLayout.vue';
@@ -8,39 +8,37 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 const screenshot = localStorage.getItem('screenshot');
 console.log(screenshot);
-
-// function saveFile() {
-//   this.capture();
-  // โหลดไฟล์ภาพ
-  // var link = document.createElement("a");
-  // link.download = "screenshot.png";
-  // link.href = screenshot;
-  // link.click();
-
-    //console.log("Capture Complete !");
-// }
-// async function shareFile() {
-  // แชร์ไฟล์ภาพ
+function saveFile() {
   // this.capture();
-  // const blob = await (await fetch(screenshot)).blob();
-  // const filesArray = [
-  //   new File([blob], "bla.png", {
-  //     type: blob.type,
-  //     lastModified: new Date().getTime(),
-  //   }),
-  // ];
-  // const shareData = { files: filesArray };
+  // โหลดไฟล์ภาพ
+  var link = document.createElement("a");
+  link.download = "screenshot.png";
+  link.href = screenshot;
+  link.click();
 
-  // เช็คก่อนว่า browser ที่ใช้อยู่แชร์ได้มั้ย
-//   if (navigator.canShare && navigator.canShare(shareData)) {
-//     try {
-//       navigator.share(shareData);
-//     } catch (err) {
-//       console.error(err.name + " " + err.message);
-//     }
-//   } else console.warn("Sharing not supported", shareData);
-// }
+  console.log("Capture Complete !");
+}
+async function shareFile() {
+  //แชร์ไฟล์ภาพ
+  // this.capture();
+  const blob = await (await fetch(screenshot)).blob();
+  const filesArray = [
+    new File([blob], "bla.png", {
+      type: blob.type,
+      lastModified: new Date().getTime(),
+    }),
+  ];
+  const shareData = { files: filesArray };
 
+  //เช็คก่อนว่า browser ที่ใช้อยู่แชร์ได้มั้ย
+  if (navigator.canShare && navigator.canShare(shareData)) {
+    try {
+      navigator.share(shareData);
+    } catch (err) {
+      console.error(err.name + " " + err.message);
+    }
+  } else console.warn("Sharing not supported", shareData);
+}
 </script>
 
 
@@ -104,7 +102,7 @@ console.log(screenshot);
   margin-left: auto;
   margin-right: auto;
   height: 20em;
-  border-radius: 50px;
+  border-radius: 30px;
   border-color: black;
 }
 </style>

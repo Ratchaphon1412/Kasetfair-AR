@@ -1,6 +1,5 @@
 <script>
 import ARDropdown from '@/components/ARDropdown.vue';
-import {useCounterStore} from '@/stores/counter';
 var screenshot;
 var localstream;
 
@@ -142,8 +141,9 @@ video{
             gltf-model="/models/Cow.gltf"
             class="clickable"
             gesture-handler
+            position="0 0 0"
             rotation="-90 0 0"
-            scale="0.5 0.5 0.5"
+            scale="0.4 0.4 0.4"
           ></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
