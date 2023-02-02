@@ -20,7 +20,7 @@ console.log(screenshot);
       />
     </div>
   </div>
-    <ShareNavbarLayout>
+    <ShareNavbarLayout :show-annouce="false">
 
     </ShareNavbarLayout>
 
