@@ -29,13 +29,34 @@
         >
   
           <!-- <dev class="test"><img src="./assets/1..jpg"  height="337"></dev> -->
-          <div class="flex justify-center img-select">
-            <img v-if="image" :key="image.id" @click="switchImage" class="image object-contain md:object-scale-down " :src="image.src" alt="image.alt">
-          </div>
+          <!-- justify-center -->
+
+          <!-- โชว์รูปภาพ
+          <div class="filter-select">
+            <img v-if="image" :key="image.id" @click="switchImage" class="image" :src="image.src" alt="image.alt">
+          </div> -->
           
-          <div class="camera-shutter" :class="{ flash: isShotPhoto }"></div>
-  
-          <video
+          <!-- <div class="camera-shutter" :class="{ flash: isShotPhoto }"></div> -->
+          
+          <div class="relative" @click="switchImage">
+            <!-- โชว์รูปภาพ -->
+            <!-- <div class="filter-select"> -->
+                <!-- <img v-if="image" :key="image.id" @click="switchImage" class="image filter-select" :src="image.src" alt="image.alt"> -->
+            <!-- </div> -->
+            <div class="absolute w-full inser-x-0">
+                <img v-if="image" :key="image.id" class="image w-full" :src="image.src" alt="image.alt">
+            </div>
+            
+                <video
+                v-show="!isPhotoTaken"
+                ref="camera"
+                webkit-playsinline
+                playsinline
+                autoplay
+                id="video">
+                </video>
+          </div>
+          <!-- <video
             v-show="!isPhotoTaken"
             ref="camera"
             :width="450"
@@ -44,14 +65,12 @@
             playsinline
             autoplay
             id="video"
-          ></video>
+          ></video> -->
   
           <canvas
             v-show="isPhotoTaken"
             id="photoTaken"
             ref="canvas"
-            :width="450"
-            :height="337.5"
           ></canvas>
         </div>
   
@@ -70,12 +89,14 @@
           </button>
         </div>
   
-        <div>
-          <button class="button is-success" id="btn" @click="capture()">
+        <div v-if="isCameraOpen && !isLoading" >
+          <button type="button" class="button is-success"  id="btn" @click="capture()">
               <!-- <span class="icon is-small">
               <i class="fas fa-camera"></i>
               </span> -->
-              Take Photo
+              <img
+              src="https://img.icons8.com/material-outlined/50/000000/camera--v2.png"
+            />
           </button>
         </div>
   
@@ -113,23 +134,38 @@
        
         images: [{
             id: 1,
-            src: '../assets/images/time-capsule/hall.png',
-            alt: "Natural Grove Green Trees Path",
+            src: '../assets/images/time-capsule/PhotoFrame-80-EN.png',
+            alt: "hall",
       
           },
           {
             id: 2,
-            src: "../assets/images/time-capsule/restaurant.png",
-            alt: "stockafbeelding cascades in nationaal park plitvice"
+            src: "../assets/images/time-capsule/PhotoFrame-80-TH.png",
+            alt: "restaurant"
           },
           {
             id: 3,
-            src: "../assets/images/time-capsule/PhotoFrame-80-EN.png",
+            src: "../assets/images/time-capsule/p1.png",
             alt: "PhotoFrame-80-English"
           },
           {
             id: 4,
-            src: "../assets/images/time-capsule/PhotoFrame-80-TH.png",
+            src: "../assets/images/time-capsule/p2.png",
+            alt: "PhotoFrame-80-Thailand"
+          },
+          {
+            id: 5,
+            src: "../assets/images/time-capsule/p3.png",
+            alt: "PhotoFrame-80-Thailand"
+          },
+          {
+            id: 6,
+            src: "../assets/images/time-capsule/p4.png",
+            alt: "PhotoFrame-80-Thailand"
+          },
+          {
+            id: 7,
+            src: "../assets/images/time-capsule/p5.png",
             alt: "PhotoFrame-80-Thailand"
           }
         ]
@@ -205,22 +241,22 @@
         });
       },
   
-      takePhoto() {
-        if (!this.isPhotoTaken) {
-          this.isShotPhoto = true;
+    //   takePhoto() {
+    //     if (!this.isPhotoTaken) {
+    //       this.isShotPhoto = true;
   
-          const FLASH_TIMEOUT = 50;
+    //       const FLASH_TIMEOUT = 50;
   
-          setTimeout(() => {
-            this.isShotPhoto = false;
-          }, FLASH_TIMEOUT);
-        }
+    //       setTimeout(() => {
+    //         this.isShotPhoto = false;
+    //       }, FLASH_TIMEOUT);
+    //     }
   
-        this.isPhotoTaken = !this.isPhotoTaken;
+    //     this.isPhotoTaken = !this.isPhotoTaken;
   
-        const context = this.$refs.canvas.getContext('2d');
-        context.drawImage(this.$refs.camera, 0, 0, 450, 337.5);
-      },
+    //     const context = this.$refs.canvas.getContext('2d');
+    //     context.drawImage(this.$refs.camera, 0, 0, 450, 337.5);
+    //   },
   
       downloadImage() {
         const download = document.getElementById('downloadPhoto');
@@ -263,13 +299,13 @@
         var height = video.videoHeight;
         canvas.width = width;
         canvas.height = height;
-        alert(width, height);
-  
+        // alert(width, height);
+        //แคปรูป
         var screenshot;
         canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-  
+        //ผลลัพธ์
         var imgData = document.querySelector('.image');     
-        canvas.getContext('2d').drawImage(imgData, 0, 0, imgData.width, imgData.height);
+        canvas.getContext('2d').drawImage(imgData, 0, 0, width, height);
         screenshot = canvas.toDataURL('image/png');
   
         var link = document.createElement("a");
@@ -296,26 +332,30 @@
     margin-bottom: 3rem;
   
   }
-  .img-select{
+  /* .img-select{
   position: absolute;
   z-index: 2;
-  }
+  } */
   
   body {
     display: flex;
     justify-content: center;
   }
- /*
  
-  .image {
-    width: 450px;
-    height: 337px;
-    margin: 2px;
+
+  .filter-select {
+    position: absolute;
+    z-index: 2;
+    width: 306px;
+    height: 407px;
+    /* margin: 2px; */
     cursor: pointer;
     transition: filter 0.3s ease-in;
+    /* border: 3px solid #ccc; */
+    /* border-radius: 4px; */
   }
  
- */
+
   
   .image:hover {
     filter: brightness(1.2);
@@ -339,8 +379,8 @@
   /* } */
   .web-camera-container .camera-box .camera-shutter {
     opacity: 0;
-    /* width: 450px;
-    height: 337.5px; */
+    width: 337.5px;
+    height: 450px;
     background-color: #fff;
     position: absolute;
   }
