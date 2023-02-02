@@ -1,16 +1,19 @@
 <script setup lang="ts">
 import MapZone from '@/components/MapZone.vue';
-import Navbar from '@/components/Navbar.vue';
-import Annoucement from '@/components/Annoucement.vue'
+import NavbarButton from '@/components/NavbarButton.vue';
+import NavbarLayout from '@/components/NavbarLayout.vue';
 </script>
 
 <template>
-    <div>
-		<div class="px-3 py-2">
+    <navbar-layout show-annouce = true>
+		<div class="px-3 py-2 flex justify-between">
 			<h1 class="font-bold text-3xl">แผนที่</h1>
+            <navbar-button
+                icon="notification_icon.svg"
+                size=""
+                linkPage="notification" 
+                />
 		</div>
-        <MapZone/>
-        <Annoucement/>
-        <Navbar />
-    </div>
+        <map-zone/>
+    </navbar-layout>
 </template>
