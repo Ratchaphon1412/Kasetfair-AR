@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 import { defineComponent } from "vue";
 import FullCalendar from "@fullcalendar/vue3";
 // import dayGridPlugin from "@fullcalendar/daygrid";
@@ -7,14 +7,13 @@ import interactionPlugin from "@fullcalendar/interaction";
 import thLocale from "@fullcalendar/core/locales/th";
 import { INITIAL_EVENTS, createEventId } from "../plugins/event-utils";
 
-import "bootstrap-icons/font/bootstrap-icons.css"; // bootstrap icons
-import bootstrap5Plugin from "@fullcalendar/bootstrap5";
+// import "bootstrap-icons/font/bootstrap-icons.css"; // bootstrap icons
+// import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 
 import MapZone from "../components/MapZone.vue";
 import TimeSlide from "../components/TimeSlide.vue";
 import PopupTimeTable from "../components/PopupTimeTable.vue";
-import Navbar from "@/components/Navbar.vue";
-import Annoucement from "@/components/Annoucement.vue";
+
 import NavbarLayer from "@/components/NavbarLayout.vue";
 
 export default defineComponent({
@@ -23,8 +22,6 @@ export default defineComponent({
     MapZone,
     TimeSlide,
     PopupTimeTable,
-    Navbar,
-    Annoucement,
     NavbarLayer,
   },
   data() {
@@ -34,7 +31,7 @@ export default defineComponent({
           //   dayGridPlugin, // needed for dayGridWeek/dayGridDay
           timeGridPlugin, // needed for timeGridWeek/timeGridDay
           interactionPlugin, // needed for dateClick
-          bootstrap5Plugin, // bootstrap5 theme
+          //bootstrap5Plugin, // bootstrap5 theme
         ],
         // headerToolbar: false, // hide the header
         headerToolbar: {
@@ -74,7 +71,7 @@ export default defineComponent({
             ],
             slotDuration: "00:10:00", // 30 minutes
             slotMinTime: "08:00:00", // 8:00 AM
-            slotMaxTime: "21:00:00", // 8:00 PM
+            slotMaxTime: "22:00:00", // 8:00 PM
             weekends: true, // show weekends mon - sun
             dayHeaders: false, // hide the day header
           },
@@ -85,7 +82,7 @@ export default defineComponent({
         //select: this.handleDateSelect, // this is the function that will be called when a date is selected
         eventClick: this.handleEventClick, // this is the function that will be called when an event is clicked
         //eventSet: this.handleEvents, // this is the function that will be called when events are set or reset
-        // events: [], // this is the array of events that will be displayed on the calendar
+        events: [], // this is the array of events that will be displayed on the calendar
         /* you can update a remote database when these fire:
         eventAdd:
         eventChange:
@@ -137,6 +134,7 @@ export default defineComponent({
     getDate(date) {
       let calendarApi = this.$refs.fullCalendar.getApi();
       calendarApi.next();
+      console.log(date);
       calendarApi.gotoDate(date);
       this.dateSelect = date;
     },
@@ -253,6 +251,10 @@ export default defineComponent({
   /* various CSS styles to make calendar*/
   background-color: #a0a8a0;
 }
+#calendar-container {
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
 
 .fc-header {
   border-radius: 25px;
@@ -309,9 +311,9 @@ export default defineComponent({
 /* calendar main setup*/
 .calendar-container {
   overflow: auto !important;
-  -ms-overflow-style: none;
+  /*-ms-overflow-style: none;*/
   font-size: 16px;
-  scrollbar-width: none;
+  /*scrollbar-width: none;*/
 }
 .calendar-container::-webkit-scrollbar {
   display: none;

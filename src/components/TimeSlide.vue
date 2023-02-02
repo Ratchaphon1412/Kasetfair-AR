@@ -66,7 +66,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent, onMounted, ref } from "vue";
 export default defineComponent({
   setup() {
