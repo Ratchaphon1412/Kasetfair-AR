@@ -7,8 +7,8 @@ import interactionPlugin from "@fullcalendar/interaction";
 import thLocale from "@fullcalendar/core/locales/th";
 import { INITIAL_EVENTS, createEventId } from "../plugins/event-utils";
 
-import "bootstrap-icons/font/bootstrap-icons.css"; // bootstrap icons
-import bootstrap5Plugin from "@fullcalendar/bootstrap5";
+// import "bootstrap-icons/font/bootstrap-icons.css"; // bootstrap icons
+// import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 
 import MapZone from "../components/MapZone.vue";
 import TimeSlide from "../components/TimeSlide.vue";
@@ -31,7 +31,7 @@ export default defineComponent({
           //   dayGridPlugin, // needed for dayGridWeek/dayGridDay
           timeGridPlugin, // needed for timeGridWeek/timeGridDay
           interactionPlugin, // needed for dateClick
-          bootstrap5Plugin, // bootstrap5 theme
+          //bootstrap5Plugin, // bootstrap5 theme
         ],
         // headerToolbar: false, // hide the header
         headerToolbar: {
