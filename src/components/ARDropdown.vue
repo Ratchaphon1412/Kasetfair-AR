@@ -35,16 +35,16 @@
 }
 </style>
 
+
 <template>
   <div class="dropdown" style="float: right">
     <button
-      class="font-medium bg-[#57855E] rounded py-1 px-5 text-sm "
+      class="font-medium bg-[#57855E] dropbtn rounded py-1 px-5 text-sm"
       @click="dropDown"
-      id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
     >
       ลอง AR อื่น ๆ
     </button>
-    <div class="dropdown-content border-none shadow-lg border-none" aria-labelledby="dropdownDefaultButton">
+    <div class="dropdown-content border-none shadow-lg border-none">
       <router-link :to="{ name: 'ar' }">
         <a class="border-2 border-black py-1 px-4 text-sm">พญานาค</a>
       </router-link>
@@ -59,9 +59,7 @@
       <router-link :to="{ name: 'ar3' }">
         <a class="border-x-2 border-black py-1 px-4 text-sm">คณะแพทย์</a>
       </router-link>
-      <!-- <router-link :to="{ name: 'ar4' }"> -->
       <a class="border-2 border-black py-1 px-4 text-sm">ภาคฟิสิกส์</a>
-      <!-- </router-link> -->
     </div>
   </div>
 </template>
