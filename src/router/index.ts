@@ -33,7 +33,18 @@ const router = createRouter({
       path: routePath('/notification'),
       name: 'notification',
       component: () => import('../views/Notification.vue')
-    }
+    },
+    {
+      path: routePath('/ar'),
+      name: 'ar',
+      component: () => import('../views/AR.vue')
+    },
+    {
+      path: routePath('/share'),
+      name: 'share',
+      component: () => import('../views/Share.vue')
+    },
+
   ]
 })
 

@@ -7,7 +7,6 @@ import interactionPlugin from "@fullcalendar/interaction";
 import thLocale from "@fullcalendar/core/locales/th";
 import { INITIAL_EVENTS, createEventId } from "../plugins/event-utils";
 
-import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css"; // bootstrap icons
 import bootstrap5Plugin from "@fullcalendar/bootstrap5";
 
@@ -310,13 +309,12 @@ export default defineComponent({
 .calendar-container {
   overflow: auto !important;
   -ms-overflow-style: none;
-  font-size: 0.5rem;
+  font-size: 16px;
   scrollbar-width: none;
 }
 .calendar-container::-webkit-scrollbar {
   display: none;
 }
-
 /* Inherits background for each event from Schedule. */
 .fc-event .fc-bg {
   z-index: 1 !important;

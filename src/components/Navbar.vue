@@ -8,7 +8,7 @@ import NavbarButton from './NavbarButton.vue';
             <navbar-button 
                 icon="ar_icon.svg" 
                 text="AR" 
-                linkPage="home"
+                linkPage="ar"
             />
             <navbar-button 
                 icon="capsule_icon.svg" 

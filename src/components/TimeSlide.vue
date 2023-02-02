@@ -13,10 +13,7 @@
                 class="flex group bg-[#69B19B] hover:bg-[#80D2B9] shadow-lg dark-shadow rounded-lg mx-1 cursor-pointer justify-center relative w-16"
                 @click="clickDate(date)"
               >
-                <span
-                  ref="targetDiv"
-                  class="flex h-3 w-3 absolute -top-1 -right-1"
-                >
+                <span class="flex h-3 w-3 absolute -top-1 -right-1">
                   <span
                     class="animate-ping absolute group-hover:opacity-75 opacity-0 inline-flex h-full w-full rounded-full bg-purple-400"
                   ></span>
@@ -92,9 +89,18 @@ export default {
 
     console.log(arrayDate[8].getTime() == dateToday.getTime());
 
+    const nowDate = ref(null);
+
+    const goToNowDate = () => {
+      nowDate.value[0].scrollIntoView({ block: "center", inline: "center" });
+      console.log(nowDate.value[0]);
+    };
+
     return {
       arrayDate,
       dateCurrent,
+      goToNowDate,
+      nowDate,
     };
   },
   data() {
@@ -112,7 +118,10 @@ export default {
       this.callback(date);
     },
   },
-  mounted() {},
+  mounted() {
+    this.goToNowDate();
+  },
+  beforeMount() {},
 };
 </script>
 
