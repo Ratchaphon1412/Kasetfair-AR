@@ -5,7 +5,7 @@ import NavbarLayout from '@/components/NavbarLayout.vue';
 </script>
 
 <template>
-    <navbar-layout show-annouce = true>
+    <navbar-layout showAnnouce="True">
 		<div class="px-3 py-2 flex justify-between">
 			<h1 class="font-bold text-3xl">แผนที่</h1>
             <navbar-button
