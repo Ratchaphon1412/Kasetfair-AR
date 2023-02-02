@@ -22,7 +22,9 @@
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1;}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
 
 .dropdown:hover .dropdown-content {
   display: block;
@@ -32,6 +34,7 @@
   background-color: #4c7c63;
 }
 </style>
+
 
 <template>
     <div class="dropdown" style="float:right;">
