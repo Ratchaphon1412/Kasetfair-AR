@@ -9,7 +9,6 @@ const route = useRoute();
 const screenshot = localStorage.getItem('screenshot');
 console.log(screenshot);
 function saveFile() {
-  // this.capture();
   // โหลดไฟล์ภาพ
   var link = document.createElement("a");
   link.download = "screenshot.png";
@@ -20,7 +19,6 @@ function saveFile() {
 }
 async function shareFile() {
   //แชร์ไฟล์ภาพ
-  // this.capture();
   const blob = await (await fetch(screenshot)).blob();
   const filesArray = [
     new File([blob], "bla.png", {
