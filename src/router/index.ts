@@ -25,6 +25,16 @@ const router = createRouter({
       component: () => import('../views/Trois.vue')
     },
     {
+      path: routePath('/form'),
+      name: 'form',
+      component: () => import('../views/Form.vue')
+    },
+    {
+      path: routePath('/feedback'),
+      name: 'feedback',
+      component: () => import('../views/FeedBack.vue')
+    },
+    {
       path: routePath('/notification'),
       name: 'notification',
       component: () => import('../views/Notification.vue')
@@ -33,7 +43,13 @@ const router = createRouter({
       path: routePath('/ar'),
       name: 'ar',
       component: () => import('../views/AR.vue')
-    }
+    },
+    {
+      path: routePath('/share'),
+      name: 'share',
+      component: () => import('../views/Share.vue')
+    },
+
   ]
 })
 
