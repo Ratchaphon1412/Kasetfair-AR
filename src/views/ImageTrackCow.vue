@@ -64,9 +64,8 @@ export default {
         .components.screenshot.getCanvas("perspective");
       canvas.getContext("2d").drawImage(imgData, 0, 0, width, height);
       screenshot = canvas.toDataURL("image/png");
-       this.$router
-        .push({ path: "/preview", params: { screenshot }})
-        .then(() => { this.$router.go() })
+      this.stopVideo();
+       this.$router.push({ path: "share", params: { screenshot }}).then(() => { this.$router.go() })
     },
     home(){
       window.close();
@@ -87,7 +86,7 @@ video{
 </style>
 
 <template>
-    <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch">
+    <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
           <img src="../assets/icons/back_to_home.svg" />
@@ -99,8 +98,8 @@ video{
     </div>
 
     <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute">
-      <button type="button" @click="capture()">
-        <img src="../assets/icons/icon.camera.svg" />
+      <button type="button" @click="capture()" class="scale-75">
+        <img src="../assets/icons/icon.camera.svg"/>
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
