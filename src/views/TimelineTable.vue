@@ -251,6 +251,10 @@ export default defineComponent({
   /* various CSS styles to make calendar*/
   background-color: #a0a8a0;
 }
+#calendar-container {
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
 
 .fc-header {
   border-radius: 25px;
@@ -307,9 +311,9 @@ export default defineComponent({
 /* calendar main setup*/
 .calendar-container {
   overflow: auto !important;
-  -ms-overflow-style: none;
+  /*-ms-overflow-style: none;*/
   font-size: 16px;
-  scrollbar-width: none;
+  /*scrollbar-width: none;*/
 }
 .calendar-container::-webkit-scrollbar {
   display: none;

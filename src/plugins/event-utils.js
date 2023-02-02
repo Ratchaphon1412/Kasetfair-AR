@@ -16,7 +16,7 @@ export const INITIAL_EVENTS = [
 
     extendedProps: {
       description: "  ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     },
   },{
@@ -31,7 +31,7 @@ export const INITIAL_EVENTS = [
 
     extendedProps: {
       description: "  ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     },
   },{
@@ -44,7 +44,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
 
@@ -58,7 +58,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -71,7 +71,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -84,7 +84,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -97,7 +97,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -110,7 +110,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -123,7 +123,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -136,7 +136,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -149,7 +149,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -162,7 +162,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -175,7 +175,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -188,7 +188,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -201,7 +201,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -214,7 +214,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -227,7 +227,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -240,7 +240,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -253,7 +253,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -266,7 +266,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -279,7 +279,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -292,7 +292,7 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
   },{
@@ -305,11 +305,82 @@ export const INITIAL_EVENTS = [
     textColor: "#2A5E5C",
     extendedProps:{
       description:"ไม่มีข้อมูล",
-      url:"https://www.google.com/maps/dir//เวทีสนามอินทร์+เกษตร/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x30e29ce783fef46b:0xdfe8047a1944b34a?sa=X&ved=2ahUKEwiJrIanyO_8AhVgCLcAHaUsBC4Q9Rd6BAhXEAQ",
+      url:"https://goo.gl/maps/ppqdfSmCtXjXABcUA",
       location:"ณ พื้นที่ลานดาวหอประชุมใหญ่",
     }
-  },
+  },{
+    id: createEventId(),
+    title: "การประกวดผลไม้ประจำปี",
+    start: "2023-02-03T09:00:00",
+    end: "2023-02-03T13:00:00",
+    editable: false,
+    backgroundColor: "#EAEAEA",
+    textColor: "#2A5E5C",
 
+    extendedProps: {
+      description: "ไม่มีข้อมูล",
+      url:"https://goo.gl/maps/PGAtnX6CbHnX218h7",
+      location:"ณ อาคารจักรพันธ์เพ็ญศิริ คณะเกษตร ภาควิชาพืชสวน กรมส่งเสริมการเกษตร กรมวิชาการเกษตร",
+    },
+},{
+    id: createEventId(),
+    title: "การประกวดไม้ประดับประจำปี",
+    start: "2023-02-03T13:00:00",
+    end: "2023-02-03T17:00:00",
+    editable: false,
+    backgroundColor: "#EAEAEA",
+    textColor: "#2A5E5C",
+
+    extendedProps: {
+      description: "ไม่มีข้อมูล",
+      url:"https://goo.gl/maps/jXCGnsCFcxna9TFq6",
+      location:"ณ ชั้น 1 อาคารวชิรานุสรณ์ คณะเกษตร ภาควิชาพืชสวน ชมรมผู้พัฒนาไม้ประดับ",
+    },
+},{
+    id: createEventId(),
+    title: "การประกวดกล้วยไม้ตัดดอก",
+    start: "2023-02-04T09:00:00",
+    end: "2023-02-04T22:00:00",
+    editable: false,
+    backgroundColor: "#EAEAEA",
+    textColor: "#2A5E5C",
+
+    extendedProps: {
+      description: "ไม่มีข้อมูล",
+      url:"https://goo.gl/maps/jXCGnsCFcxna9TFq6",
+      location:"ณ ชั้น 1 อาคารวชิรานุสรณ์ คณะเกษตร ภาควิชาพืชสวน",
+    },
+},{
+    id: createEventId(),
+    title: "การประกวด แพะ และ แกะ",
+    start: "2023-02-04T09:00:00",
+    end: "2023-02-04T22:00:00",
+    editable: false,
+    backgroundColor: "#EAEAEA",
+    textColor: "#2A5E5C",
+
+    extendedProps: {
+      description: "ไม่มีข้อมูล",
+      url:"https://goo.gl/maps/sVSHwr4RHP4krjdd9",
+      location:"ณ ลานเอนกประสงค์ ตึกจรัด คณะเกษตร ภาควิชาสัตวบาล",
+    },
+},{
+    id: createEventId(),
+    title: "การประกวดกล้วยไม้ประดับประจำปี",
+    start: "2023-02-05T09:00:00",
+    end: "2023-02-05T22:00:00",
+    editable: false,
+    backgroundColor: "#EAEAEA",
+    textColor: "#2A5E5C",
+
+    extendedProps: {
+      description: "ไม่มีข้อมูล",
+      url:"https://goo.gl/maps/jXCGnsCFcxna9TFq6",
+      location:"ณ โถงชั้น 1 อาคารวชิรานุสรณ์คณะเกษตร",
+    },
+},
+
+  
     
 
 ]
