@@ -4,11 +4,7 @@ import { TroisJSVuePlugin } from 'troisjs';
 
 import App from './App.vue'
 import router from './router'
-
-import VueScrollTo from "vue-scrollto";
-
-
-
+import vue3StarRatings from "vue3-star-ratings";
 import './assets/main.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
@@ -17,5 +13,5 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(TroisJSVuePlugin)
-app.use(VueScrollTo)
+app.component("vue3starRatings",vue3StarRatings)
 app.mount('#app')

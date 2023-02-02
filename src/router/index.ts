@@ -30,21 +30,46 @@ const router = createRouter({
       component: () => import('../views/TimelineTable.vue')
     },{
 
+      path: routePath('/form'),
+      name: 'form',
+      component: () => import('../views/Form.vue')
+    },
+    {
+      path: routePath('/feedback'),
+      name: 'feedback',
+      component: () => import('../views/FeedBack.vue')
+    },
+    {
       path: routePath('/notification'),
       name: 'notification',
       component: () => import('../views/Notification.vue')
     },
-    {
+    {  
       path: routePath('/ar'),
       name: 'ar',
-      component: () => import('../views/AR.vue')
+      component: () => import('../views/ImageTrackCow.vue')
+    },
+    {  
+      path: routePath('/ar1'),
+      name: 'ar1',
+      component: () => import('../views/ImageTrackChess.vue')
+    },
+    {  
+      path: routePath('/ar2'),
+      name: 'ar2',
+      component: () => import('../views/ImageTrackCow.vue')
+    },
+    {
+      path: routePath('/ar3'),
+      name: 'ar3',
+      component: () => import('../views/Share.vue')
     },
     {
       path: routePath('/share'),
       name: 'share',
+      props: ['preview'],
       component: () => import('../views/Share.vue')
     },
-
   ]
 })
 
