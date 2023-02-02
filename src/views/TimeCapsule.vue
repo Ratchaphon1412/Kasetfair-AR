@@ -20,59 +20,65 @@
             <li></li>
           </ul>
         </div>
-  
-        <div
-          v-if="isCameraOpen"
-          v-show="!isLoading"
-          class="camera-box"
-          :class="{ flash: isShotPhoto }"
-        >
-  
-          <!-- <dev class="test"><img src="./assets/1..jpg"  height="337"></dev> -->
-          <!-- justify-center -->
 
-          <!-- โชว์รูปภาพ
-          <div class="filter-select">
-            <img v-if="image" :key="image.id" @click="switchImage" class="image" :src="image.src" alt="image.alt">
-          </div> -->
-          
-          <!-- <div class="camera-shutter" :class="{ flash: isShotPhoto }"></div> -->
-          
-          <div class="relative" @click="switchImage">
-            <!-- โชว์รูปภาพ -->
-            <!-- <div class="filter-select"> -->
-                <!-- <img v-if="image" :key="image.id" @click="switchImage" class="image filter-select" :src="image.src" alt="image.alt"> -->
-            <!-- </div> -->
-            <div class="absolute w-full inser-x-0">
-                <img v-if="image" :key="image.id" class="image w-full" :src="image.src" alt="image.alt">
-            </div>
+        <div class="portrait:hidden">
+            ใช้โทรศัพท์ในแนวตั้ง
+        </div>
+        
+        <div class="landscape:hidden">
+            <div
+            v-if="isCameraOpen"
+            v-show="!isLoading"
+            class="camera-box"
+            :class="{ flash: isShotPhoto }"
+            >
+    
+            <!-- <dev class="test"><img src="./assets/1..jpg"  height="337"></dev> -->
+            <!-- justify-center -->
+
+            <!-- โชว์รูปภาพ
+            <div class="filter-select">
+                <img v-if="image" :key="image.id" @click="switchImage" class="image" :src="image.src" alt="image.alt">
+            </div> -->
             
-                <video
+            <!-- <div class="camera-shutter" :class="{ flash: isShotPhoto }"></div> -->
+            
+                <div class="relative" @click="switchImage">
+                <!-- โชว์รูปภาพ -->
+                <!-- <div class="filter-select"> -->
+                    <!-- <img v-if="image" :key="image.id" @click="switchImage" class="image filter-select" :src="image.src" alt="image.alt"> -->
+                <!-- </div> -->
+                <div class="absolute w-full inser-x-0">
+                    <img v-if="image" :key="image.id" class="image w-full" :src="image.src" alt="image.alt">
+                </div>
+                
+                    <video
+                    v-show="!isPhotoTaken"
+                    ref="camera"
+                    webkit-playsinline
+                    playsinline
+                    autoplay
+                    id="video">
+                    </video>
+            </div>
+            <!-- <video
                 v-show="!isPhotoTaken"
                 ref="camera"
+                :width="450"
+                :height="337.5"
                 webkit-playsinline
                 playsinline
                 autoplay
-                id="video">
-                </video>
-          </div>
-          <!-- <video
-            v-show="!isPhotoTaken"
-            ref="camera"
-            :width="450"
-            :height="337.5"
-            webkit-playsinline
-            playsinline
-            autoplay
-            id="video"
-          ></video> -->
-  
-          <canvas
-            v-show="isPhotoTaken"
-            id="photoTaken"
-            ref="canvas"
-          ></canvas>
-        </div>
+                id="video"
+            ></video> -->
+    
+            <canvas
+                v-show="isPhotoTaken"
+                id="photoTaken"
+                ref="canvas"
+            ></canvas>
+            </div>
+        </div> 
   
         <!-- <div v-if="isCameraOpen && !isLoading" class="camera-shoot">
           <button type="button" class="button" @click="takePhoto">
@@ -81,23 +87,25 @@
             />
           </button>
         </div> -->
-        <div v-if="isCameraOpen && !isLoading" class="change-camera-type">
-          <button type="button" class="button" @click="toggleCameraType">
-            <img
-              src="https://img.icons8.com/material-outlined/30/000000/switch-camera.png"
-            />
-          </button>
-        </div>
-  
-        <div v-if="isCameraOpen && !isLoading" >
-          <button type="button" class="button is-success"  id="btn" @click="capture()">
-              <!-- <span class="icon is-small">
-              <i class="fas fa-camera"></i>
-              </span> -->
-              <img
-              src="https://img.icons8.com/material-outlined/50/000000/camera--v2.png"
-            />
-          </button>
+        <div class="landscape:hidden">
+            <div v-if="isCameraOpen && !isLoading" class="change-camera-type">
+            <button type="button" class="button" @click="toggleCameraType">
+                <img
+                src="https://img.icons8.com/material-outlined/30/000000/switch-camera.png"
+                />
+            </button>
+            </div>
+    
+            <div v-if="isCameraOpen && !isLoading" >
+            <button type="button" class="button is-success"  id="btn" @click="capture()">
+                <!-- <span class="icon is-small">
+                <i class="fas fa-camera"></i>
+                </span> -->
+                <img
+                src="https://img.icons8.com/material-outlined/50/000000/camera--v2.png"
+                />
+            </button>
+            </div>
         </div>
   
         <div v-if="isPhotoTaken && isCameraOpen" class="camera-download">
