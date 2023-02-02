@@ -1,20 +1,21 @@
 <template>
+  <br/>
   <div class="grid grid-rows-1 grid-flow-col gap-4">
     <!-- this is aorrow left -->
-    <div class="row-start-1 pl-3">
-      <a href="../home">
-        <i class="fa-solid fa-chevron-left pt-3 pl-2 text-3xl"></i>
+    <div class="row-start-1">
+      <a href="../timepod/home">
+        <img src="../assets/images/aorrow-left.png" width="45" height="60"/>
       </a>
     </div>
     <!-- buttom to report -->
-    <div class="row-start-1 row-end-1 text-right pr-2">
-      <i class="fa-solid fa-circle-exclamation text-3xl pt-4"></i>
+    <div class="row-start-1 row-end-1">
+        <img src="../assets/images/warming.png" width="60" height="80" style="float: right;"/>
     </div>
   </div>
   
-  <p class="text-right pb-2 pr-1" style="color:#2A5E5C">รายงาน</p>
+  <p class="text-right pr-1" style="color:#2A5E5C">รายงาน</p>
 
-    <label style="font-weight:bolder" class="pb-1 pl-10">รายงานปัญหา</label><br>
+    <label style="font-weight:bolder" class="pl-10">รายงานปัญหา</label>
     
     <!-- dropdown problem -->
     <br><label class="pl-10">หมวดหมู่ปัญหา </label>
@@ -27,15 +28,14 @@
     </div>
 
     <!-- location -->
-    <br><label class="pl-10">ตำแหน่ง </label>
+    <label class="pl-10">ตำแหน่ง </label>
     <label style="color: red;">*</label><br>
     <div class="text-center pl-10 pr-10">
       <input v-model="location" type="text" class="w-full rounded" placeholder="ตำแหน่งที่คุณ....">
     </div>
 
     <!-- explain the information -->
-    <br><label class="pl-10">เพิ่มเติม </label>
-    <label style="color: red;">*</label><br>
+    <label class="pl-10">เพิ่มเติม </label><br>
     <div class="text-center pl-10 pr-10">
       <textarea v-model="information" rows="4" cols="50" class="w-full rounded"
         placeholder="คำอธิบายเกี่ยวกับเเหตุการณ์นั้น....."></textarea>
@@ -46,18 +46,19 @@
         class="text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 w-full"
         style="background-color:#57855E">ยืนยัน</button>
     </div>
-
-
+    <br/>
   <!-- this is aorrow down -->
-  <div style="text-align:center" class="pt-10">
-    <a href="../feedback">
-      <i class="fa-solid fa-angle-down text-3xl"></i>
+  <div>
+    <a href="../timepod/feedback">
+      <img src="../assets/images/aorrow-down.png" width="45" height="60" style="margin:auto">
     </a>
   </div>
 
+  <NavbarLayout/>
 </template>
 
 <script>
+import NavbarLayout from "../components/NavbarLayout.vue"
 import axios from "axios";
 
 export default {
@@ -71,7 +72,10 @@ export default {
   },
   methods: {
       confirm(){
-        if (this.problem !== '' && this.location !== '' && this.information !== '') {
+        if (this.problem !== '' && this.location !== '') {
+          if(this.information === ''){
+            this.information = 'ไม่ได้ใส่ข้อความเข้ามา'
+          }
           axios.get('https://script.google.com/macros/s/AKfycbx2qxF4VMjgROQTEZZfWGAma_tZWrc5-ikuZI7bPV2rQDoe9bEBdABCyvFDq88WOGHsXg/exec',{
             params:{
               problem: this.problem,
@@ -86,6 +90,9 @@ export default {
         }
         
       }
+  },
+  components:{
+    NavbarLayout
   }
 }
 </script>
