@@ -6,6 +6,7 @@ import App from './App.vue'
 import router from './router'
 import vue3StarRatings from "vue3-star-ratings";
 import './assets/main.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 const app = createApp(App)
 

@@ -20,6 +20,11 @@ const router = createRouter({
       component: () => import('@/views/Home.vue')
     },
     {
+      path: routePath('/timeline'),
+      name: 'timeline',
+      component: () => import('../views/TimelineTable.vue')
+    },{
+
       path: routePath('/form'),
       name: 'form',
       component: () => import('@/views/Form.vue')
