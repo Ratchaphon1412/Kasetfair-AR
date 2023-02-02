@@ -18,7 +18,7 @@ import NavbarButton from '@/components/NavbarButton.vue';
     </div>
     <div class="bg-green-200">anotherAR</div>
   </div>
-  <a-r-navbar-layout show-annouce="false">
+  <a-r-navbar-layout :show-annouce=false>
 
   </a-r-navbar-layout>
 </template>
