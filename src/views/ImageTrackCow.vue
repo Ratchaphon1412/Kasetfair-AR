@@ -78,10 +78,12 @@ export default {
 a-scene {
   height: 100vh;
 }
+body{
+  overflow: hidden;
+}
 video{
   margin-left: 0px !important;
   position: absolute;
-  margin-top: -100px !important;
 }
 </style>
 
