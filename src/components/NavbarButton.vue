@@ -29,8 +29,8 @@ const getSize = (size : string): string =>{
 
 <template>
 <div>
-	<router-link :to="{ name: props.linkPage }" :target="newTab && '_blank'" class="p-1 flex-col mt-auto">
-        <img :src="getIconURL(props.icon)" class="mx-auto" :class="getSize(props.size)" alt="icon" draggable="false">
+	<router-link :to="{ name: props.linkPage }" :target="newTab && '_blank'" class="flex-col mt-auto">
+        <img :src="getIconURL(props.icon)" class="mx-auto mt-1" :class="getSize(props.size)" alt="icon" draggable="false">
         <h1 class="text-center pt-1 font-bold">{{ props.text }}</h1>
 	</router-link>
 </div>
