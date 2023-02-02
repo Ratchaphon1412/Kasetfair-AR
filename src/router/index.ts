@@ -20,11 +20,6 @@ const router = createRouter({
       component: () => import('../views/Home.vue')
     },
     {
-      path: routePath('/trois'),
-      name: 'trois',
-      component: () => import('../views/Trois.vue')
-    },
-    {
       path: routePath('/form'),
       name: 'form',
       component: () => import('../views/Form.vue')
