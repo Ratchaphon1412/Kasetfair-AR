@@ -64,6 +64,7 @@ export default {
         .components.screenshot.getCanvas("perspective");
       canvas.getContext("2d").drawImage(imgData, 0, 0, width, height);
       screenshot = canvas.toDataURL("image/png");
+      localStorage.setItem('screenshot', screenshot);
       this.stopVideo();
        this.$router.push({ path: "share", params: { screenshot }}).then(() => { this.$router.go() })
     },

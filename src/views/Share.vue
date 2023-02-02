@@ -1,12 +1,14 @@
 <script setup lang="ts">
+
 import { defineComponent } from 'vue';
 import ShareNavbarLayout from '@/components/ShareNavbarLayout.vue';
 import NavbarButton from '@/components/NavbarButton.vue';
 import { useRoute } from 'vue-router';
 
-const route = useRoute();  
-const screenshot = route.params; // read parameter id (it is reactive) 
+const route = useRoute();
+const screenshot = localStorage.getItem('screenshot');
 console.log(screenshot);
+
 </script>
 
 
@@ -20,8 +22,22 @@ console.log(screenshot);
       />
     </div>
   </div>
-    <ShareNavbarLayout>
 
-    </ShareNavbarLayout>
+  <ShareNavbarLayout>
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <img id="image1" :src="screenshot" />
+    </div>
+  </ShareNavbarLayout>
 
 </template>
+
+<style>
+#image1 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 40px;
+  border-color: black;
+  border-width: 5px;
+}
+</style>
