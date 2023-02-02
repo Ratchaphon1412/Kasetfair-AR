@@ -36,7 +36,7 @@
 <template>
     <div class="dropdown" style="float:right;">
         <button class="font-medium bg-[#57855E] dropbtn rounded py-1 px-5  text-sm">ลอง AR อื่น ๆ</button>
-        <div class=" dropdown-content border-none shadow-lg border-none">
+        <div class=" dropdown-content border-none shadow-lg">
           <router-link :to="{ name: 'ar' }">
             <a class="border-2 border-black py-1 px-4 text-sm">พญานาค</a>
           </router-link>
