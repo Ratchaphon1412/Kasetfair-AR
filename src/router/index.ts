@@ -16,7 +16,7 @@ const router = createRouter({
     {
       path: '/timeline',
       name: 'timeline',
-      component: () => import('../views/TimelineTable.vue')
+      component: () => import('@/views/TimelineTable.vue')
     },{
 
       path: '/form',
@@ -70,10 +70,15 @@ const router = createRouter({
       component: () => import('@/views/Share.vue')
     },
     {
-      path: '/ARX',
+      path: '/arx',
       name: 'ARX',
       component: () => import('@/views/Markersculpture.vue')
     },
+    {
+      path: '/time-capsule',
+      name: 'time-capsule',
+      component: () => import('@/views/TimeCapsule.vue')
+    }
   ]
 })
 
