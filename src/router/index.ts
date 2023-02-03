@@ -1,82 +1,76 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const BASE_URL = ''
-
-const routePath = (path: string) => {
-  return BASE_URL + path
-}
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // {
-    //   path: routePath('/'),
-    //   name: 'welcome',
-    //   component: () => import('@/views/Welcome.vue')
-    // },
     {
-      path: routePath('/'),
+      path: '/',
+      name: 'welcome',
+      component: () => import('@/views/Welcome.vue')
+    },
+    {
+      path: '/home',
       name: 'home',
       component: () => import('@/views/Home.vue')
     },
     {
-      path: routePath('/timeline'),
+      path: '/timeline',
       name: 'timeline',
       component: () => import('../views/TimelineTable.vue')
     },{
 
-      path: routePath('/form'),
+      path: '/form',
       name: 'form',
       component: () => import('@/views/Form.vue')
     },
     {
-      path: routePath('/feedback'),
+      path: '/feedback',
       name: 'feedback',
       component: () => import('@/views/FeedBack.vue')
     },
     {
-      path: routePath('/notification'),
+      path: '/notification',
       name: 'notification',
       component: () => import('@/views/Notification.vue')
     },
     {  
-      path: routePath('/ar'),
+      path: '/ar',
       name: 'ar',
       component: () => import('@/views/ImageTrackCow.vue')
     },
     {  
-      path: routePath('/ar0'),
+      path: '/ar0',
       name: 'ar0',
       component: () => import('@/views/MarkerNak.vue')
     },
     {  
-      path: routePath('/ar1'),
+      path: '/ar1',
       name: 'ar1',
       component: () => import('@/views/ImageTrackChess.vue')
     },
     {  
-      path: routePath('/ar2'),
+      path: '/ar2',
       name: 'ar2',
       component: () => import('@/views/ImageTrackCow.vue')
     },
     {
-      path: routePath('/ar3'),
+      path: '/ar3',
       name: 'ar3',
       component: () => import('@/views/Share.vue')
     },
     {
-      path: routePath('/ar4'),
+      path: '/ar4',
       name: 'ar4',
       component: () => import('@/views/MarkerPriemuim.vue')
     },
     {
-      path: routePath('/share'),
+      path: '/share',
       name: 'share',
       props: ['preview'],
       component: () => import('@/views/Share.vue')
     },
     {
-      path: routePath('/ARX'),
+      path: '/ARX',
       name: 'ARX',
       component: () => import('@/views/Markersculpture.vue')
     },
