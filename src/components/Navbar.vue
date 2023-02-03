@@ -14,7 +14,7 @@ import NavbarButton from './NavbarButton.vue';
             <navbar-button 
                 icon="capsule_icon.svg" 
                 text="วันวาน KU" 
-                linkPage="home"
+                linkPage="time-capsule"
             />
             <navbar-button 
                 icon="icon.home.svg" 

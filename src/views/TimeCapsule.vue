@@ -44,9 +44,7 @@
             </button>
 
         </div>
-
-
-      <div class="web-camera-container">
+      <div class="web-camera-container">        
         <div class="camera-button">
           <button
             type="button"
@@ -300,7 +298,7 @@
           })
           .catch((error) => {
             this.isLoading = false;
-            alert("May the browser didn't support or there is some errors.");
+            alert("อุปกรณ์ของคุณไม่รองรับ โปรดใช้โทรศัพท์มือถือในการเปิดหน้านี้");
           });
       },
   
