@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import Navbar from '@/components/Navbar.vue';
-import Annoucement from '@/components/Annoucement.vue'
-
+import ShareNavbar from './ShareNavbar.vue';
 const props = defineProps<{
     showAnnouce : boolean,
 }>()
@@ -13,8 +11,7 @@ const props = defineProps<{
             <slot />
         </div>
         <div class="bottom-0 w-full fixed">
-            <annoucement v-if="showAnnouce"/>
-            <navbar />
+            <ShareNavbar/>
         </div>
     </div>
 </template>
