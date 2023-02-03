@@ -64,21 +64,25 @@ window.onclick = function(event) {
     <div class="dropdown" style="float:right;">
         <button class="font-medium bg-[#57855E] dropbtn rounded py-1 px-5  text-sm">ลอง AR อื่น ๆ</button>
         <div class=" dropdown-content border-none shadow-lg">
-          <router-link :to="{ name: 'ar' }">
-            <a class="border-2 border-black py-1 px-4 text-sm">พญานาค</a>
+          <router-link :to="{ name: 'ar0' }">
+            <a class="border-2 border-black py-1 px-4 text-sm">สระพระพิรุณ</a>
           </router-link>
           <router-link :to="{ name: 'ar1' }">
             <a class="border-x-2 border-b-2 border-black py-1 px-4 text-sm">สามบูรพาจารย์</a>
           </router-link>
           <router-link :to="{ name: 'ar2' }">
-            <a class="border-x-2 border-b-2 border-black py-1 px-4 text-sm">วัว</a>
+            <a class="border-x-2 border-b-2 border-black py-1 px-4 text-sm">KU Milk</a>
           </router-link>
           <router-link :to="{ name: 'ar3' }">
             <a class="border-x-2 border-black py-1 px-4 text-sm">คณะแพทย์</a>
           </router-link>
-          <!-- <router-link :to="{ name: 'ar4' }"> -->
-            <a class="border-2 border-black py-1 px-4 text-sm">ภาคฟิสิกส์</a>
-          <!-- </router-link> -->
+          <router-link :to="{ name: 'ar4' }">
+            <a class="border-2 border-black py-1 px-4 text-sm">พรีเมียม</a>
+          </router-link>
+          <router-link :to="{ name: 'ARX' }">
+            <a class="border-x-2 border-b-2 border-black py-1 px-4 text-sm">คณะวิศวะ</a>
+          </router-link>
+
         </div>
     </div>
 </template>
