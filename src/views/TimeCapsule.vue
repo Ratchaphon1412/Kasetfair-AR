@@ -2,22 +2,21 @@
     <div id="app">
     <!-- ปุ่มย้อนกลับ -->
         <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
-        <div>
+          <div>
+            <router-link :to="{ name: 'home'}">
+              <button type="button" class="py-2 px-2">
+                <img src="../assets/icons/back_to_home.svg" />
+              </button>
+          </router-link>
+          </div>
+          <!-- <div>
             <button type="button" class="py-2 px-2">
               <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30"><path d="m12 20-8-8 8-8 1.425 1.4-5.6 5.6H20v2H7.825l5.6 5.6Z"/></svg>
             </button> กลับหน้าหลัก
-        </div>
+          </div> -->
         </div>
         
         <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 flex justify-center fixed bottom-0" style="position: absolute">
-            <div v-if="!isCameraOpen ">
-                <button type="button" class="scale-75" id="btn">
-                    <img
-                        src="../assets/icons/icon.camera.svg"/>
-                    <h1 class="text-center font-bold">วิธีใช้งาน</h1>
-                </button>
-            </div>
-
             <div v-if="isCameraOpen && !isLoading">
                 <button type="button"  @click="capture()" class="scale-75" id="btn">
                     <img
@@ -39,7 +38,7 @@
               </button>
             </div>
 
-            <button type="button" @click="shareFile()" class="scale-75">
+            <button v-if="isPhotoTaken" type="button" @click="shareFile()" class="scale-75">
               <img src="../assets/icons/share_icon.svg" />
               <h1 class="text-center font-bold">แชร์</h1>
             </button>
@@ -55,19 +54,10 @@
             :class="{ 'is-primary': !isCameraOpen, 'is-danger': isCameraOpen }"
             @click="toggleCamera"
           >
-            <span v-if="!isCameraOpen" class="flex px-2"> <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M12 17.75q1.925 0 3.263-1.337Q16.6 15.075 16.6 13.15q0-1.925-1.337-3.263Q13.925 8.55 12 8.55q-1.925 0-3.262 1.337Q7.4 11.225 7.4 13.15q0 1.925 1.338 3.263Q10.075 17.75 12 17.75Zm0-2.65q-.8 0-1.375-.575t-.575-1.375q0-.8.575-1.375T12 11.2q.8 0 1.375.575t.575 1.375q0 .8-.575 1.375T12 15.1Zm-8.15 6.725q-1.1 0-1.875-.775-.775-.775-.775-1.875V7.125q0-1.1.775-1.875.775-.775 1.875-.775h3.025l2.05-2.25h6.15l2.05 2.25h3.025q1.1 0 1.875.775.775.775.775 1.875v12.05q0 1.1-.775 1.875-.775.775-1.875.775Zm16.3-2.65V7.125h-4.2l-2.05-2.25h-3.8l-2.05 2.25h-4.2v12.05ZM12 13.15Z"/></svg> กดเพื่อเปิดกล้อง</span>
-            <span v-else class="flex px-2"><svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="m22.8 19.5-2.65-2.625v-9.75h-4.2l-2.05-2.25h-3.8L9.175 5.9 7.3 4.025l1.625-1.8h6.15l2.05 2.25h3.025q1.1 0 1.875.775.775.775.775 1.875Zm-6.2-6.175L11.825 8.55q.95 0 1.85.337.9.338 1.575 1.013.675.675 1.013 1.575.337.9.337 1.85Zm-5.675.9Zm3.725-2.85Zm-9.75-6.9 2.7 2.7H3.85v12h12L.1 3.425 1.975 1.55l20.5 20.5-1.875 1.875-2.1-2.1H3.85q-1.1 0-1.875-.775-.775-.775-.775-1.875V7.125q0-1.1.775-1.875.775-.775 1.875-.775Zm3.75 5.6 1.4 1.4q-.325.35-.475.787-.15.438-.15.913 0 1.075.75 1.825t1.825.75q.475 0 .913-.15.437-.15.787-.475l1.4 1.4q-.65.575-1.437.9-.788.325-1.663.325-1.9 0-3.237-1.337-1.338-1.338-1.338-3.238 0-.875.313-1.663.312-.787.912-1.437Z"/></svg> ปิดกล้อง</span>
+            <button v-if="!isCameraOpen" class="flex"> <img src="../assets/icons/icon.photo_camera.svg"/> <h class="ml-2">กดอนุญาตใช้งานกล้อง</h></button>
+            <button v-else class="flex px-2"> <img src="../assets/icons/icon.no_photography.svg"/> <h class="ml-2">ปิดกล้อง</h></button>
           </button>
         </div>
-
-        <div v-if="!isCameraOpen">
-          
-          <t>วิธีการใช้งาน</t>
-          <li>1. ใช้โทรศัพท์ในแนวตั้ง</li>
-          <li>2. กดเปิดกล้องเพื่อเข้าใช้งาน</li>
-          <li>3. แตะที่หน้าจอเพื่อเปลี่ยนภาพ</li>
-        </div>
-  
         <div v-show="isCameraOpen && isLoading" class="camera-loading">
           <ul class="loader-circle">
             <li></li>
@@ -248,8 +238,9 @@
         screenshot: null,
         imgData: null,
         link: null,
-
-    
+        // imgShare: null
+      
+      
     };
     },
   
@@ -338,9 +329,7 @@
     //     context.drawImage(this.$refs.camera, 0, 0, 450, 337.5);
     //   },
   
-      downloadImage() {
-        this.link.click();
-      },
+    // ------------
   
       // btnScreenshot(){
   
@@ -364,7 +353,10 @@
       //     link.click();
    
       // },
-  
+      downloadImage() {
+        this.link.click();
+      },
+
       capture() {
         this.video = document.getElementsByTagName("video")[0];
         this.canvas = document.createElement("canvas");
@@ -404,14 +396,16 @@
         this.canvas.width = 450
         this.context = this.$refs.canvas.getContext('2d');
         this.context.drawImage(this.$refs.camera, 0, 0, 337.5, 450);
+        // this.shareFile(this.screenshot);
+        
+  
       },
-      
       async shareFile() {
       // แชร์ไฟล์ภาพ
-      this.capture();
-      const blob = await (await fetch(screenshot)).blob();
+      // this.capture();
+      const blob = await (await fetch(this.screenshot)).blob();
       const filesArray = [
-        new File([blob], "bla.png", {
+        new File([blob], "screenshot.png", {
           type: blob.type,
           lastModified: new Date().getTime(),
         }),
@@ -426,12 +420,7 @@
           console.error(err.name + " " + err.message);
         }
       } else console.warn("Sharing not supported", shareData);
-    },
-
-        //   home(){
-        //     window.close();
-    // }
-  
+    }  
     },
   };
   </script>
