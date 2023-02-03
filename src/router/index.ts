@@ -45,6 +45,11 @@ const router = createRouter({
       component: () => import('@/views/ImageTrackCow.vue')
     },
     {  
+      path: routePath('/ar0'),
+      name: 'ar0',
+      component: () => import('@/views/MarkerNak.vue')
+    },
+    {  
       path: routePath('/ar1'),
       name: 'ar1',
       component: () => import('@/views/ImageTrackChess.vue')
@@ -60,10 +65,20 @@ const router = createRouter({
       component: () => import('@/views/Share.vue')
     },
     {
+      path: routePath('/ar4'),
+      name: 'ar4',
+      component: () => import('@/views/MarkerPriemuim.vue')
+    },
+    {
       path: routePath('/share'),
       name: 'share',
       props: ['preview'],
       component: () => import('@/views/Share.vue')
+    },
+    {
+      path: routePath('/ARX'),
+      name: 'ARX',
+      component: () => import('@/views/Markersculpture.vue')
     },
   ]
 })
