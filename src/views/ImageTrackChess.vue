@@ -104,29 +104,65 @@ video{
           emitevents="true"
           cursor="fuse: false; rayOrigin: mouse;"
         >
+        <!--นาคแดง-->
           <a-entity
-            id="bowser-model"
-            animation-mixer="loop: repeat"
-            gltf-model="/models/chess_pieces/red_nak.gltf"
+            id="red-nak"
+            gltf-model="/models/chess_pieces/red_nakv2.gltf"
             class="clickable"
             gesture-handler
-            position="0 0 0"
+            position="0 0 1.5"
             rotation="-90 0 0"
             scale="1 1 1"
           ></a-entity>
+        <!--ขุนแดง-->
+          <a-entity
+            id="red-khun"
+            gltf-model="/models/chess_pieces/red_khun.gltf"
+            class="clickable"
+            gesture-handler
+            position="1 0.8 1.5"
+            rotation="-90 0 0"
+            scale="1 1 1"
+          ></a-entity>
+        <!--เบี้ยแดง-->
+        <a-entity
+            id="red-chib"
+            gltf-model="/models/chess_pieces/red_chib.gltf"
+            class="clickable"
+            gesture-handler
+            position="-0.5 1.2 1.5"
+            rotation="-90 0 0"
+            scale="1 1 1"
+          ></a-entity>
+        <!--ม้าขาว-->
+        <a-entity
+            id="white_horse"
+            gltf-model="/models/chess_pieces/white_horse.gltf"
+            class="clickable"
+            gesture-handler
+            position="0.2 2 1.5"
+            rotation="-90 90 180"
+            scale="1 1 1"
+          ></a-entity>
+        <!--เรือขาว-->
+        <a-entity
+            id="white_ship"
+            gltf-model="/models/chess_pieces/white_ship.gltf"
+            class="clickable"
+            gesture-handler
+            position="-1.2 0.5 1.5"
+            rotation="-90 0 0"
+            scale="1 1 1"
+          ></a-entity>
+
         </a-marker>
         <a-entity camera></a-entity>
       </a-scene>
 </div>
 <div class="portrait:hidden">
-  <!--
-  <div class="z-10 absolute inset-0 flex h-screen">
-    <h1>PAUSE SCREEN 123456789</h1>
-  </div>
-  -->
 
     <div class="flex h-screen justify-center items-center">
-    <div id ="pause" class="text-center bg-[#AFC2AC]"> <!-- ⬅️ THIS DIV WILL BE CENTERED -->
+    <div id ="pause" class="text-center bg-[#AFC2AC]"> 
         <h1 class=" text-3xl">กรุณาใช้มือถือในแนวตั้ง</h1>
         <h1 class=" text-3xl">Please use your phone in portrait mode</h1>
     </div>
