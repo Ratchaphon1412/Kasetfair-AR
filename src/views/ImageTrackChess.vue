@@ -110,9 +110,9 @@ video{
             gltf-model="/models/chess_pieces/red_nakv2.gltf"
             class="clickable"
             gesture-handler
-            position="0 0 1.5"
-            rotation="-90 0 0"
-            scale="1 1 1"
+            position="0 0 -1.6"
+            rotation="-115 -30 0"
+            scale="0.7 0.7 0.7"
           ></a-entity>
         <!--ขุนแดง-->
           <a-entity
@@ -120,9 +120,9 @@ video{
             gltf-model="/models/chess_pieces/red_khun.gltf"
             class="clickable"
             gesture-handler
-            position="1 0.8 1.5"
-            rotation="-90 0 0"
-            scale="1 1 1"
+            position="1.9 0 0.7"
+            rotation="-100 0 30"
+            scale="0.7 0.7 0.7"
           ></a-entity>
         <!--เบี้ยแดง-->
         <a-entity
@@ -130,19 +130,19 @@ video{
             gltf-model="/models/chess_pieces/red_chib.gltf"
             class="clickable"
             gesture-handler
-            position="-0.5 1.2 1.5"
-            rotation="-90 0 0"
-            scale="1 1 1"
+            position="-1.5 0 1.3"
+            rotation="-90 -60 0"
+            scale="0.7 0.7 0.7"
           ></a-entity>
         <!--ม้าขาว-->
         <a-entity
             id="white_horse"
-            gltf-model="/models/chess_pieces/white_horse.gltf"
+            gltf-model="/models/chess_pieces/white_horse_v2.gltf"
             class="clickable"
             gesture-handler
-            position="0.2 2 1.5"
-            rotation="-90 90 180"
-            scale="1 1 1"
+            position="0.2 0 2"
+            rotation="-111 90 -100"
+            scale="0.7 0.7 0.7"
           ></a-entity>
         <!--เรือขาว-->
         <a-entity
@@ -150,9 +150,9 @@ video{
             gltf-model="/models/chess_pieces/white_ship.gltf"
             class="clickable"
             gesture-handler
-            position="-1.2 0.5 1.5"
-            rotation="-90 0 0"
-            scale="1 1 1"
+            position="-1.2 0 -0.6"
+            rotation="-30 0 30"
+            scale="0.7 0.7 0.7"
           ></a-entity>
 
         </a-marker>
