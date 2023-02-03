@@ -9,15 +9,8 @@
               </button>
           </router-link>
           </div>
-          <!-- <div>
-            <button type="button" class="py-2 px-2">
-              <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30"><path d="m12 20-8-8 8-8 1.425 1.4-5.6 5.6H20v2H7.825l5.6 5.6Z"/></svg>
-            </button> กลับหน้าหลัก
-          </div> -->
         </div>
         
-        
-
       <div class="web-camera-container">        
         <div class="camera-button">
           <button
@@ -51,103 +44,36 @@
             class="camera-box"
             :class="{ flash: isShotPhoto }"
             >
-    
-            <!-- <dev class="test"><img src="./assets/1..jpg"  height="337"></dev> -->
-            <!-- justify-center -->
 
-            <!-- โชว์รูปภาพ
-            <div class="filter-select">
-                <img v-if="image" :key="image.id" @click="switchImage" class="image" :src="image.src" alt="image.alt">
-            </div> -->
-            
-            <!-- <div class="camera-shutter" :class="{ flash: isShotPhoto }"></div> -->
             <div class="p-2">
                 <div class="relative" @click="switchImage">
-                <!-- โชว์รูปภาพ -->
-                <!-- <div class="filter-select"> -->
-                    <!-- <img v-if="image" :key="image.id" @click="switchImage" class="image filter-select" :src="image.src" alt="image.alt"> -->
-                <!-- </div> -->
                 <div class="absolute w-full inser-x-0">
                     <img v-if="image" :key="image.id" class="image w-full" :src="image.src" alt="image.alt">
                 </div>
                 
                     <video
-                    v-show="!isPhotoTaken"
-                    ref="camera"
-                    webkit-playsinline
-                    playsinline
-                    autoplay
-                    id="video">
+                      v-show="!isPhotoTaken"
+                      ref="camera"
+                      webkit-playsinline
+                      playsinline
+                      autoplay
+                      id="video">
                     </video>
 
                     <canvas
-                        v-show="isPhotoTaken"
-                        id="photoTaken"
-                        ref="canvas"
-                        :width="337.5"
-                        :height="450"></canvas>
-            </div>
-            <!-- <video
-                v-show="!isPhotoTaken"
-                ref="camera"
-                :width="450"
-                :height="337.5"
-                webkit-playsinline
-                playsinline
-                autoplay
-                id="video"
-            ></video> -->
-    
-            </div>
+                      v-show="isPhotoTaken"
+                      id="photoTaken"
+                      ref="canvas"
+                      :width="337.5"
+                      :height="450">
+                    </canvas>
+                </div>
+              </div>
             </div>
         </div> 
-  
-        <!-- <div v-if="isCameraOpen && !isLoading" class="camera-shoot">
-          <button type="button" class="button" @click="takePhoto">
-            <img
-              src="https://img.icons8.com/material-outlined/50/000000/camera--v2.png"
-            />
-          </button>
-        </div> -->
-        <div class="landscape:hidden">
-            <!-- ปุ่มสลับกล้อง -->
-            <!-- <div v-if="isCameraOpen && !isLoading" class="change-camera-type">
-            <button type="button" class="button" @click="toggleCameraType">
-                <img
-                src="https://img.icons8.com/material-outlined/30/000000/switch-camera.png"
-                />
-            </button>
-            </div> -->
-            
-            <!-- ปุ่มกดถ่ายรูป -->
-            <!-- <div v-if="isCameraOpen && !isLoading" >
-                <button type="button" class="button is-success"  id="btn" @click="capture()">
-                    <span class="icon is-small">
-                    <i class="fas fa-camera"></i>
-                    </span>
-
-                    <img
-                    src="../assets/icons/icon.camera.svg"
-                    />
-                </button>
-            </div> -->
-        </div>
-        
-        <!-- download ภาพ -->
-        <!-- <div v-if="isPhotoTaken && isCameraOpen" class="camera-download">
-          <a
-            id="downloadPhoto"
-            download="my-photo.jpg"
-            class="button"
-            role="button"
-            @click="downloadImage"
-          >
-            Download
-          </a>
-        </div> -->
-
       </div>
     </div>
+
     <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 flex justify-center fixed bottom-0" style="position: absolute">
             <div v-if="isCameraOpen && !isLoading">
                 <button type="button"  @click="capture()" class="scale-75" id="btn">
@@ -199,38 +125,38 @@
         images: [{
             id: 1,
             src: '../assets/images/time-capsule/tuch.png',
-            alt: "PhotoFrame-80-EN",
+            alt: "tuch",
       
           },
           {
             id: 2,
             src: "../assets/images/time-capsule/PhotoFrame-80-TH.png",
-            alt: "restaurant"
+            alt: "PhotoFrame-80-TH"
           },
           {
             id: 3,
             src: "../assets/images/time-capsule/p1.png",
-            alt: "PhotoFrame-80-English"
+            alt: "p1"
           },
           {
             id: 4,
             src: "../assets/images/time-capsule/p2.png",
-            alt: "PhotoFrame-80-Thailand"
+            alt: "p2"
           },
           {
             id: 5,
             src: "../assets/images/time-capsule/p3.png",
-            alt: "PhotoFrame-80-Thailand"
+            alt: "p3"
           },
           {
             id: 6,
             src: "../assets/images/time-capsule/p4.png",
-            alt: "PhotoFrame-80-Thailand"
+            alt: "p4"
           },
           {
             id: 7,
             src: "../assets/images/time-capsule/p5.png",
-            alt: "PhotoFrame-80-Thailand"
+            alt: "p5"
           }
         ],
 
@@ -242,9 +168,7 @@
         imgData: null,
         link: null,
         // imgShare: null
-      
-      
-    };
+      };
     },
   
     mounted() {
@@ -314,47 +238,6 @@
         });
       },
   
-    //   takePhoto() {
-    //     if (!this.isPhotoTaken) {
-    //       this.isShotPhoto = true;
-  
-    //       const FLASH_TIMEOUT = 50;
-  
-    //       setTimeout(() => {
-    //         this.isShotPhoto = false;
-    //       }, FLASH_TIMEOUT);
-    //     }
-  
-    //     this.isPhotoTaken = !this.isPhotoTaken;
-  
-    //     const context = this.$refs.canvas.getContext('2d');
-    //     context.drawImage(this.$refs.camera, 0, 0, 450, 337.5);
-    //   },
-  
-    // ------------
-  
-      // btnScreenshot(){
-  
-      //     const video = document.getElementsByTagName("video")[0];
-      //     const canvas = document.createElement("canvas");
-  
-      //     var width = video.videoWidth, height = video.videoHeight;
-      //     canvas.width = width;
-      //     canvas.height = height;
-          
-      //     var screenshot;
-      //     canvas.getContext('2d').drawImage(video, 0, 0, 1920, 1080);
-  
-      //     var imgData = document.querySelector('.img1');     
-      //     canvas.getContext('2d').drawImage(imgData, 0, 0, imgData.width, imgData.height);
-      //     screenshot = canvas.toDataURL('image/png');
-          
-      //     var link = document.createElement('a');
-      //     link.download = 'screenshot.png';
-      //     link.href = screenshot;
-      //     link.click();
-   
-      // },
       downloadImage() {
         this.link.click();
       },
@@ -362,8 +245,6 @@
       capture() {
         this.video = document.getElementsByTagName("video")[0];
         this.canvas = document.createElement("canvas");
-        // this.width = this.video.videoWidth;
-        // this.height = this.video.videoHeight;
         this.canvas.width = this.width;
         this.canvas.height = this.height;
 
@@ -444,53 +325,30 @@
     margin-bottom: 1rem;
   
   }
-  /* .img-select{
-  position: absolute;
-  z-index: 2;
-  } */
-  
   body {
     display: flex;
-    /* justify-content: center; */
     overflow: hidden;
   }
- 
-
   .filter-select {
     position: absolute;
     z-index: 2;
     width: 306px;
     height: 407px;
-    /* margin: 2px; */
     cursor: pointer;
     transition: filter 0.3s ease-in;
-    /* border: 3px solid #ccc; */
-    /* border-radius: 4px; */
   }
- 
-
-  
   .image:hover {
     filter: brightness(1.2);
   }
-  
   .web-camera-container {
-    /* padding-bottom: 10px; */
     margin-top: 4rem;
-    /* margin-bottom: 2rem; */
     padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* border: 0px solid #ccc; */
     border-radius: 4px;
-    /* width: auto; */
   }
-  /* .web-camera-container .camera-button {
-    margin-bottom: 2rem;
-    background-color: rgb(255, 10, 10);
-  } */
   .web-camera-container .camera-box .camera-shutter {
     opacity: 0;
     width: 337.5px;
@@ -504,8 +362,6 @@
   .web-camera-container .camera-shoot,
   .web-camera-container .change-camera-type {
     margin-top: 5rem 0;
-    /* padding-bottom: 3rem; */
-    /* margin-bottom: 3rem; */
   }
   .web-camera-container .camera-shoot button,
   .web-camera-container .change-camera-type button {
@@ -516,11 +372,6 @@
     justify-content: center;
     border-radius: 100%;
   }
-  /* .web-camera-container .camera-shoot button img,
-  .web-camera-container .change-camera-type button img {
-    height: 35px;
-    object-fit: cover;
-  } */
   .web-camera-container .camera-loading {
     overflow: hidden;
     height: 100%;
