@@ -76,10 +76,15 @@ const router = createRouter({
       component: () => import('@/views/Share.vue')
     },
     {
-      path: routePath('/ARX'),
+      path: routePath('/arx'),
       name: 'ARX',
       component: () => import('@/views/Markersculpture.vue')
     },
+    {
+      path: routePath('/time-capsule'),
+      name: 'time-capsule',
+      component: () => import('@/views/TimeCapsule.vue')
+    }
   ]
 })
 
