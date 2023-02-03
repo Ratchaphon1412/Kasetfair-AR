@@ -78,6 +78,74 @@ export default {
     }
   },
 };
+let marker_visible = { marker1: false, marker2: false };
+      let scale = 5;
+      let isShowed = false;
+      let countdown = 3;
+      let avgDistance = 0;
+      
+// ----------------------------------------------------------------------------------------------------        
+//    keep check each marker   
+      AFRAME.registerComponent("check-marker", {
+        init: function() {
+          let el = this.el;
+          el.addEventListener("markerFound", function() {
+            marker_visible[el.id] = true;
+          });
+
+          el.addEventListener("markerLost", function() {
+            console.log("Lost");
+            marker_visible[el.id] = false;
+          });
+          
+        }
+      });
+      
+        AFRAME.registerComponent("spawn-model", {
+          init: function() {
+//        search for markers    
+          this.el1 = document.querySelector("#marker1");
+          this.el2 = document.querySelector("#marker2");
+          
+//        position of marker to compute model spawn position
+          this.p1  = new THREE.Vector3(0,0,0);
+          this.p2 = new THREE.Vector3(0,0,0);
+          this.cameraPosition  = new THREE.Vector3(0,0,0);
+           
+//        make models spawn at vectorOrigin          
+          this.model1 = document.querySelector("#model1").object3D;
+          this.model2 = document.querySelector("#model2").object3D;
+          this.camera = document.querySelector("#camera");
+          
+
+          },
+          
+//   main thing        
+     tick: function(time, deltaTime) 
+        {
+
+            if(marker_visible["marker2"] && countdown % 3 == 0)
+              {
+                  this.model2.visible = true;
+                  this.model1.visible = false;
+                  isShowed = true;
+              }
+            else if(marker_visible["marker1"] && countdown % 3 == 0)
+              {
+                  this.model1.visible = true;
+                  this.model2.visible = false;
+                  isShowed = true;
+              }
+        
+        } });
+
+
+//******************************************************************          
+          
+          
+          
+          
+          
 </script>
 
 <style>
@@ -125,31 +193,31 @@ video{
         vr-mode-ui="enabled: false;"
         loading-screen="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3"
         id="scene"
         gesture-detector
       >
-        <a-marker
-          id="animated-marker"
-          type="pattern"
-          preset="custom"
-          url="/80logo/finallogo_v2.patt"
-          raycaster="objects: .clickable"
-          emitevents="true"
-          cursor="fuse: false; rayOrigin: mouse;"
-        >
-          <a-entity
-            id="bowser-model"
-            animation-mixer="loop: repeat"
-            gltf-model="/models/Cow.gltf"
-            class="clickable"
-            gesture-handler
-            position="0 0 0"
-            rotation="-90 0 0"
-            scale="0.4 0.4 0.4"
-          ></a-entity>
-        </a-marker>
-        <a-entity camera></a-entity>
+      <a-marker type="barcode" id="marker1" value="14" check-marker>
+      <a-entity id = "model1" visible ="false" gesture-handler position = "1 0 0" scale = "0.75 0.75 0.75" rotation = "0 90 270" gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
+      </a-marker>
+ 
+      <a-marker type="barcode" id="marker2" value="8" check-marker>
+       <a-entity id = "model2" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
+      </a-marker>
+         
+      <a-marker type="barcode" id="marker3" value="24" check-marker>
+       <a-entity id = "model3" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
+      </a-marker>
+         
+        
+
+       <a-entity  spawn-model></a-entity> 
+
+                  
+      <a-entity id = "camera" camera  ></a-entity>
+      <a-entity spawn-model></a-entity>
+
+
       </a-scene>
 </div>
 <div class="portrait:hidden">
