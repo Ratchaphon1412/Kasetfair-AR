@@ -49,6 +49,7 @@ export default {
       console.log("capture")
       const video = document.getElementsByTagName("video")[0];
       const canvas = document.createElement("canvas");
+      const logo = document.getElementById("logo");
 
       var width = video.videoWidth,
         height = video.videoHeight;
@@ -57,11 +58,12 @@ export default {
 
       // วาด video กับโมเดล AR ที่ขึ้นบนจอ ลงบน canvas เปล่าๆ
       // var screenshot;
+      // canvas.getContext("2d").drawImage(logo, 0, 0, 809, 750);
       canvas.getContext("2d").drawImage(video, 0, 0, width, height);
       var imgData = document
         .querySelector("a-scene")
         .components.screenshot.getCanvas("perspective");
-      canvas.getContext("2d").drawImage(imgData, 0, 0, width, height);
+      canvas.getContext("2d").drawImage(imgData, 0, 0, width +200, height);
       screenshot = canvas.toDataURL("image/png");
 
   
@@ -87,7 +89,7 @@ body{
 }
 video{
   margin-left: 0px !important;
-  position: absolute;
+  object-fit: cover;
 }
 #pause{
   width: 100%;
@@ -100,6 +102,7 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
+      <img src="../assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
           <img src="../assets/icons/back_to_home.svg" />
