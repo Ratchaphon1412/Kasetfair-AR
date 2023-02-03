@@ -124,39 +124,39 @@
        
         images: [{
             id: 1,
-            src: '../assets/images/time-capsule/tuch.png',
-            alt: "tuch",
+            src: '../assets/images/time-capsule/touch.png',
+            alt: "touch",
       
           },
           {
             id: 2,
-            src: "../assets/images/time-capsule/PhotoFrame-80-TH.png",
-            alt: "PhotoFrame-80-TH"
-          },
-          {
-            id: 3,
-            src: "../assets/images/time-capsule/p1.png",
+            src: "../assets/images/time-capsule/frame_img_1.png",
             alt: "p1"
           },
           {
-            id: 4,
-            src: "../assets/images/time-capsule/p2.png",
+            id: 3,
+            src: "../assets/images/time-capsule/frame_img_2.png",
             alt: "p2"
           },
           {
-            id: 5,
-            src: "../assets/images/time-capsule/p3.png",
+            id: 4,
+            src: "../assets/images/time-capsule/frame_img_3.png",
             alt: "p3"
           },
           {
-            id: 6,
-            src: "../assets/images/time-capsule/p4.png",
+            id: 5,
+            src: "../assets/images/time-capsule/frame_img_4.png",
             alt: "p4"
           },
           {
-            id: 7,
-            src: "../assets/images/time-capsule/p5.png",
+            id: 6,
+            src: "../assets/images/time-capsule/frame_img_5.png",
             alt: "p5"
+          },
+          {
+            id: 7,
+            src: "../assets/images/time-capsule/frame_img_6.png",
+            alt: "p6"
           }
         ],
 
