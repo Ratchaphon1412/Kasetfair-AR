@@ -25,7 +25,7 @@ import NavbarButton from './NavbarButton.vue';
             <navbar-button 
                 icon="time _icon.svg" 
                 text="ตารางเวลา" 
-                linkPage="home" 
+                linkPage="timeline" 
             />
             <navbar-button 
                 icon="more_icon.svg" 

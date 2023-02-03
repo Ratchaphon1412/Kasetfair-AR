@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const BASE_URL = '/timepod'
+const BASE_URL = ''
 
 const routePath = (path: string) => {
   return BASE_URL + path
@@ -9,13 +9,13 @@ const routePath = (path: string) => {
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // {
+    //   path: routePath('/'),
+    //   name: 'welcome',
+    //   component: () => import('@/views/Welcome.vue')
+    // },
     {
       path: routePath('/'),
-      name: 'welcome',
-      component: () => import('@/views/Welcome.vue')
-    },
-    {
-      path: routePath('/home'),
       name: 'home',
       component: () => import('@/views/Home.vue')
     },
