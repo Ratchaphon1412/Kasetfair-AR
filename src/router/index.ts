@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const BASE_URL = '/timepod'
+const BASE_URL = ''
 
 const routePath = (path: string) => {
   return BASE_URL + path
@@ -9,13 +9,13 @@ const routePath = (path: string) => {
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // {
+    //   path: routePath('/'),
+    //   name: 'welcome',
+    //   component: () => import('@/views/Welcome.vue')
+    // },
     {
       path: routePath('/'),
-      name: 'welcome',
-      component: () => import('@/views/Welcome.vue')
-    },
-    {
-      path: routePath('/home'),
       name: 'home',
       component: () => import('@/views/Home.vue')
     },
@@ -45,6 +45,11 @@ const router = createRouter({
       component: () => import('@/views/ImageTrackCow.vue')
     },
     {  
+      path: routePath('/ar0'),
+      name: 'ar0',
+      component: () => import('@/views/MarkerNak.vue')
+    },
+    {  
       path: routePath('/ar1'),
       name: 'ar1',
       component: () => import('@/views/ImageTrackChess.vue')
@@ -60,10 +65,20 @@ const router = createRouter({
       component: () => import('@/views/Share.vue')
     },
     {
+      path: routePath('/ar4'),
+      name: 'ar4',
+      component: () => import('@/views/MarkerPriemuim.vue')
+    },
+    {
       path: routePath('/share'),
       name: 'share',
       props: ['preview'],
       component: () => import('@/views/Share.vue')
+    },
+    {
+      path: routePath('/ARX'),
+      name: 'ARX',
+      component: () => import('@/views/Markersculpture.vue')
     },
   ]
 })
