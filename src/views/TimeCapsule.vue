@@ -1,5 +1,52 @@
 <template>
     <div id="app">
+    <!-- ปุ่มย้อนกลับ -->
+        <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
+        <div>
+            <button type="button" class="py-2 px-2">
+              <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30"><path d="m12 20-8-8 8-8 1.425 1.4-5.6 5.6H20v2H7.825l5.6 5.6Z"/></svg>
+            </button> กลับหน้าหลัก
+        </div>
+        </div>
+        
+        <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 flex justify-center fixed bottom-0" style="position: absolute">
+            <div v-if="!isCameraOpen ">
+                <button type="button" class="scale-75" id="btn">
+                    <img
+                        src="../assets/icons/icon.camera.svg"/>
+                    <h1 class="text-center font-bold">วิธีใช้งาน</h1>
+                </button>
+            </div>
+
+            <div v-if="isCameraOpen && !isLoading">
+                <button type="button"  @click="capture()" class="scale-75" id="btn">
+                    <img
+                        src="../assets/icons/icon.camera.svg"/>
+                    <h1 class="text-center font-bold">ถ่ายภาพ</h1>
+                </button>
+            </div>
+            <!-- download ภาพ -->
+            <div v-if="isPhotoTaken && isCameraOpen">
+              <button
+                type="button"
+                id="downloadPhoto"
+                download="my-photo.jpg"
+                class="button scale-75"
+                role="button"
+                @click="downloadImage">
+                <img src="../assets/icons/save_icon.svg" />
+                <h1 class="text-center font-bold">บันทึก</h1>
+              </button>
+            </div>
+
+            <button type="button" @click="shareFile()" class="scale-75">
+              <img src="../assets/icons/share_icon.svg" />
+              <h1 class="text-center font-bold">แชร์</h1>
+            </button>
+
+        </div>
+
+
       <div class="web-camera-container">
         <div class="camera-button">
           <button
@@ -8,9 +55,17 @@
             :class="{ 'is-primary': !isCameraOpen, 'is-danger': isCameraOpen }"
             @click="toggleCamera"
           >
-            <span v-if="!isCameraOpen">กดเพื่อเปิดกล้อง</span>
-            <span v-else>กดเพื่อปิดกล้อง</span>
+            <span v-if="!isCameraOpen" class="flex px-2"> <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M12 17.75q1.925 0 3.263-1.337Q16.6 15.075 16.6 13.15q0-1.925-1.337-3.263Q13.925 8.55 12 8.55q-1.925 0-3.262 1.337Q7.4 11.225 7.4 13.15q0 1.925 1.338 3.263Q10.075 17.75 12 17.75Zm0-2.65q-.8 0-1.375-.575t-.575-1.375q0-.8.575-1.375T12 11.2q.8 0 1.375.575t.575 1.375q0 .8-.575 1.375T12 15.1Zm-8.15 6.725q-1.1 0-1.875-.775-.775-.775-.775-1.875V7.125q0-1.1.775-1.875.775-.775 1.875-.775h3.025l2.05-2.25h6.15l2.05 2.25h3.025q1.1 0 1.875.775.775.775.775 1.875v12.05q0 1.1-.775 1.875-.775.775-1.875.775Zm16.3-2.65V7.125h-4.2l-2.05-2.25h-3.8l-2.05 2.25h-4.2v12.05ZM12 13.15Z"/></svg> กดเพื่อเปิดกล้อง</span>
+            <span v-else class="flex px-2"><svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="m22.8 19.5-2.65-2.625v-9.75h-4.2l-2.05-2.25h-3.8L9.175 5.9 7.3 4.025l1.625-1.8h6.15l2.05 2.25h3.025q1.1 0 1.875.775.775.775.775 1.875Zm-6.2-6.175L11.825 8.55q.95 0 1.85.337.9.338 1.575 1.013.675.675 1.013 1.575.337.9.337 1.85Zm-5.675.9Zm3.725-2.85Zm-9.75-6.9 2.7 2.7H3.85v12h12L.1 3.425 1.975 1.55l20.5 20.5-1.875 1.875-2.1-2.1H3.85q-1.1 0-1.875-.775-.775-.775-.775-1.875V7.125q0-1.1.775-1.875.775-.775 1.875-.775Zm3.75 5.6 1.4 1.4q-.325.35-.475.787-.15.438-.15.913 0 1.075.75 1.825t1.825.75q.475 0 .913-.15.437-.15.787-.475l1.4 1.4q-.65.575-1.437.9-.788.325-1.663.325-1.9 0-3.237-1.337-1.338-1.338-1.338-3.238 0-.875.313-1.663.312-.787.912-1.437Z"/></svg> ปิดกล้อง</span>
           </button>
+        </div>
+
+        <div v-if="!isCameraOpen">
+          
+          <t>วิธีการใช้งาน</t>
+          <li>1. ใช้โทรศัพท์ในแนวตั้ง</li>
+          <li>2. กดเปิดกล้องเพื่อเข้าใช้งาน</li>
+          <li>3. แตะที่หน้าจอเพื่อเปลี่ยนภาพ</li>
         </div>
   
         <div v-show="isCameraOpen && isLoading" class="camera-loading">
@@ -21,8 +76,8 @@
           </ul>
         </div>
 
-        <div class="portrait:hidden">
-            ใช้โทรศัพท์ในแนวตั้ง
+        <div class="portrait:hidden text-red-600 font-weight: 700 text-2xl">
+            *ใช้โทรศัพท์ในแนวตั้ง
         </div>
         
         <div class="landscape:hidden">
@@ -42,7 +97,7 @@
             </div> -->
             
             <!-- <div class="camera-shutter" :class="{ flash: isShotPhoto }"></div> -->
-            
+            <div class="p-2">
                 <div class="relative" @click="switchImage">
                 <!-- โชว์รูปภาพ -->
                 <!-- <div class="filter-select"> -->
@@ -80,6 +135,7 @@
             ></video> -->
     
             </div>
+            </div>
         </div> 
   
         <!-- <div v-if="isCameraOpen && !isLoading" class="camera-shoot">
@@ -90,27 +146,31 @@
           </button>
         </div> -->
         <div class="landscape:hidden">
-            <div v-if="isCameraOpen && !isLoading" class="change-camera-type">
+            <!-- ปุ่มสลับกล้อง -->
+            <!-- <div v-if="isCameraOpen && !isLoading" class="change-camera-type">
             <button type="button" class="button" @click="toggleCameraType">
                 <img
                 src="https://img.icons8.com/material-outlined/30/000000/switch-camera.png"
                 />
             </button>
-            </div>
-    
-            <div v-if="isCameraOpen && !isLoading" >
-            <button type="button" class="button is-success"  id="btn" @click="capture()">
-                <!-- <span class="icon is-small">
-                <i class="fas fa-camera"></i>
-                </span> -->
-                <img
-                src="https://img.icons8.com/material-outlined/50/000000/camera--v2.png"
-                />
-            </button>
-            </div>
+            </div> -->
+            
+            <!-- ปุ่มกดถ่ายรูป -->
+            <!-- <div v-if="isCameraOpen && !isLoading" >
+                <button type="button" class="button is-success"  id="btn" @click="capture()">
+                    <span class="icon is-small">
+                    <i class="fas fa-camera"></i>
+                    </span>
+
+                    <img
+                    src="../assets/icons/icon.camera.svg"
+                    />
+                </button>
+            </div> -->
         </div>
-  
-        <div v-if="isPhotoTaken && isCameraOpen" class="camera-download">
+        
+        <!-- download ภาพ -->
+        <!-- <div v-if="isPhotoTaken && isCameraOpen" class="camera-download">
           <a
             id="downloadPhoto"
             download="my-photo.jpg"
@@ -120,7 +180,8 @@
           >
             Download
           </a>
-        </div>
+        </div> -->
+
       </div>
     </div>
   </template>
@@ -343,24 +404,53 @@
         this.canvas.width = 450
         this.context = this.$refs.canvas.getContext('2d');
         this.context.drawImage(this.$refs.camera, 0, 0, 337.5, 450);
-      }
+      },
+      
+      async shareFile() {
+      // แชร์ไฟล์ภาพ
+      this.capture();
+      const blob = await (await fetch(screenshot)).blob();
+      const filesArray = [
+        new File([blob], "bla.png", {
+          type: blob.type,
+          lastModified: new Date().getTime(),
+        }),
+      ];
+      const shareData = { files: filesArray };
+
+      // เช็คก่อนว่า browser ที่ใช้อยู่แชร์ได้มั้ย
+      if (navigator.canShare && navigator.canShare(shareData)) {
+        try {
+          navigator.share(shareData);
+        } catch (err) {
+          console.error(err.name + " " + err.message);
+        }
+      } else console.warn("Sharing not supported", shareData);
+    },
+
+        //   home(){
+        //     window.close();
+    // }
   
     },
   };
   </script>
   
   <style scoped>
+
   .button-oc{
-    background-color: #006b14; /* Green */
+    flex: auto;
+    background-color: #4d4d4d; /* Green */
     border-radius: 10px;
     border-color: rgb(207, 207, 207);
-    color: white;
+    color: rgb(255, 255, 255);
     padding: 16px 32px;
     text-align: center;
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
-    margin-bottom: 3rem;
+
+    margin-bottom: 1rem;
   
   }
   /* .img-select{
@@ -370,7 +460,8 @@
   
   body {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    overflow: hidden;
   }
  
 
@@ -393,9 +484,10 @@
   }
   
   .web-camera-container {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    padding: 2rem;
+    /* padding-bottom: 10px; */
+    margin-top: 4rem;
+    /* margin-bottom: 2rem; */
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -404,10 +496,10 @@
     border-radius: 4px;
     /* width: auto; */
   }
-  /* .web-camera-container .camera-button { */
-    /* margin-bottom: 2rem; */
-    /* background-color: rgb(255, 10, 10); */
-  /* } */
+  /* .web-camera-container .camera-button {
+    margin-bottom: 2rem;
+    background-color: rgb(255, 10, 10);
+  } */
   .web-camera-container .camera-box .camera-shutter {
     opacity: 0;
     width: 337.5px;
@@ -420,7 +512,9 @@
   }
   .web-camera-container .camera-shoot,
   .web-camera-container .change-camera-type {
-    margin: 1rem 0;
+    margin-top: 5rem 0;
+    /* padding-bottom: 3rem; */
+    /* margin-bottom: 3rem; */
   }
   .web-camera-container .camera-shoot button,
   .web-camera-container .change-camera-type button {
