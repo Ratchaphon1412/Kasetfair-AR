@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const BASE_URL = '/timepod'
+const BASE_URL = ''
 
 const routePath = (path: string) => {
   return BASE_URL + path
