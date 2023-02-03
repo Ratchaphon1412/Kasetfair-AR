@@ -16,34 +16,8 @@
           </div> -->
         </div>
         
-        <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 flex justify-center fixed bottom-0" style="position: absolute">
-            <div v-if="isCameraOpen && !isLoading">
-                <button type="button"  @click="capture()" class="scale-75" id="btn">
-                    <img
-                        src="../assets/icons/icon.camera.svg"/>
-                    <h1 class="text-center font-bold">ถ่ายภาพ</h1>
-                </button>
-            </div>
-            <!-- download ภาพ -->
-            <div v-if="isPhotoTaken && isCameraOpen">
-              <button
-                type="button"
-                id="downloadPhoto"
-                download="my-photo.jpg"
-                class="button scale-75"
-                role="button"
-                @click="downloadImage">
-                <img src="../assets/icons/save_icon.svg" />
-                <h1 class="text-center font-bold">บันทึก</h1>
-              </button>
-            </div>
+        
 
-            <button v-if="isPhotoTaken" type="button" @click="shareFile()" class="scale-75">
-              <img src="../assets/icons/share_icon.svg" />
-              <h1 class="text-center font-bold">แชร์</h1>
-            </button>
-
-        </div>
       <div class="web-camera-container">        
         <div class="camera-button">
           <button
@@ -63,7 +37,9 @@
             <li></li>
           </ul>
         </div>
-
+        <div v-if="!isCameraOpen" class=" text-red-600 font-weight: 800 text-l">
+            คำแนะนำ: ใช้อุปกรณ์มือถือใช้งานหน้านี้
+        </div>
         <div class="portrait:hidden text-red-600 font-weight: 700 text-2xl">
             *ใช้โทรศัพท์ในแนวตั้ง
         </div>
@@ -172,6 +148,34 @@
 
       </div>
     </div>
+    <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 flex justify-center fixed bottom-0" style="position: absolute">
+            <div v-if="isCameraOpen && !isLoading">
+                <button type="button"  @click="capture()" class="scale-75" id="btn">
+                    <img
+                        src="../assets/icons/icon.camera.svg"/>
+                    <h1 class="text-center font-bold">ถ่ายภาพ</h1>
+                </button>
+            </div>
+            <!-- download ภาพ -->
+            <div v-if="isPhotoTaken && isCameraOpen">
+              <button
+                type="button"
+                id="downloadPhoto"
+                download="my-photo.jpg"
+                class="button scale-75"
+                role="button"
+                @click="downloadImage">
+                <img src="../assets/icons/save_icon.svg" />
+                <h1 class="text-center font-bold">บันทึก</h1>
+              </button>
+            </div>
+
+            <button v-if="isPhotoTaken" type="button" @click="shareFile()" class="scale-75">
+              <img src="../assets/icons/share_icon.svg" />
+              <h1 class="text-center font-bold">แชร์</h1>
+            </button>
+          </div>
+
   </template>
   
   <script>
@@ -184,6 +188,7 @@
         isShotPhoto: false,
         isLoading: false,
         btnScreenshot: document.querySelector("#btnScreenshot"),
+        firstTuch: true,
         
         cameraType: 'environment',
         link: '#',
@@ -193,8 +198,8 @@
        
         images: [{
             id: 1,
-            src: '../assets/images/time-capsule/PhotoFrame-80-EN.png',
-            alt: "hall",
+            src: '../assets/images/time-capsule/tuch.png',
+            alt: "PhotoFrame-80-EN",
       
           },
           {
@@ -243,15 +248,14 @@
     },
   
     mounted() {
-      this.switchImage();
+      this.image = this.images[this.index];
     },
   
     methods: {
       switchImage() {
-        this.image = this.images[this.index];
-        this.index = (this.index + 1) % this.images.length;
+        this.index = (this.index + 1) % (this.images.length - 1);
+        this.image = this.images[this.index + 1];
       },
-  
       toggleCamera() {
         if (this.isCameraOpen) {
           this.isCameraOpen = false;
