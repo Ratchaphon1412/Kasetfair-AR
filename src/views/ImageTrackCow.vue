@@ -141,12 +141,12 @@ video{
           <a-entity
             id="bowser-model"
             animation-mixer="loop: repeat"
-            gltf-model="/models/Cow.gltf"
+            gltf-model="/models/Cow_v2.gltf"
             class="clickable"
             gesture-handler
             position="0 0 0"
-            rotation="-90 0 0"
-            scale="0.4 0.4 0.4"
+            rotation="90 90 -90"
+            scale="0.8 0.8 0.8"
           ></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
