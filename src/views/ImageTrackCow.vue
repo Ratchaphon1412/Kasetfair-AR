@@ -145,7 +145,7 @@ video{
             class="clickable"
             gesture-handler
             position="0 0 3.5"
-            rotation="90 90 -90"
+            rotation="-90 0 0"
             scale="0.8 0.8 0.8"
           ></a-entity>
         </a-marker>
