@@ -144,7 +144,7 @@ video{
             gltf-model="/models/Cow_v2.gltf"
             class="clickable"
             gesture-handler
-            position="0 0 0"
+            position="0 0 3.5"
             rotation="90 90 -90"
             scale="0.8 0.8 0.8"
           ></a-entity>
