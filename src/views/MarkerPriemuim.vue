@@ -121,7 +121,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 // ----------------------------------------------------------------------------------------------------         
 
 //  take animation that need to play from model into mixer && clips     
-     AFRAME.registerComponent('take-animation', {
+     AFRAME.registerComponent('take-premium-animation', {
         init: function() {
         this.el.addEventListener("model-loaded", evt => 
           {
@@ -392,7 +392,7 @@ video{
       <a-marker type="barcode" id="marker2" value="8" check-marker-premium>
       </a-marker>
                   
-      <a-entity id = "false-model" gesture-handler position = "0 0 0" take-animation  gltf-model="/models/naga.glb" ></a-entity>
+      <a-entity id = "false-model" gesture-handler position = "0 0 0" take-premium-animation  gltf-model="/models/naga.glb" ></a-entity>
 
       <a-entity id = "camera" camera  ></a-entity>
       <a-entity spawn-team></a-entity>
