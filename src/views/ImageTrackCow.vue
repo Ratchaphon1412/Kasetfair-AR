@@ -58,12 +58,12 @@ export default {
 
       // วาด video กับโมเดล AR ที่ขึ้นบนจอ ลงบน canvas เปล่าๆ
       // var screenshot;
-      // canvas.getContext("2d").drawImage(logo, 0, 0, 809, 750);
       canvas.getContext("2d").drawImage(video, 0, 0, width, height);
       var imgData = document
-        .querySelector("a-scene")
-        .components.screenshot.getCanvas("perspective");
+      .querySelector("a-scene")
+      .components.screenshot.getCanvas("perspective");
       canvas.getContext("2d").drawImage(imgData, 0, 0, width +200, height);
+      canvas.getContext("2d").drawImage(logo, 530, 300, 106 - 30, 173 - 30);
       screenshot = canvas.toDataURL("image/png");
 
   
@@ -102,7 +102,7 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
-      <img src="../assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
+      <img src="../assets/images/watermark/KU-milk.wh4.png" class="hidden" id="logo" width="0" height="0">
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
           <img src="../assets/icons/back_to_home.svg" />

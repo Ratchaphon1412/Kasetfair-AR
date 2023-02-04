@@ -7,7 +7,7 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const screenshot = localStorage.getItem('screenshot');
-console.log(screenshot);
+// console.log(screenshot);
 function saveFile() {
   // โหลดไฟล์ภาพ
   var link = document.createElement("a");
@@ -102,7 +102,7 @@ async function shareFile() {
   margin-top: 2em;
   margin-left: auto;
   margin-right: auto;
-  height: 20em;
+  /* height: 20em; */
   border-radius: 30px;
   border-color: black;
 }
