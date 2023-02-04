@@ -356,7 +356,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid #ccc;
     border-radius: 4px;
   }
   .web-camera-container .camera-box .camera-shutter {
