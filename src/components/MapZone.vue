@@ -12,7 +12,7 @@
     >
       <img
         class="justify-items-center w-auto h-auto max-w- max-h-full"
-        src="@/assets/images/basemapKU_Home_crop_artBoard.svg"
+        src="@/assets/images/FinalMapKasetFair.svg"
         alt=""
       />
     </div>

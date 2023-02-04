@@ -112,7 +112,7 @@ video{
             gesture-handler
             position="0 0 -1.6"
             rotation="-115 -30 0"
-            scale="0.7 0.7 0.7"
+            scale="0.9 0.9 0.9"
           ></a-entity>
         <!--ขุนแดง-->
           <a-entity
@@ -122,7 +122,7 @@ video{
             gesture-handler
             position="1.9 0 0.7"
             rotation="-100 0 30"
-            scale="0.7 0.7 0.7"
+            scale="0.9 0.9 0.9"
           ></a-entity>
         <!--เบี้ยแดง-->
         <a-entity
@@ -132,7 +132,7 @@ video{
             gesture-handler
             position="-1.5 0 1.3"
             rotation="-90 -60 0"
-            scale="0.7 0.7 0.7"
+            scale="0.9 0.9 0.9"
           ></a-entity>
         <!--ม้าขาว-->
         <a-entity
@@ -142,7 +142,7 @@ video{
             gesture-handler
             position="0.2 0 2"
             rotation="-111 90 -100"
-            scale="0.7 0.7 0.7"
+            scale="0.9 0.9 0.9"
           ></a-entity>
         <!--เรือขาว-->
         <a-entity
@@ -152,7 +152,7 @@ video{
             gesture-handler
             position="-1.2 0 -0.6"
             rotation="-30 0 30"
-            scale="0.7 0.7 0.7"
+            scale="0.9 0.9 0.9"
           ></a-entity>
 
         </a-marker>
