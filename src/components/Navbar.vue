@@ -24,12 +24,12 @@ import NavbarButton from './NavbarButton.vue';
             />
             <navbar-button 
                 icon="time _icon.svg" 
-                text="ตารางเวลา" s
+                text="ตารางเวลา"
                 linkPage="timeline" 
             />
             <navbar-button
                 icon="more_icon.svg"
-                text="รายงานและประเมิน"
+                text="แบบสอบถาม"
                 linkPage="form"
             />
         </div>
