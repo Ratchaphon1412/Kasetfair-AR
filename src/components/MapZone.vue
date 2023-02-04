@@ -26,6 +26,8 @@ export default {
       zoomLevel: 2,
       initialDistance: 0,
       currentDistance: 0,
+      minScale: 1,
+      maxScale: 3,
     };
   },
   methods: {
@@ -36,13 +38,25 @@ export default {
     handleTouchStart(event) {
       if (event.touches.length >= 2) {
         this.initialDistance = this.getTouchDistance(event);
+        if (this.zoomLevel < this.minScale) {
+          this.zoomLevel = this.minScale;
+        }
+        if (this.zoomLevel > this.maxScale) {
+          this.zoomLevel = this.maxScale;
+        }
       }
     },
     handleTouchMove(event) {
       if (event.touches.length >= 2) {
         this.currentDistance = this.getTouchDistance(event);
-        // this.zoomLevel =
-        //   this.zoomLevel * (this.currentDistance / this.initialDistance);
+        this.zoomLevel =
+          this.zoomLevel * (this.currentDistance / this.initialDistance);
+        if (this.zoomLevel < this.minScale) {
+          this.zoomLevel = this.minScale;
+        }
+        if (this.zoomLevel > this.maxScale) {
+          this.zoomLevel = this.maxScale;
+        }
       }
     },
     handleTouchEnd() {

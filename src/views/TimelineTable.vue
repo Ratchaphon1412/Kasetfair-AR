@@ -141,12 +141,17 @@ export default defineComponent({
     popUpClose() {
       this.show = !this.show;
     },
+    disableZoom(event) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    },
   },
 });
 </script>
 
 <template>
-  <div class="grap-4">
+  <div class="grap-4" @touchstart="disableZoom">
     <div class="page-timetable">
       <!--header date slide-->
       <div class="text-center p-4">
