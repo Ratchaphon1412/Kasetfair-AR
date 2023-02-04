@@ -69,7 +69,7 @@ export default {
       var imgData = document
         .querySelector("a-scene")
         .components.screenshot.getCanvas("perspective");
-      canvas.getContext("2d").drawImage(imgData, 0, 0, width +200, height);
+      canvas.getContext("2d").drawImage(imgData, -100, 0, width +200, height);
       screenshot = canvas.toDataURL("image/png");
 
   
@@ -151,7 +151,7 @@ video{
             gesture-handler
             position="0 0 -1.5"
             rotation="90 0 -180"
-            scale="0.05 0.05 0.05"
+            scale="0.01 0.01 0.01"
           ></a-entity>
         </a-marker>
         <a-entity camera></a-entity>

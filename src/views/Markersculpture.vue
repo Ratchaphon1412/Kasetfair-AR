@@ -69,7 +69,7 @@ export default {
       var imgData = document
         .querySelector("a-scene")
         .components.screenshot.getCanvas("perspective");
-      canvas.getContext("2d").drawImage(imgData, 0, 0, width +200, height);
+      canvas.getContext("2d").drawImage(imgData, -100, 0, width +200, height);
       screenshot = canvas.toDataURL("image/png");
 
   
