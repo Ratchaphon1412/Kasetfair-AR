@@ -1,3 +1,7 @@
+<script setup>
+import { getAsset } from '@/utils';
+</script>
+
 <template>
     <div id="app">
       <!-- ปุ่มย้อนกลับ -->
@@ -5,7 +9,7 @@
         <div>
           <router-link :to="{ name: 'home'}">
             <button type="button" class="py-2 px-2">
-              <img src="../assets/icons/back_to_home.svg" />
+              <img src="@/assets/icons/back_to_home.svg" />
             </button>
         </router-link>
         </div>
@@ -19,8 +23,8 @@
             :class="{ 'is-primary': !isCameraOpen, 'is-danger': isCameraOpen }"
             @click="toggleCamera"
           >
-            <button v-if="!isCameraOpen" class="flex"> <img src="../assets/icons/icon.photo_camera.svg"/> <h class="ml-2">กดอนุญาตใช้งานกล้อง</h></button>
-            <button v-else class="flex px-2"> <img src="../assets/icons/icon.no_photography.svg"/> <h class="ml-2">ปิดกล้อง</h></button>
+            <button v-if="!isCameraOpen" class="flex"> <img src="@/assets/icons/icon.photo_camera.svg"/> <h class="ml-2">กดอนุญาตใช้งานกล้อง</h></button>
+            <button v-else class="flex px-2"> <img src="@/assets/icons/icon.no_photography.svg"/> <h class="ml-2">ปิดกล้อง</h></button>
           </button>
         </div>
         <div v-show="isCameraOpen && isLoading" class="camera-loading">
@@ -48,7 +52,7 @@
             
               <div class="relative" @click="switchImage">
                 <div class="absolute w-full inser-x-0">
-                  <img v-if="image" :key="image.id" class="image w-full" :src="image.src" alt="image.alt">
+                  <img v-if="image" :key="image.id" class="image w-full" :src="getAsset(image.src)" :alt="image.alt">
                 </div>
                 
                   <video
@@ -77,14 +81,14 @@
             <div v-if="isCameraOpen && !isLoading && !isPhotoTaken">
                 <button type="button"  @click="capture()" class="scale-75" id="btn">
                   <img
-                    src="../assets/icons/icon.camera.svg"/>
+                    src="@/assets/icons/icon.camera.svg"/>
                     <h1 class="text-center font-bold">ถ่ายภาพ</h1>
                 </button>
             </div>
             <div v-if="isCameraOpen && !isLoading && isPhotoTaken">
               <button type="button"  @click="capture()" class="scale-75" id="btn">
                 <img
-                  src="../assets/icons/icon.camera.svg"/>
+                  src="@/assets/icons/icon.camera.svg"/>
                 <h1 class="text-center font-bold">ถ่ายใหม่</h1>
               </button>
             </div>
@@ -97,13 +101,13 @@
                 class="button scale-75"
                 role="button"
                 @click="downloadImage">
-                <img src="../assets/icons/save_icon.svg" />
+                <img src="@/assets/icons/save_icon.svg" />
                 <h1 class="text-center font-bold">บันทึก</h1>
               </button>
             </div>
             <!-- ปุ่มแชร์ภาพ -->
             <button v-if="isPhotoTaken" type="button" @click="shareFile()" class="scale-75">
-              <img src="../assets/icons/share_icon.svg" />
+              <img src="@/assets/icons/share_icon.svg" />
               <h1 class="text-center font-bold">แชร์</h1>
             </button>
           </div>
@@ -112,7 +116,7 @@
     </div>
   </template>
   
-  <script>
+  <script>  
   export default {
     name: 'App',
     data() {
@@ -132,38 +136,38 @@
        
         images: [{
             id: 1,
-            src: '../assets/images/time-capsule/touch.png',
+            src: 'images/time-capsule/touch.png',
             alt: "touch",
       
           },
           {
             id: 2,
-            src: "../assets/images/time-capsule/frame_img_1.png",
+            src: "images/time-capsule/frame_img_1.png",
             alt: "p1"
           },
           {
             id: 3,
-            src: "../assets/images/time-capsule/frame_img_2.png",
+            src: "images/time-capsule/frame_img_2.png",
             alt: "p2"
           },
           {
             id: 4,
-            src: "../assets/images/time-capsule/frame_img_3.png",
+            src: "images/time-capsule/frame_img_3.png",
             alt: "p3"
           },
           {
             id: 5,
-            src: "../assets/images/time-capsule/frame_img_4.png",
+            src: "images/time-capsule/frame_img_4.png",
             alt: "p4"
           },
           {
             id: 6,
-            src: "../assets/images/time-capsule/frame_img_5.png",
+            src: "images/time-capsule/frame_img_5.png",
             alt: "p5"
           },
           {
             id: 7,
-            src: "../assets/images/time-capsule/frame_img_6.png",
+            src: "images/time-capsule/frame_img_6.png",
             alt: "p6"
           }
         ],
