@@ -31,6 +31,7 @@ const confirm = async () => {
             // alert("ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่");
             console.log(err);
         })
+        alert('ใส่ข้อมูลครบทวนแล้ว ขอบคุณสำหรับการประเมิน')
         window.location.reload()
     } else {
         alert("กรุณาใส่ข้อมูลให้ครบถ้วน")
