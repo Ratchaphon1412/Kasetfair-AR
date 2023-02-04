@@ -56,11 +56,9 @@ async function shareFile() {
       "
     >
       <div class="flex px-3">
-        <NavbarButton
-          icon ="back_to_home.svg"
-          size=""
-          link-page="ar0"
-          />
+        <button type="button" class="py-2 px-2" @click="$router.go(-1)">
+          <img src="../assets/icons/back_to_home.svg" />
+        </button>
       </div>
       <div class="p-2 justify-self-end">
         <a-r-dropdown />
@@ -72,7 +70,7 @@ async function shareFile() {
       style="position: absolute"
     >
       <div class="grid grid-cols-3 gap-10">
-        <router-link :to="{ name: 'ar' }">
+        <router-link :to="{ name: 'ar0' }">
           <button type="button" class="scale-75">
             <img src="../assets/icons/ARselect_icon.svg" />
           <h1 class="text-center font-bold">ลอง AR อื่นๆ</h1>

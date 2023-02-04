@@ -11,7 +11,7 @@ const icon = ref("fa-caret-down");
 
 const arList = ref([
 	{ 'text': 'สระพระพิรุณ', 'route': 'ar0' },
-	{ 'text': 'สามบูรพาจารย์', 'route': 'ar1' },
+	{ 'text': '๓ บูรพาจารย์', 'route': 'ar1' },
 	{ 'text': 'KU Milk', 'route': 'ar2' },
 	{ 'text': 'คณะแพทย์', 'route': 'ar3' },
 	{ 'text': 'พรีเมียม', 'route': 'ar4' },
@@ -37,7 +37,7 @@ const getRouteName = (routeName: string): string => {
 		case 'ar0':
 			return 'สระพระพิรุณ';
 		case 'ar1':
-			return 'สามบูรพาจารย์';
+			return '๓ บูรพาจารย์';
 		case 'ar2':
 			return 'KU Milk';
 		case 'ar3':
