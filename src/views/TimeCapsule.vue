@@ -1,15 +1,15 @@
 <template>
     <div id="app">
-    <!-- ปุ่มย้อนกลับ -->
-        <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
-          <div>
-            <router-link :to="{ name: 'home'}">
-              <button type="button" class="py-2 px-2">
-                <img src="../assets/icons/back_to_home.svg" />
-              </button>
-          </router-link>
-          </div>
+      <!-- ปุ่มย้อนกลับ -->
+      <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
+        <div>
+          <router-link :to="{ name: 'home'}">
+            <button type="button" class="py-2 px-2">
+              <img src="../assets/icons/back_to_home.svg" />
+            </button>
+        </router-link>
         </div>
+      </div>
         
       <div class="web-camera-container">        
         <div class="camera-button">
@@ -44,29 +44,29 @@
             class="camera-box"
             :class="{ flash: isShotPhoto }"
             >
-
+            <!-- เปลี่ยนฟิลเตอร์ -->
             <div class="p-2">
-                <div class="relative" @click="switchImage">
+              <div class="relative" @click="switchImage">
                 <div class="absolute w-full inser-x-0">
-                    <img v-if="image" :key="image.id" class="image w-full" :src="image.src" alt="image.alt">
+                  <img v-if="image" :key="image.id" class="image w-full" :src="image.src" alt="image.alt">
                 </div>
                 
-                    <video
-                      v-show="!isPhotoTaken"
-                      ref="camera"
-                      webkit-playsinline
-                      playsinline
-                      autoplay
-                      id="video">
-                    </video>
+                  <video
+                    v-show="!isPhotoTaken"
+                    ref="camera"
+                    webkit-playsinline
+                    playsinline
+                    autoplay
+                    id="video">
+                  </video>
 
-                    <canvas
-                      v-show="isPhotoTaken"
-                      id="photoTaken"
-                      ref="canvas"
-                      :width="337.5"
-                      :height="450">
-                    </canvas>
+                  <canvas
+                    v-show="isPhotoTaken"
+                    id="photoTaken"
+                    ref="canvas"
+                    :width="337.5"
+                    :height="450">
+                  </canvas>
                 </div>
               </div>
             </div>
@@ -74,34 +74,41 @@
       </div>
     </div>
 
+    <!-- แถบด่านล่าง -->
     <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 flex justify-center fixed bottom-0" style="position: absolute">
-            <div v-if="isCameraOpen && !isLoading">
-                <button type="button"  @click="capture()" class="scale-75" id="btn">
-                    <img
-                        src="../assets/icons/icon.camera.svg"/>
-                    <h1 class="text-center font-bold">ถ่ายภาพ</h1>
-                </button>
-            </div>
-            <!-- download ภาพ -->
-            <div v-if="isPhotoTaken && isCameraOpen">
-              <button
-                type="button"
-                id="downloadPhoto"
-                download="my-photo.jpg"
-                class="button scale-75"
-                role="button"
-                @click="downloadImage">
-                <img src="../assets/icons/save_icon.svg" />
-                <h1 class="text-center font-bold">บันทึก</h1>
-              </button>
-            </div>
-
-            <button v-if="isPhotoTaken" type="button" @click="shareFile()" class="scale-75">
-              <img src="../assets/icons/share_icon.svg" />
-              <h1 class="text-center font-bold">แชร์</h1>
-            </button>
-          </div>
-
+      <div v-if="isCameraOpen && !isLoading && !isPhotoTaken">
+          <button type="button"  @click="capture()" class="scale-75" id="btn">
+            <img
+              src="../assets/icons/icon.camera.svg"/>
+              <h1 class="text-center font-bold">ถ่ายภาพ</h1>
+          </button>
+      </div>
+      <div v-if="isCameraOpen && !isLoading && isPhotoTaken">
+        <button type="button"  @click="capture()" class="scale-75" id="btn">
+          <img
+            src="../assets/icons/icon.camera.svg"/>
+          <h1 class="text-center font-bold">ถ่ายใหม่</h1>
+        </button>
+      </div>
+      <!-- download ภาพ -->
+      <div v-if="isPhotoTaken && isCameraOpen">
+        <button
+          type="button"
+          id="downloadPhoto"
+          download="my-photo.jpg"
+          class="button scale-75"
+          role="button"
+          @click="downloadImage">
+          <img src="../assets/icons/save_icon.svg" />
+          <h1 class="text-center font-bold">บันทึก</h1>
+        </button>
+      </div>
+      <!-- ปุ่มแชร์ภาพ -->
+      <button v-if="isPhotoTaken" type="button" @click="shareFile()" class="scale-75">
+        <img src="../assets/icons/share_icon.svg" />
+        <h1 class="text-center font-bold">แชร์</h1>
+      </button>
+    </div>
   </template>
   
   <script>
@@ -349,13 +356,13 @@
     align-items: center;
     border-radius: 4px;
   }
-  .web-camera-container .camera-box .camera-shutter {
+  /* .web-camera-container .camera-box .camera-shutter {
     opacity: 0;
     width: 337.5px;
     height: 450px;
     background-color: #fff;
     position: absolute;
-  }
+  } */
   .web-camera-container .camera-box .camera-shutter.flash {
     opacity: 1;
   }
@@ -364,14 +371,14 @@
     margin-top: 5rem 0;
   }
   .web-camera-container .camera-shoot button,
-  .web-camera-container .change-camera-type button {
+  /* .web-camera-container .change-camera-type button {
     height: 60px;
     width: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 100%;
-  }
+  } */
   .web-camera-container .camera-loading {
     overflow: hidden;
     height: 100%;
