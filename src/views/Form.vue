@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import NavbarLayout from "@/components/NavbarLayout.vue"
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { ref } from "vue";
 
 const problem = ref<string>('');
@@ -8,20 +8,22 @@ const location = ref<string>('');
 const information = ref<string>('');
 const problemList = ref<string[]>(['ทางจราจร', 'ของหาย', 'จุดอันตราย', 'อื่น']);
 
-const confirm = () => {
+const confirm = async () => {
 	if (problem.value !== '' && location.value !== '') {
 		if(information.value === ''){
 			information.value = 'ไม่ได้ใส่ข้อความเข้ามา'
 		}
 
-		axios.get('https://script.google.com/macros/s/AKfycbx2qxF4VMjgROQTEZZfWGAma_tZWrc5-ikuZI7bPV2rQDoe9bEBdABCyvFDq88WOGHsXg/exec',{
+		await axios.get('https://script.google.com/macros/s/AKfycbx2qxF4VMjgROQTEZZfWGAma_tZWrc5-ikuZI7bPV2rQDoe9bEBdABCyvFDq88WOGHsXg/exec',{
 			params:{
 			problem: problem.value,
 			location: location.value,
 			information: information.value
 			}
+		}).catch((err: AxiosError) =>{
+			console.log(err);
 		})
-		
+		alert("ใส่ข้อมูลครบทวนแล้ว ขอบคุณสำหรับการแจ้งเตือน")
 		window.location.reload()
 	}else{
 		alert("กรุณาใส่ให้ครบ")
