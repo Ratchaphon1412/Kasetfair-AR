@@ -86,7 +86,7 @@ let marker_visible = { marker1: false, marker2: false };
       
 // ----------------------------------------------------------------------------------------------------        
 //    keep check each marker   
-      AFRAME.registerComponent("check-marker", {
+      AFRAME.registerComponent("check-marker-sculp", {
         init: function() {
           let el = this.el;
           el.addEventListener("markerFound", function() {
@@ -101,7 +101,7 @@ let marker_visible = { marker1: false, marker2: false };
         }
       });
       
-        AFRAME.registerComponent("spawn-model", {
+        AFRAME.registerComponent("spawn-virtual", {
           init: function() {
 //        search for markers    
           this.el1 = document.querySelector("#marker1");
@@ -197,25 +197,22 @@ video{
         id="scene"
         gesture-detector
       >
-      <a-marker type="barcode" id="marker1" value="14" check-marker>
+      <a-marker type="barcode" id="marker1" value="14" check-marker-sculp>
       <a-entity id = "model1" visible ="false" gesture-handler position = "1 0 0" scale = "0.75 0.75 0.75" rotation = "0 90 270" gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
       </a-marker>
  
-      <a-marker type="barcode" id="marker2" value="8" check-marker>
+      <a-marker type="barcode" id="marker2" value="8" check-marker-sculp>
        <a-entity id = "model2" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
       </a-marker>
          
-      <a-marker type="barcode" id="marker3" value="24" check-marker>
+      <a-marker type="barcode" id="marker3" value="24" check-marker-sculp>
        <a-entity id = "model3" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
       </a-marker>
-         
-        
 
-       <a-entity  spawn-model></a-entity> 
+       <a-entity  spawn-virtual></a-entity> 
 
                   
       <a-entity id = "camera" camera  ></a-entity>
-      <a-entity spawn-model></a-entity>
 
 
       </a-scene>
