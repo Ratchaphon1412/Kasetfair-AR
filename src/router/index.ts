@@ -34,11 +34,6 @@ const router = createRouter({
       component: () => import('@/views/Notification.vue')
     },
     {  
-      path: '/ar',
-      name: 'ar',
-      component: () => import('@/views/ImageTrackCow.vue')
-    },
-    {  
       path: '/ar0',
       name: 'ar0',
       component: () => import('@/views/MarkerNak.vue')
@@ -56,7 +51,7 @@ const router = createRouter({
     {
       path: '/ar3',
       name: 'ar3',
-      component: () => import('@/views/Share.vue')
+      component: () => import('@/views/MarkerMedical.vue')
     },
     {
       path: '/ar4',
@@ -71,7 +66,7 @@ const router = createRouter({
     },
     {
       path: '/arx',
-      name: 'ARX',
+      name: 'arx',
       component: () => import('@/views/Markersculpture.vue')
     },
     {

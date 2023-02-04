@@ -79,7 +79,7 @@ window.onclick = function(event) {
           <router-link :to="{ name: 'ar4' }">
             <a class="border-2 border-black py-1 px-4 text-sm">พรีเมียม</a>
           </router-link>
-          <router-link :to="{ name: 'ARX' }">
+          <router-link :to="{ name: 'arx' }">
             <a class="border-x-2 border-b-2 border-black py-1 px-4 text-sm">คณะวิศวะ</a>
           </router-link>
 
