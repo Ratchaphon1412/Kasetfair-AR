@@ -1,3 +1,9 @@
+<script setup>
+const getPath = (path) => {
+	return new URL(`../assets/${path}`, import.meta.url).href;
+};
+</script>
+
 <script>
 import ARDropdown from '@/components/ARDropdown.vue';
 var screenshot;
@@ -170,10 +176,10 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
-      <img src="../assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
+      <img src="@/assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
-          <img src="../assets/icons/back_to_home.svg" />
+          <img src="@/assets/icons/back_to_home.svg" />
         </button>
       </div>
       <div class="p-2 justify-self-end">
@@ -183,7 +189,7 @@ video{
 
     <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute">
       <button type="button" @click="capture()" class="scale-75">
-        <img src="../assets/icons/icon.camera.svg"/>
+        <img src="@/assets/icons/icon.camera.svg"/>
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
@@ -198,7 +204,14 @@ video{
         gesture-detector
       >
       <a-marker type="barcode" id="marker1" value="14" check-marker-sculp>
-      <a-entity id = "model1" visible ="false" gesture-handler position = "1 0 0" scale = "0.75 0.75 0.75" rotation = "0 90 270" gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
+      <a-entity 
+        id = "model1" 
+        visible ="false" 
+        gesture-handler 
+        position = "1 0 0" 
+        scale = "0.75 0.75 0.75" 
+        rotation = "0 90 270" 
+        gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
       </a-marker>
  
       <a-marker type="barcode" id="marker2" value="8" check-marker-sculp>

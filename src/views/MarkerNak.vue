@@ -1,3 +1,8 @@
+<script setup>
+const getPath = (path) => {
+	return new URL(`../assets/${path}`, import.meta.url).href;
+};
+</script>
 <script>
 import ARDropdown from '@/components/ARDropdown.vue';
 var screenshot;
@@ -399,7 +404,14 @@ video{
     
       <a-marker type="barcode" id="marker4" value="58" check-marker-naka></a-marker>
  
-      <a-entity id = "false-model"  visible="false" gesture-handler rotation ="10 350 0" take-animation gltf-model="/models/naga.glb" ></a-entity>
+      <a-entity 
+        id = "false-model" 
+        visible="false" 
+        gesture-handler 
+        rotation ="10 350 0" 
+        take-animation 
+        :gltf-model="getPath('models/naga.glb')" 
+      ></a-entity>
 
       <a-entity id = "camera" camera  ></a-entity>
       <a-entity spawn-model></a-entity>

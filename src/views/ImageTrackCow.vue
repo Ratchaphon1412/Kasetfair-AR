@@ -1,3 +1,9 @@
+<script setup>
+const getPath = (path) => {
+	return new URL(`../assets/${path}`, import.meta.url).href;
+};
+</script>
+
 <script>
 import ARDropdown from '@/components/ARDropdown.vue';
 var screenshot;
@@ -102,10 +108,10 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
-      <img src="../assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
+      <img src="@/assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
-          <img src="../assets/icons/back_to_home.svg" />
+          <img src="@/assets/icons/back_to_home.svg" />
         </button>
       </div>
       <div class="p-2 justify-self-end">
@@ -115,7 +121,7 @@ video{
 
     <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute">
       <button type="button" @click="capture()" class="scale-75">
-        <img src="../assets/icons/icon.camera.svg"/>
+        <img src="@/assets/icons/icon.camera.svg"/>
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
@@ -133,7 +139,7 @@ video{
           id="animated-marker"
           type="pattern"
           preset="custom"
-          url="/80logo/finallogo_v2.patt"
+          :url="getPath('80logo/finallogo_v2.patt')"
           raycaster="objects: .clickable"
           emitevents="true"
           cursor="fuse: false; rayOrigin: mouse;"
@@ -141,7 +147,7 @@ video{
           <a-entity
             id="bowser-model"
             animation-mixer="loop: repeat"
-            gltf-model="/models/Cow_v2.gltf"
+            :gltf-model="getPath('models/Cow_v2.gltf')"
             class="clickable"
             gesture-handler
             position="0 0 0"

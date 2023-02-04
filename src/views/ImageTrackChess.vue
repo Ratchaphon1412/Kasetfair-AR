@@ -1,3 +1,9 @@
+<script setup>
+const getPath = (path) => {
+	return new URL(`../assets/${path}`, import.meta.url).href;
+};
+</script>
+
 <script>
 import ARDropdown from '@/components/ARDropdown.vue';
 var screenshot;
@@ -68,10 +74,10 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
-      <img src="../assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
+      <img src="@/assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
-          <img src="../assets/icons/back_to_home.svg" />
+          <img src="@/assets/icons/back_to_home.svg" />
         </button>
       </div>
       <div class="p-2 justify-self-end">
@@ -81,7 +87,7 @@ video{
 
     <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute">
       <button type="button" @click="capture()" class="scale-75">
-        <img src="../assets/icons/icon.camera.svg"/>
+        <img src="@/assets/icons/icon.camera.svg"/>
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
@@ -99,7 +105,7 @@ video{
           id="animated-marker"
           type="pattern"
           preset="custom"
-          url="/80logo/finallogo_v2.patt"
+          :url="getPath('80logo/finallogo_v2.patt')"
           raycaster="objects: .clickable"
           emitevents="true"
           cursor="fuse: false; rayOrigin: mouse;"
@@ -107,7 +113,7 @@ video{
         <!--นาคแดง-->
           <a-entity
             id="red-nak"
-            gltf-model="/models/chess_pieces/red_nakv2.gltf"
+            :gltf-model="getPath('models/chess_pieces/red_nakv2.gltf')"
             class="clickable"
             gesture-handler
             position="0 0 -1.6"
@@ -117,7 +123,7 @@ video{
         <!--ขุนแดง-->
           <a-entity
             id="red-khun"
-            gltf-model="/models/chess_pieces/red_khun.gltf"
+            :gltf-model="getPath('models/chess_pieces/red_khun.gltf')"
             class="clickable"
             gesture-handler
             position="1.9 0 0.7"
@@ -127,7 +133,7 @@ video{
         <!--เบี้ยแดง-->
         <a-entity
             id="red-chib"
-            gltf-model="/models/chess_pieces/red_chib.gltf"
+            :gltf-model="getPath('models/chess_pieces/red_chib.gltf')"
             class="clickable"
             gesture-handler
             position="-1.5 0 1.3"
@@ -137,7 +143,7 @@ video{
         <!--ม้าขาว-->
         <a-entity
             id="white_horse"
-            gltf-model="/models/chess_pieces/white_horse_v2.gltf"
+            :gltf-model="getPath('models/chess_pieces/white_horse_v2.gltf')"
             class="clickable"
             gesture-handler
             position="0.2 0 2"
@@ -147,7 +153,7 @@ video{
         <!--เรือขาว-->
         <a-entity
             id="white_ship"
-            gltf-model="/models/chess_pieces/white_ship.gltf"
+            :gltf-model="getPath('models/chess_pieces/white_ship.gltf')"
             class="clickable"
             gesture-handler
             position="-1.2 0 -0.6"
