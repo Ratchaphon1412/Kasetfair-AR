@@ -59,7 +59,7 @@ async function shareFile() {
         <NavbarButton
           icon ="back_to_home.svg"
           size=""
-          link-page="ar"
+          link-page="ar0"
           />
       </div>
       <div class="p-2 justify-self-end">
