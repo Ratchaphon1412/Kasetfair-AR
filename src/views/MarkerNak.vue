@@ -89,8 +89,8 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
       let newPosition = new THREE.Vector3(0,0,0);//new model position that too far from current position 
       let center = new THREE.Vector3(0,0,0);//center between current and new     
       let rotationCheckCount = 0;//number of time that check rotation
-      let additionX = 0;//defualt addition x for each roation
-      let additionY = 0;//defualt addition y for each roation
+      let additionX = 2;//defualt addition x for each roation
+      let additionY = 1;//defualt addition y for each roation
       let playAnimation = false;//check if need to run animation for not
       let mixer;//animation-mixer
       let clips;//animation that going to play
@@ -100,7 +100,8 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //    Custom Value 
 //    using when marker is too far away
       let distance = 0.5;//Distance between current point to center point || center to new
-      let countdown = 200;//Delay time without tracking before model disappear
+      let countdown = 20
+      ;//Delay time without tracking before model disappear
  
 // ----------------------------------------------------------------------------------------------------        
 //    keep check each marker   
@@ -197,9 +198,9 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               let pseudoYPos = 0;
               let pseudoZPos = 0;
 
-              pseudoXPos = this.p1.x + additionX - 3;
-              pseudoYPos = this.p2.y + additionY ;
-              pseudoZPos = ((this.p1.z + this.p2.z) / 2 ) - 60;
+              pseudoXPos = this.p1.x + additionX;
+              pseudoYPos = this.p2.y + additionY  + 6;
+              pseudoZPos = ((this.p1.z + this.p2.z) / 2 ) - 50;
 
 
 // If new position is too far model will slide to it 
@@ -312,10 +313,10 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
           if(despawn )
             {
               this.falseModel.scale.set(scale,scale,scale);
-              playAnimation = false;
-              scale -= 0.01;
+              scale -= 0.02;
               if(scale <= 0.01)
                 {
+                  playAnimation = false;
                   this.falseModel.visible = false;
                   reset = true;                
                 }    
@@ -398,7 +399,7 @@ video{
     
       <a-marker type="barcode" id="marker4" value="58" check-marker-naka></a-marker>
  
-      <a-entity id = "false-model"  visible="false" gesture-handler rotation ="0 350 0" take-animation gltf-model="/models/naga.glb" ></a-entity>
+      <a-entity id = "false-model"  visible="false" gesture-handler rotation ="10 350 0" take-animation gltf-model="/models/naga.glb" ></a-entity>
 
       <a-entity id = "camera" camera  ></a-entity>
       <a-entity spawn-model></a-entity>
