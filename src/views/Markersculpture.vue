@@ -86,7 +86,7 @@ export default {
       
 // ----------------------------------------------------------------------------------------------------        
 //    keep check each marker   
-      AFRAME.registerComponent("check-marker", {
+      AFRAME.registerComponent("check-marker-sculp", {
         init: function() {
           let el = this.el;
           el.addEventListener("markerFound", function() {
@@ -101,7 +101,7 @@ export default {
         }
       });
       
-        AFRAME.registerComponent("spawn-model", {
+        AFRAME.registerComponent("spawn-virtual", {
           init: function() {
 //        search for markers    
           this.el1 = document.querySelector("#marker1");
@@ -230,25 +230,24 @@ video{
         id="scene"
         gesture-detector
       >
-      <a-marker type="barcode" id="marker1" value="14" check-marker>
+      <a-marker type="barcode" id="marker1" value="59" check-marker-sculp>
       <a-entity id = "model1" visible ="false" gesture-handler position = "1 0 0" scale = "0.75 0.75 0.75" rotation = "0 90 270" gltf-model="/models/upDownSideCity2.glb" ></a-entity> 
       </a-marker>
  
-      <a-marker type="barcode" id="marker2" value="8" check-marker>
+      <a-marker type="barcode" id="marker2" value="8" check-marker-sculp>
        <a-entity id = "model2" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " gltf-model="/models/upDownSideCity2.glb" ></a-entity> 
       </a-marker>
          
-      <a-marker type="barcode" id="marker3" value="24" check-marker>
+      <a-marker type="barcode" id="marker3" value="14" check-marker-sculp>
        <a-entity id = "model3" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 0 0 " gltf-model ="/models/Cow.gltf"></a-entity> 
       </a-marker>
          
         
 
-       <a-entity  spawn-model></a-entity> 
+       <a-entity  spawn-virtual></a-entity> 
 
                   
       <a-entity id = "camera" camera  ></a-entity>
-      <a-entity spawn-model></a-entity>
 
 
       </a-scene>
