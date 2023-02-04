@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import NavbarLayout from "@/components/NavbarLayout.vue"
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { ref } from "vue";
 
 const problem = ref<string>('');
@@ -8,20 +8,22 @@ const location = ref<string>('');
 const information = ref<string>('');
 const problemList = ref<string[]>(['ทางจราจร', 'ของหาย', 'จุดอันตราย', 'อื่น']);
 
-const confirm = () => {
+const confirm = async () => {
 	if (problem.value !== '' && location.value !== '') {
 		if(information.value === ''){
 			information.value = 'ไม่ได้ใส่ข้อความเข้ามา'
 		}
 
-		axios.get('https://script.google.com/macros/s/AKfycbx2qxF4VMjgROQTEZZfWGAma_tZWrc5-ikuZI7bPV2rQDoe9bEBdABCyvFDq88WOGHsXg/exec',{
+		await axios.get('https://script.google.com/macros/s/AKfycbx2qxF4VMjgROQTEZZfWGAma_tZWrc5-ikuZI7bPV2rQDoe9bEBdABCyvFDq88WOGHsXg/exec',{
 			params:{
 			problem: problem.value,
 			location: location.value,
 			information: information.value
 			}
+		}).catch((err: AxiosError) =>{
+			console.log(err);
 		})
-		
+		alert("ใส่ข้อมูลครบทวนแล้ว ขอบคุณสำหรับการแจ้งเตือน")
 		window.location.reload()
 	}else{
 		alert("กรุณาใส่ให้ครบ")
@@ -32,20 +34,34 @@ const confirm = () => {
 <template>
 <navbar-layout :show-annouce="true">
 	<br/>
-	<div class="grid grid-rows-1 grid-flow-col gap-4">
-		<!-- this is aorrow left -->
+	<!-- <div class="grid grid-rows-1 grid-flow-col gap-4">
+		
 		<div class="row-start-1">
 		<router-link :to="{ name: 'home' }">
 			<img src="@/assets/images/aorrow-left.png" width="45" height="60"/>
 		</router-link>
 		</div>
-		<!-- buttom to report -->
+		
 		<div class="row-start-1 row-end-1">
 			<img src="@/assets/images/warming.png" width="60" height="80" style="float: right;"/>
 		</div>
-	</div>
 
-	<p class="text-right pr-1" style="color:#2A5E5C">รายงาน</p>
+	</div> -->
+
+	<!-- <p class="text-right pr-1" style="color:#2A5E5C">รายงาน</p> -->
+	
+	<div class="flex justify-center">
+		<router-link :to="{ name : 'form'}">
+  			<button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l-lg">
+    			รายงาน
+  			</button>
+		</router-link>
+		<router-link :to="{ name : 'feedback'}">
+  			<button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r-lg">
+    			ประเมิน
+  			</button>
+		</router-link>
+	</div>
 
 		<label style="font-weight:bolder" class="pl-10">รายงานปัญหา</label>
 		
@@ -80,11 +96,13 @@ const confirm = () => {
 		</div>
 		<br/>
 	<!-- this is aorrow down -->
-	<div>
-		<a href="../timepod/feedback">
-		<img src="../assets/images/aorrow-down.png" width="45" height="60" style="margin:auto">
-		</a>
-	</div>
+	<!-- <div class="text-center">
+		<i style="text-align: center; color:gray">กด ลูกศร ด้านล่างเพื่อ ประเมินแอพพลิเคชั่น </i>
+		<br><br>
+		<router-link :to="{ name: 'feedback'}">
+			<img src="../assets/images/aorrow-down.png" width="45" height="60" style="margin:auto">
+		</router-link>
+	</div> -->
 </navbar-layout>
 </template>
 

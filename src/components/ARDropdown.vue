@@ -1,88 +1,77 @@
-<style>
-.dropbtn {
-  color: white;
-  cursor: pointer;
+<script setup lang="ts">
+
+import { ref } from "vue";
+import { onMounted } from "vue";
+import { onBeforeRouteUpdate, useRoute } from "vue-router";
+
+const show = ref(false);
+const selected = ref("เลือกจุดของ AR");
+const route = useRoute();
+const icon = ref("fa-caret-down");
+
+const arList = ref([
+	{ 'text': 'สระพระพิรุณ', 'route': 'ar0' },
+	{ 'text': '๓ บูรพาจารย์', 'route': 'ar1' },
+	{ 'text': 'KU Milk', 'route': 'ar2' },
+	{ 'text': 'คณะแพทย์', 'route': 'ar3' },
+	{ 'text': 'พรีเมียม', 'route': 'ar4' },
+	{ 'text': 'คณะวิศวะ', 'route': 'arx' },
+])
+
+const select = (item: string) => {
+	selected.value = item;
+	show.value = false;
+};
+
+const toggle = () => {
+	show.value = !show.value;
+	if (show.value === false) {
+		icon.value = "fa-caret-down"
+	} else {
+		icon.value = "fa-caret-up"
+	}
+};
+
+const getRouteName = (routeName: string): string => {
+	switch (routeName) {
+		case 'ar0':
+			return 'สระพระพิรุณ';
+		case 'ar1':
+			return '๓ บูรพาจารย์';
+		case 'ar2':
+			return 'KU Milk';
+		case 'ar3':
+			return 'คณะแพทย์';
+		case 'ar4':
+			return 'พรีเมียม';
+		case 'arx':
+			return 'คณะวิศวะ';
+		default:
+			return 'เลือกจุดของ AR';
+	}
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #e5e4df;
-  min-width: 105px;
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  display: block;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown:hover .dropbtn {
-  background-color: #4c7c63;
-}
-
-.show {display: block;}
-</style>
-<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
+selected.value = getRouteName(route.name as string);
 </script>
 
 
-
 <template>
-    <div class="dropdown" style="float:right;">
-        <button class="font-medium bg-[#57855E] dropbtn rounded py-1 px-5  text-sm">ลอง AR อื่น ๆ</button>
-        <div class=" dropdown-content border-none shadow-lg">
-          <router-link :to="{ name: 'ar0' }">
-            <a class="border-2 border-black py-1 px-4 text-sm">สระพระพิรุณ</a>
-          </router-link>
-          <router-link :to="{ name: 'ar1' }">
-            <a class="border-x-2 border-b-2 border-black py-1 px-4 text-sm">สามบูรพาจารย์</a>
-          </router-link>
-          <router-link :to="{ name: 'ar2' }">
-            <a class="border-x-2 border-b-2 border-black py-1 px-4 text-sm">KU Milk</a>
-          </router-link>
-          <router-link :to="{ name: 'ar3' }">
-            <a class="border-x-2 border-black py-1 px-4 text-sm">คณะแพทย์</a>
-          </router-link>
-          <router-link :to="{ name: 'ar4' }">
-            <a class="border-2 border-black py-1 px-4 text-sm">พรีเมียม</a>
-          </router-link>
-          <router-link :to="{ name: 'ARX' }">
-            <a class="border-x-2 border-b-2 border-black py-1 px-4 text-sm">คณะวิศวะ</a>
-          </router-link>
-
-        </div>
-    </div>
+	<div class="relative">
+		<button @click="toggle" class="w-full py-1 px-6 border bg-[#57855E] text-white border-none rounded-md flex items-center">
+			{{ selected }}
+			<i class="fas ml-2 text-xs" :class="icon"></i>
+		</button>
+		<div v-if="show" class="absolute right-0 z-10 bg-white rounded-md shadow-lg w-28">
+			<ul class="list-none">
+			<router-link :to="{ name: item.route }" v-for="item in arList">
+				<li class="py-1 px-3 hover:bg-gray-100 rounded-md">
+					{{ item.text }}
+				</li>
+			</router-link>
+			</ul>
+		</div>
+	</div>
 </template>
+
+<style scoped>
+</style>

@@ -41,6 +41,8 @@ async function shareFile() {
 
 
 <template>
+    <!-- <div class="vue-scrollbar__area vue-scrollbar-transition" > -->
+
   <div class="flex justify-between pl-2 pt-2">
     <div
       class="
@@ -54,11 +56,9 @@ async function shareFile() {
       "
     >
       <div class="flex px-3">
-        <NavbarButton
-          icon ="back_to_home.svg"
-          size=""
-          link-page="ar"
-          />
+        <button type="button" class="py-2 px-2" @click="$router.go(-1)">
+          <img src="../assets/icons/back_to_home.svg" />
+        </button>
       </div>
       <div class="p-2 justify-self-end">
         <a-r-dropdown />
@@ -70,7 +70,7 @@ async function shareFile() {
       style="position: absolute"
     >
       <div class="grid grid-cols-3 gap-10">
-        <router-link :to="{ name: 'ar' }">
+        <router-link :to="{ name: 'ar0' }">
           <button type="button" class="scale-75">
             <img src="../assets/icons/ARselect_icon.svg" />
           <h1 class="text-center font-bold">ลอง AR อื่นๆ</h1>
@@ -88,7 +88,8 @@ async function shareFile() {
     </div>
   </div>
 
-  <div class="d-flex justify-content-center align-items-center h-100">
+  <div class="d-flex justify-content-center align-items-center h-100" style="height: 68vh; overflow: scroll;">
+  <!-- <div class="vue-scrollbar__area vue-scrollbar-transition" style=" margin-left: 0px;" > -->
     <img id="image1" :src="screenshot" />
   </div>
 </template>
@@ -96,7 +97,7 @@ async function shareFile() {
 <style>
 #image1 {
   display: block;
-  margin-top: 5em;
+  margin-top: 2em;
   margin-left: auto;
   margin-right: auto;
   height: 20em;

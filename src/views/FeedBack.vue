@@ -31,6 +31,7 @@ const confirm = async () => {
             // alert("ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่");
             console.log(err);
         })
+        alert('ใส่ข้อมูลครบทวนแล้ว ขอบคุณสำหรับการประเมิน')
         window.location.reload()
     } else {
         alert("กรุณาใส่ข้อมูลให้ครบถ้วน")
@@ -42,10 +43,22 @@ const confirm = async () => {
     <navbar-layout :showAnnouce="true">
         <!-- this is aorrow up -->
         <br/>
-        <router-link :to="{ name: 'form' }">
+        <!-- <router-link :to="{ name: 'form' }">
             <img src="@/assets/images/aorrow-up.png" width="45" height="60" style="margin:auto"/>
-        </router-link><br/>
+        </router-link><br/> -->
 
+        <div class="flex justify-center">
+		<router-link :to="{ name : 'form'}">
+  			<button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l-lg">
+    			รายงาน
+  			</button>
+		</router-link>
+		<router-link :to="{ name : 'feedback'}">
+  			<button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r-lg">
+    			ประเมิน
+  			</button>
+		</router-link>
+	    </div>
 
         <label style="font-weight:bolder" class="pb-1 pl-10">ประเมินแอพพลิเคชั่น</label><br/>
 

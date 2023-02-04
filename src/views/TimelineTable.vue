@@ -175,7 +175,7 @@ export default defineComponent({
       <!--map-->
       <div class="container mx-auto">
         <div class="grid grid-rows-1 grid-cols-12 grap-3">
-          <div class="col-start-2 col-span-9 row-span-6">
+          <div class="col-start-1 col-span-12 row-span-6">
             <MapZone />
           </div>
         </div>

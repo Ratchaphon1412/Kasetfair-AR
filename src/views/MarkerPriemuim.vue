@@ -105,7 +105,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
  
 // ----------------------------------------------------------------------------------------------------        
 //    keep check each marker   
-      AFRAME.registerComponent("check-marker", {
+      AFRAME.registerComponent("check-marker-premium", {
         init: function() {
           let el = this.el;
           el.addEventListener("markerFound", function() {
@@ -121,7 +121,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 // ----------------------------------------------------------------------------------------------------         
 
 //  take animation that need to play from model into mixer && clips     
-     AFRAME.registerComponent('take-animation', {
+     AFRAME.registerComponent('take-premium-animation', {
         init: function() {
         this.el.addEventListener("model-loaded", evt => 
           {
@@ -133,7 +133,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 // ----------------------------------------------------------------------------------------------------  
 
 //      compute model location / playAnimation  or not /phone rotation 
-        AFRAME.registerComponent("spawn-model", {
+        AFRAME.registerComponent("spawn-team", {
           init: function() {
 //        search for markers    
           this.el1 = document.querySelector("#marker1");
@@ -386,16 +386,16 @@ video{
         id="scene"
         gesture-detector
       >
-      <a-marker type="barcode" id="marker1" value="14" check-marker>
+      <a-marker type="barcode" id="marker1" value="14" check-marker-premium>
       </a-marker>
     
-      <a-marker type="barcode" id="marker2" value="8" check-marker>
+      <a-marker type="barcode" id="marker2" value="8" check-marker-premium>
       </a-marker>
                   
-      <a-entity id = "false-model" gesture-handler position = "0 0 0" take-animation  gltf-model="/models/naga.glb" ></a-entity>
+      <a-entity id = "false-model" gesture-handler position = "0 0 0"  gltf-model="/models/people_GLTF.gltf" ></a-entity>
 
       <a-entity id = "camera" camera  ></a-entity>
-      <a-entity spawn-model></a-entity>
+      <a-entity spawn-team></a-entity>
       </a-scene>
 </div>
 <div class="portrait:hidden">

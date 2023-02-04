@@ -96,21 +96,21 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
       let clips;//animation that going to play
       let scale = 0.1;
       
+      
 //    Custom Value 
 //    using when marker is too far away
       let distance = 0.5;//Distance between current point to center point || center to new
-      let countdown = 1000;//Delay time without tracking before model disappear
+      let countdown = 200;//Delay time without tracking before model disappear
  
 // ----------------------------------------------------------------------------------------------------        
 //    keep check each marker   
-      AFRAME.registerComponent("check-marker", {
+      AFRAME.registerComponent("check-marker-naka", {
         init: function() {
           let el = this.el;
           el.addEventListener("markerFound", function() {
             marker_visible[el.id] = true;
            
           });
-
           el.addEventListener("markerLost", function() {
             marker_visible[el.id] = false;
            
@@ -154,6 +154,11 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //   main thing        
      tick: function(time, deltaTime) 
         {
+          // if((!marker_visible["marker2"] &&  !marker_visible["marker1"] && !marker_visible["marker2"] && !marker_visible["marker1"]))
+          // {
+          //   this.falseModel.visible = false;
+          //   reset  =true;
+          // }
 // ***************************************************************************************************           
 //        reset all variable value into defualt
           if(reset)
@@ -169,9 +174,9 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
                 center.copy(0,0,0);
                 newPosition.copy(0,0,0);
                 currentPosition.copy(0,0,0);
-                this.falseModel.rotation.x = THREE.MathUtils.degToRad(0);
-                this.falseModel.rotation.y = THREE.MathUtils.degToRad(0);
-                this.falseModel.rotation.z = THREE.MathUtils.degToRad(0);
+              //  this.falseModel.rotation.x = THREE.MathUtils.degToRad(0);
+              //  this.falseModel.rotation.y = THREE.MathUtils.degToRad(0);
+              //  this.falseModel.rotation.z = THREE.MathUtils.degToRad(270);
             }
 
 
@@ -192,9 +197,9 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               let pseudoYPos = 0;
               let pseudoZPos = 0;
 
-                 pseudoXPos = this.p1.x + additionX;
-                 pseudoYPos = this.p2.y + additionY - 3;
-                 pseudoZPos = this.p1.z - 15;
+              pseudoXPos = this.p1.x + additionX - 3;
+              pseudoYPos = this.p2.y + additionY ;
+              pseudoZPos = ((this.p1.z + this.p2.z) / 2 ) - 60;
 
 
 // If new position is too far model will slide to it 
@@ -290,21 +295,21 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
   
           
 //  for model appear in camera to do something
-          if(spawn && (leftTime % 2 ==0 || leftTime ==0))
+          if(spawn)
             {
               
               this.falseModel.scale.set(scale,scale,scale);
               playAnimation = true;
               scale += 0.01;
               this.falseModel.visible = true;
-              if(scale >= 1)
+              if(scale >= 2)
                 {
                   spawn = false; 
                 }            
             }
           
 //  for model to do something before disappear from camera 
-          if(despawn & (leftTime % 2 ==0 || leftTime ==0))
+          if(despawn )
             {
               this.falseModel.scale.set(scale,scale,scale);
               playAnimation = false;
@@ -316,7 +321,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
                 }    
             }
 //   Running / stop animation
-           if (mixer && playAnimation)
+            if (mixer && playAnimation)
            {
               mixer.clipAction(clips).play();
               mixer.update(deltaTime/1000) ;
@@ -325,6 +330,8 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
             {
               mixer.update(0) ;
             }
+
+
 // ****************************************************************************************************          
           
           
@@ -383,15 +390,15 @@ video{
         id="scene"
         gesture-detector
       >
-      <a-marker type="barcode" id="marker1" value="14" check-marker></a-marker>
+      <a-marker type="barcode" id="marker1" value="14" check-marker-naka></a-marker>
     
-      <a-marker type="barcode" id="marker2" value="8" check-marker></a-marker>
+      <a-marker type="barcode" id="marker2" value="8" check-marker-naka></a-marker>
     
-      <a-marker type="barcode" id="marker3" value="60" check-marker></a-marker>
+      <a-marker type="barcode" id="marker3" value="60" check-marker-naka></a-marker>
     
-      <a-marker type="barcode" id="marker4" value="58" check-marker></a-marker>
+      <a-marker type="barcode" id="marker4" value="58" check-marker-naka></a-marker>
  
-      <a-entity id = "false-model"  visible="false" gesture-handler take-animation gltf-model="/models/naga.glb" ></a-entity>
+      <a-entity id = "false-model"  visible="false" gesture-handler rotation ="0 350 0" take-animation gltf-model="/models/naga.glb" ></a-entity>
 
       <a-entity id = "camera" camera  ></a-entity>
       <a-entity spawn-model></a-entity>

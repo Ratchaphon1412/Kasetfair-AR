@@ -8,13 +8,13 @@ import NavbarButton from './NavbarButton.vue';
             <navbar-button 
                 icon="ar_icon.svg" 
                 text="AR" 
-                linkPage="ar"
+                linkPage="ar0"
                 :newTab="true"
             />
             <navbar-button 
                 icon="capsule_icon.svg" 
                 text="วันวาน KU" 
-                linkPage="home"
+                linkPage="time-capsule"
             />
             <navbar-button 
                 icon="icon.home.svg" 
@@ -24,13 +24,13 @@ import NavbarButton from './NavbarButton.vue';
             />
             <navbar-button 
                 icon="time _icon.svg" 
-                text="ตารางเวลา" 
+                text="ตารางเวลา"
                 linkPage="timeline" 
             />
-            <navbar-button 
-                icon="more_icon.svg" 
-                text="เพิ่มเติม" 
-                linkPage="home" 
+            <navbar-button
+                icon="more_icon.svg"
+                text="แบบสอบถาม"
+                linkPage="form"
             />
         </div>
     </div>
