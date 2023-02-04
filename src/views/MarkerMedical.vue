@@ -145,14 +145,13 @@ video{
           cursor="fuse: false; rayOrigin: mouse;"
         >
           <a-entity
-            id="bowser-model"
-            animation-mixer="loop: repeat"
-            :gltf-model="getPath('models/Cow_v2.gltf')"
+            id="med-model"
+            :gltf-model="getPath('models/MedBuildingsv3.gltf')"
             class="clickable"
             gesture-handler
-            position="0 0 0"
-            rotation="90 90 -90"
-            scale="0.8 0.8 0.8"
+            position="0 0 -1.5"
+            rotation="90 0 -180"
+            scale="0.05 0.05 0.05"
           ></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
