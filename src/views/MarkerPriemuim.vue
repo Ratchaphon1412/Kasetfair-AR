@@ -392,7 +392,7 @@ video{
       <a-marker type="barcode" id="marker2" value="8" check-marker-premium>
       </a-marker>
                   
-      <a-entity id = "false-model" gesture-handler position = "0 0 0" take-premium-animation  gltf-model="/models/naga.glb" ></a-entity>
+      <a-entity id = "false-model" gesture-handler position = "0 0 0"  gltf-model="/models/people_GLTF.gltf" ></a-entity>
 
       <a-entity id = "camera" camera  ></a-entity>
       <a-entity spawn-team></a-entity>
