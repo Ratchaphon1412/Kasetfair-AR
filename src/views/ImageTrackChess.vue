@@ -74,18 +74,18 @@ export default {
     },
   },
 };
-let marker_visible = { animatedMarker: false };
 AFRAME.registerComponent("check-marker", {
   init: function () {
     let el = this.el;
+    var track = document.getElementById('tracker');
 
     el.addEventListener("markerFound", function () {
-      marker_visible[el.id] = true;
+      track.style.display = 'none'; 
       console.log(el.id + " found");
     });
 
     el.addEventListener("markerLost", function () {
-      marker_visible[el.id] = false;
+      track.style.display = 'block';
       console.log(el.id + " lost");
     });
   },
@@ -144,6 +144,15 @@ video {
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
+
+    <!-- <div v-if="!animatedMarker"> -->
+    <div id="tracker" class="flex h-screen justify-center items-center">
+      <div id="tracker" class="text-center bg-[#AFC2AC]">
+        กรุณาหันกล้องไปทางโลโก้
+      </div>
+    </div>
+  <!-- </div> -->
+
     <a-scene
       embedded
       vr-mode-ui="enabled: false;"
