@@ -108,7 +108,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
       let center = new THREE.Vector3(0,0,0);//center between current and new     
       let rotationCheckCount = 0;//number of time that check rotation
       let additionX = 2;//defualt addition x for each roation
-      let additionY = 1;//defualt addition y for each roation
+      let additionY = 9;//defualt addition y for each roation
       let playAnimation = false;//check if need to run animation for not
       let mixer;//animation-mixer
       let clips;//animation that going to play
@@ -118,8 +118,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //    Custom Value 
 //    using when marker is too far away
       let distance = 0.5;//Distance between current point to center point || center to new
-      let countdown = 20
-      ;//Delay time without tracking before model disappear
+      let countdown = 20;//Delay time without tracking before model disappear
  
 // ----------------------------------------------------------------------------------------------------        
 //    keep check each marker   
@@ -217,7 +216,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               let pseudoZPos = 0;
 
               pseudoXPos = this.p1.x + additionX;
-              pseudoYPos = this.p2.y + additionY  + 6;
+              pseudoYPos = this.p2.y + additionY;
               pseudoZPos = ((this.p1.z + this.p2.z) / 2 ) - 50;
 
 
@@ -321,7 +320,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               playAnimation = true;
               scale += 0.01;
               this.falseModel.visible = true;
-              if(scale >= 2)
+              if(scale >= 1.7)
                 {
                   spawn = false; 
                 }            
@@ -421,7 +420,7 @@ video{
         id = "false-model" 
         visible="false" 
         gesture-handler 
-        rotation ="10 350 0" 
+        rotation ="20 350 0" 
         take-animation 
         :gltf-model="getPath('models/naga.glb')" 
       ></a-entity>
