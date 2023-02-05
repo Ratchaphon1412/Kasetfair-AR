@@ -57,7 +57,7 @@ async function shareFile() {
     >
       <div class="flex px-2">
         <button type="button" class="py-2" @click="$router.go(-1)">
-          <img src="../assets/icons/back_to_home.svg" />
+          <img src="@/assets/icons/back_to_home.svg" />
         </button>
       </div>
       <div class="p-2 justify-self-end">
@@ -71,15 +71,15 @@ async function shareFile() {
     >
       <div class="grid grid-cols-3 gap-10">
           <button type="button" class="scale-75" @click="$router.go(-1)">
-            <img src="../assets/icons/ARselect_icon.svg" />
+            <img src="@/assets/icons/ARselect_icon.svg" />
           <h1 class="text-center font-bold">ลอง AR อื่นๆ</h1>
         </button>
         <button type="button" @click="saveFile()" class="scale-75">
-          <img src="../assets/icons/save_icon.svg" />
+          <img src="@/assets/icons/save_icon.svg" />
           <h1 class="text-center font-bold">บันทึก</h1>
         </button>
         <button type="button" @click="shareFile()" class="scale-75">
-          <img src="../assets/icons/share_icon.svg" />
+          <img src="@/assets/icons/share_icon.svg" />
           <h1 class="text-center font-bold">แชร์</h1>
         </button>
       </div>

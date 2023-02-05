@@ -12,7 +12,7 @@ var localstream;
 
 export default {
   mounted (){
-    var logoSource = "/assets/images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png";
+    var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
     const logo = document.getElementById('logo');
     logo.src += logoSource;
   },
