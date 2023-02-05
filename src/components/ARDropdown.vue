@@ -38,9 +38,9 @@ const getRouteName = (routeName: string): string => {
 			return 'สระพระพิรุณ';
 		case 'ar1':
 			return '๓ บูรพาจารย์';
-		case 'ar2':
-			return 'KU Milk';
 		case 'ar3':
+			return 'KU Milk';
+		case 'ar2':
 			return 'คณะแพทย์';
 		case 'ar4':
 			return 'พรีเมียม';
