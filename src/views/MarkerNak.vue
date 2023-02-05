@@ -189,7 +189,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
           
 // *************************************************************************************************** 
 //        compute position / rotation / newest material that should be   
-          if(( marker_visible["marker2"] &&  (marker_visible["marker1"] )) || (marker_visible["marker3"] || marker_visible["marker4"]))
+          if(( marker_visible["marker2"] ||  (marker_visible["marker1"] )) && (marker_visible["marker3"] || marker_visible["marker4"]))
           { 
 //        Search for 2nd tracker to compute rotation sort by tracking efficiency 
               if(marker_visible["marker3"]) {this.el3.object3D.getWorldPosition(this.p2);}
