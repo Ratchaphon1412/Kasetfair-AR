@@ -10,6 +10,10 @@ import ARDropdown from '@/components/ARDropdown.vue';
 var screenshot;
 var localstream;
 
+const getPath = (path) => {
+	return new URL(`../assets/${path}`, import.meta.url).href;
+};
+
 export default {
   mounted (){
     var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
@@ -348,7 +352,7 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
-      <img id="logo" src=".." class="hidden"/>
+      <img id="logo" src="" class="hidden"/>
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
           <img src="@/assets/icons/back_to_home.svg" />
