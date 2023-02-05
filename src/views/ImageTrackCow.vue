@@ -137,6 +137,11 @@ video{
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
+    <div id="tracker" class="flex h-screen justify-center items-center">
+      <div id="tracker" class="text-center bg-[#AFC2AC]">
+        <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
+      </div>
+    </div>
        
       <a-scene
         embedded
@@ -155,6 +160,7 @@ video{
           raycaster="objects: .clickable"
           emitevents="true"
           cursor="fuse: false; rayOrigin: mouse;"
+          check-marker
         >
         <!--วัว-->
           <a-entity

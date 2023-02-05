@@ -148,7 +148,7 @@ video {
     <!-- <div v-if="!animatedMarker"> -->
     <div id="tracker" class="flex h-screen justify-center items-center">
       <div id="tracker" class="text-center bg-[#AFC2AC]">
-        กรุณาหันกล้องไปทางโลโก้
+        <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
       </div>
     </div>
   <!-- </div> -->

@@ -96,6 +96,22 @@ export default {
     }
   },
 };
+// AFRAME.registerComponent("check-marker", {
+//   init: function () {
+//     let el = this.el;
+//     var track = document.getElementById('tracker');
+
+//     el.addEventListener("markerFound", function () {
+//       track.style.display = 'none'; 
+//       console.log(el.id + " found");
+//     });
+
+//     el.addEventListener("markerLost", function () {
+//       track.style.display = 'block';
+//       console.log(el.id + " lost");
+//     });
+//   },
+// });
 </script>
 
 <style>
@@ -109,7 +125,7 @@ video{
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause{
+#pause, #tracker{
   width: 100%;
   height: 100px;
   margin-top: 200px ;
@@ -137,6 +153,11 @@ video{
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
+    <div id="tracker" class="flex h-screen justify-center items-center">
+      <div id="tracker" class="text-center bg-[#AFC2AC]">
+        <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
+      </div>
+    </div>
        
       <a-scene
         embedded
@@ -155,6 +176,7 @@ video{
           raycaster="objects: .clickable"
           emitevents="true"
           cursor="fuse: false; rayOrigin: mouse;"
+          check-marker
         >
           <a-entity
             id="med-model"

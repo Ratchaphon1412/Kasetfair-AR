@@ -118,11 +118,14 @@ let marker_visible = { marker1: false, marker2: false ,marker3 : false};
       AFRAME.registerComponent("check-marker-sculp", {
         init: function() {
           let el = this.el;
+          var track = document.getElementById('tracker');
           el.addEventListener("markerFound", function() {
+            track.style.display = 'none'; 
             marker_visible[el.id] = true;
           });
 
           el.addEventListener("markerLost", function() {
+            track.style.display = 'block';
             console.log("Lost");
             marker_visible[el.id] = false;
           });
@@ -202,7 +205,7 @@ video{
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause{
+#pause, #tracker{
   width: 100%;
   height: 100px;
   margin-top: 200px ;
@@ -229,6 +232,11 @@ video{
         <img src="@/assets/icons/icon.camera.svg"/>
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
+    </div>
+    <div id="tracker" class="flex h-screen justify-center items-center">
+      <div id="tracker" class="text-center bg-[#AFC2AC]">
+        <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
+      </div>
     </div>
        
       <a-scene
