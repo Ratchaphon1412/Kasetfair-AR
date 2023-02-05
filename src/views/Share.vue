@@ -7,6 +7,7 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const screenshot = localStorage.getItem('screenshot');
+
 // console.log(screenshot);
 function saveFile() {
   // โหลดไฟล์ภาพ
@@ -41,8 +42,6 @@ async function shareFile() {
 
 
 <template>
-    <!-- <div class="vue-scrollbar__area vue-scrollbar-transition" > -->
-
   <div class="flex justify-between pl-2 pt-2">
     <div
       class="
@@ -55,7 +54,8 @@ async function shareFile() {
         py-3
       "
     >
-      <div class="flex px-3">
+      <div class="flex px-3"
+      style="position: fixed">
         <NavbarButton
           icon ="back_to_home.svg"
           size=""
@@ -69,7 +69,7 @@ async function shareFile() {
 
     <div
       class="bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center"
-      style="position: absolute"
+      style="position: fixed"
     >
       <div class="grid grid-cols-3 gap-10">
         <router-link :to="{ name: 'ar' }">
@@ -90,8 +90,7 @@ async function shareFile() {
     </div>
   </div>
 
-  <div class="d-flex justify-content-center align-items-center h-100" style="height: 68vh; overflow: scroll;">
-  <!-- <div class="vue-scrollbar__area vue-scrollbar-transition" style=" margin-left: 0px;" > -->
+  <div class="d-flex justify-content-center align-items-center h-100" style="height: 100vh; overflow: scroll; ">
     <img id="image1" :src="screenshot" />
   </div>
 </template>
@@ -102,7 +101,7 @@ async function shareFile() {
   margin-top: 2em;
   margin-left: auto;
   margin-right: auto;
-  /* height: 20em; */
+  height: 20em;
   border-radius: 30px;
   border-color: black;
 }

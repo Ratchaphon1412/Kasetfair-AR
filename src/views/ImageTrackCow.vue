@@ -5,6 +5,11 @@ var localstream;
 
 export default {
   components: {ARDropdown},
+  mounted (){
+    var logoSource = "/assets/images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png";
+    const logo = document.getElementById('logo');
+    logo.src += logoSource;
+  },
   methods: {
     stopVideo() {
       const vid = document.getElementsByTagName("video")[0];
@@ -49,7 +54,7 @@ export default {
       console.log("capture")
       const video = document.getElementsByTagName("video")[0];
       const canvas = document.createElement("canvas");
-      const logo = document.getElementById("logo");
+      const logo = document.getElementById('logo');
 
       var width = video.videoWidth,
         height = video.videoHeight;
@@ -63,12 +68,15 @@ export default {
       .querySelector("a-scene")
       .components.screenshot.getCanvas("perspective");
       canvas.getContext("2d").drawImage(imgData, 0, 0, width +200, height);
-      canvas.getContext("2d").drawImage(logo, 530, 300, 106 - 30, 173 - 30);
+
+      var logoWidth = 106, logoHeight = 173;
+      var scaleLogo = 30;
+      canvas.getContext("2d").drawImage(logo,
+      width - (logoWidth - scaleLogo) - (logoWidth - scaleLogo) / 2,
+      height - (logoHeight - scaleLogo) - (logoHeight - scaleLogo) / 4,
+      logoWidth - scaleLogo,
+      logoHeight - scaleLogo);
       screenshot = canvas.toDataURL("image/png");
-
-  
-
-
       localStorage.setItem('screenshot', screenshot);
       this.stopVideo();
        this.$router.push({ path: "share", params: { screenshot }}).then(() => { this.$router.go() })
@@ -102,7 +110,7 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
-      <img src="../assets/images/watermark/KU-milk.wh4.png" class="hidden" id="logo" width="0" height="0">
+      <img id="logo" src=".." class="hidden" />
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
           <img src="../assets/icons/back_to_home.svg" />
@@ -144,7 +152,7 @@ video{
             gltf-model="/models/Cow_v2.gltf"
             class="clickable"
             gesture-handler
-            position="0 0 3.5"
+            position="0 0 3"
             rotation="90 90 -90"
             scale="0.8 0.8 0.8"
           ></a-entity>
