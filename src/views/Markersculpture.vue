@@ -84,11 +84,22 @@ export default {
     }
   },
 };
-let marker_visible = { marker1: false, marker2: false };
-      let scale = 5;
-      let isShowed = false;
-      let countdown = 3;
-      let avgDistance = 0;
+let marker_visible = { marker1: false, marker2: false ,marker3 : false};
+      let mixer;//animation-mixer
+      let clips;//animation that going to play
+
+      
+
+      AFRAME.registerComponent('do-rotation', {
+        init: function() {
+        this.el.addEventListener("model-loaded", evt => 
+          {
+            mixer = new THREE.AnimationMixer(this.el.components['gltf-model'].model);
+            clips = this.el.components['gltf-model'].model.animations[0];
+          })
+          
+        }
+    })
       
 // ----------------------------------------------------------------------------------------------------        
 //    keep check each marker   
@@ -121,6 +132,7 @@ let marker_visible = { marker1: false, marker2: false };
 //        make models spawn at vectorOrigin          
           this.model1 = document.querySelector("#model1").object3D;
           this.model2 = document.querySelector("#model2").object3D;
+          this.model3 = document.querySelector("#model3").object3D;
           this.camera = document.querySelector("#camera");
           
 
@@ -130,24 +142,37 @@ let marker_visible = { marker1: false, marker2: false };
      tick: function(time, deltaTime) 
         {
 
-            if(marker_visible["marker2"] && countdown % 3 == 0)
+          if(marker_visible["marker2"] && !marker_visible["marker3"]  )
               {
                   this.model2.visible = true;
                   this.model1.visible = false;
-                  isShowed = true;
+                  this.model3.visible = false;
+                  
               }
-            else if(marker_visible["marker1"] && countdown % 3 == 0)
+            else if(marker_visible["marker1"] && !marker_visible["marker3"] )
               {
                   this.model1.visible = true;
                   this.model2.visible = false;
-                  isShowed = true;
+                  this.model3.visible = false;
+                  
               }
+              else if(marker_visible["marker3"])
+              {
+                  this.model3.visible = true;
+                  this.model1.visible = false;;
+                  this.model2.visible = false;
+                  if(mixer)
+                  {
+                 mixer.clipAction(clips).play();
+                 mixer.update(deltaTime/1000) ;
+                  }
+              }
+
+
+
         
         } });
 
-
-//******************************************************************          
-          
           
           
           
@@ -211,15 +236,14 @@ video{
         position = "1 0 0" 
         scale = "0.75 0.75 0.75" 
         rotation = "0 90 270" 
-        gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
+        :gltf-model="getPath('models/upDownSideCity2.glb')" ></a-entity> 
       </a-marker>
  
       <a-marker type="barcode" id="marker2" value="8" check-marker-sculp>
-       <a-entity id = "model2" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
+       <a-entity id = "model2" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " :gltf-model="getPath('models/upDownSideCity2.glb')" ></a-entity> 
       </a-marker>
-         
       <a-marker type="barcode" id="marker3" value="24" check-marker-sculp>
-       <a-entity id = "model3" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
+       <a-entity id = "model3" visible ="false" gesture-handler position = "0 1.5 0" scale = "0.05 0.05 0.05 "  :gltf-model="getPath('models/auditorium.glb')" do-rotation></a-entity> 
       </a-marker>
 
        <a-entity  spawn-virtual></a-entity> 
