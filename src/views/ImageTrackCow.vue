@@ -11,11 +11,6 @@ var localstream;
 
 export default {
   components: {ARDropdown},
-  mounted (){
-    var logoSource = "getPath('models/Cow_v2.gltf')" + Math.floor( (Math.random() * 10) % 4) + ".png";
-    const logo = document.getElementById('logo');
-    logo.src += logoSource;
-  },
   methods: {
     stopVideo() {
       const vid = document.getElementsByTagName("video")[0];
@@ -113,7 +108,6 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-3">
-      <img src="@/assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
           <img src="@/assets/icons/back_to_home.svg" />
