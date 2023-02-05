@@ -125,14 +125,14 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
       AFRAME.registerComponent("check-marker-naka", {
         init: function() {
           let el = this.el;
-          var track = document.getElementById('tracker');
+          // var track = document.getElementById('tracker');
           el.addEventListener("markerFound", function() {
-            track.style.display = 'none';
+            // track.style.display = 'none';
             marker_visible[el.id] = true;
            
           });
           el.addEventListener("markerLost", function() {
-            track.style.display = 'block';
+            // track.style.display = 'block';
             marker_visible[el.id] = false;
            
           });
@@ -401,11 +401,11 @@ video{
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
-    <div id="tracker" class="flex h-screen justify-center items-center">
+    <!-- <div id="tracker" class="flex h-screen justify-center items-center">
       <div id="tracker" class="text-center bg-[#AFC2AC]">
         <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
       </div>
-    </div>
+    </div> -->
        
       <a-scene
         embedded

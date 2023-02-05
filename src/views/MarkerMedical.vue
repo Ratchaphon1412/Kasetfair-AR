@@ -96,22 +96,6 @@ export default {
     }
   },
 };
-// AFRAME.registerComponent("check-marker", {
-//   init: function () {
-//     let el = this.el;
-//     var track = document.getElementById('tracker');
-
-//     el.addEventListener("markerFound", function () {
-//       track.style.display = 'none'; 
-//       console.log(el.id + " found");
-//     });
-
-//     el.addEventListener("markerLost", function () {
-//       track.style.display = 'block';
-//       console.log(el.id + " lost");
-//     });
-//   },
-// });
 </script>
 
 <style>
