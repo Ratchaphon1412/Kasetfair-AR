@@ -11,6 +11,11 @@ var localstream;
 
 export default {
   components: {ARDropdown},
+  mounted (){
+    var logoSource = "getPath('models/Cow_v2.gltf')" + Math.floor( (Math.random() * 10) % 4) + ".png";
+    const logo = document.getElementById('logo');
+    logo.src += logoSource;
+  },
   methods: {
     stopVideo() {
       const vid = document.getElementsByTagName("video")[0];
