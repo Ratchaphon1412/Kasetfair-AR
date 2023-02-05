@@ -125,14 +125,11 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
       AFRAME.registerComponent("check-marker-naka", {
         init: function() {
           let el = this.el;
-          // var track = document.getElementById('tracker');
           el.addEventListener("markerFound", function() {
-            // track.style.display = 'none';
             marker_visible[el.id] = true;
            
           });
           el.addEventListener("markerLost", function() {
-            // track.style.display = 'block';
             marker_visible[el.id] = false;
            
           });
@@ -175,6 +172,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //   main thing        
      tick: function(time, deltaTime) 
         {
+          var track = document.getElementById('tracker');
           // if((!marker_visible["marker2"] &&  !marker_visible["marker1"] && !marker_visible["marker2"] && !marker_visible["marker1"]))
           // {
           //   this.falseModel.visible = false;
@@ -206,12 +204,14 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //        compute position / rotation / newest material that should be   
           if(( marker_visible["marker2"] ||  (marker_visible["marker1"] )) && (marker_visible["marker3"] || marker_visible["marker4"]))
           { 
+            track.style.display = 'none';
 //        Search for 2nd tracker to compute rotation sort by tracking efficiency 
-              if(marker_visible["marker3"]) {this.el3.object3D.getWorldPosition(this.p2);}
-              else if(marker_visible["marker4"]){this.el4.object3D.getWorldPosition(this.p2);}
+              if(marker_visible["marker3"]) {this.el3.object3D.getWorldPosition(this.p2); track.style.display = 'none';}
+              else if(marker_visible["marker4"]){this.el4.object3D.getWorldPosition(this.p2); track.style.display = 'none';}
               
-              if(marker_visible["marker1"]) {this.el1.object3D.getWorldPosition(this.p1);}
-              else if(marker_visible["marker2"]){this.el2.object3D.getWorldPosition(this.p1);}
+              if(marker_visible["marker1"]) {this.el1.object3D.getWorldPosition(this.p1); track.style.display = 'none';}
+              else if(marker_visible["marker2"]){this.el2.object3D.getWorldPosition(this.p1); track.style.display = 'none';}
+              else{track.style.display = 'block';}
 
 //         Using Diferrence to compute phone rotation
               let pseudoXPos = 0;
@@ -401,11 +401,11 @@ video{
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
-    <!-- <div id="tracker" class="flex h-screen justify-center items-center">
+    <div id="tracker" class="flex h-screen justify-center items-center">
       <div id="tracker" class="text-center bg-[#AFC2AC]">
         <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
       </div>
-    </div> -->
+    </div>
        
       <a-scene
         embedded
