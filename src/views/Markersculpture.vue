@@ -9,8 +9,17 @@ import ARDropdown from '@/components/ARDropdown.vue';
 var screenshot;
 var localstream;
 
+const getPath = (path) => {
+	return new URL(`../assets/${path}`, import.meta.url).href;
+};
+
 export default {
   components: {ARDropdown},
+  mounted (){
+    var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
+    const logo = document.getElementById('logo');
+    logo.src += logoSource;
+  },
   methods: {
     stopVideo() {
       const vid = document.getElementsByTagName("video")[0];
@@ -55,7 +64,7 @@ export default {
       console.log("capture")
       const video = document.getElementsByTagName("video")[0];
       const canvas = document.createElement("canvas");
-      const logo = document.getElementById("logo");
+      const logo = document.getElementById('logo');
 
       var width = video.videoWidth,
         height = video.videoHeight;
@@ -64,17 +73,20 @@ export default {
 
       // วาด video กับโมเดล AR ที่ขึ้นบนจอ ลงบน canvas เปล่าๆ
       // var screenshot;
-      // canvas.getContext("2d").drawImage(logo, 0, 0, 809, 750);
       canvas.getContext("2d").drawImage(video, 0, 0, width, height);
       var imgData = document
-        .querySelector("a-scene")
-        .components.screenshot.getCanvas("perspective");
-      canvas.getContext("2d").drawImage(imgData, -100, 0, width +200, height);
+      .querySelector("a-scene")
+      .components.screenshot.getCanvas("perspective");
+      canvas.getContext("2d").drawImage(imgData, -200, 0, width +300, height);
+
+      var logoWidth = 106, logoHeight = 173;
+      var scaleLogo = 30;
+      canvas.getContext("2d").drawImage(logo,
+      width - (logoWidth - scaleLogo) - (logoWidth - scaleLogo) / 2,
+      height - (logoHeight - scaleLogo) - (logoHeight - scaleLogo) / 4,
+      logoWidth - scaleLogo,
+      logoHeight - scaleLogo);
       screenshot = canvas.toDataURL("image/png");
-
-  
-
-
       localStorage.setItem('screenshot', screenshot);
       this.stopVideo();
        this.$router.push({ path: "share", params: { screenshot }}).then(() => { this.$router.go() })
@@ -84,11 +96,22 @@ export default {
     }
   },
 };
-let marker_visible = { marker1: false, marker2: false };
-      let scale = 5;
-      let isShowed = false;
-      let countdown = 3;
-      let avgDistance = 0;
+let marker_visible = { marker1: false, marker2: false ,marker3 : false};
+      let mixer;//animation-mixer
+      let clips;//animation that going to play
+
+      
+
+      AFRAME.registerComponent('do-rotation', {
+        init: function() {
+        this.el.addEventListener("model-loaded", evt => 
+          {
+            mixer = new THREE.AnimationMixer(this.el.components['gltf-model'].model);
+            clips = this.el.components['gltf-model'].model.animations[0];
+          })
+          
+        }
+    })
       
 // ----------------------------------------------------------------------------------------------------        
 //    keep check each marker   
@@ -121,6 +144,7 @@ let marker_visible = { marker1: false, marker2: false };
 //        make models spawn at vectorOrigin          
           this.model1 = document.querySelector("#model1").object3D;
           this.model2 = document.querySelector("#model2").object3D;
+          this.model3 = document.querySelector("#model3").object3D;
           this.camera = document.querySelector("#camera");
           
 
@@ -130,24 +154,37 @@ let marker_visible = { marker1: false, marker2: false };
      tick: function(time, deltaTime) 
         {
 
-            if(marker_visible["marker2"] && countdown % 3 == 0)
+          if(marker_visible["marker2"] && !marker_visible["marker3"]  )
               {
                   this.model2.visible = true;
                   this.model1.visible = false;
-                  isShowed = true;
+                  this.model3.visible = false;
+                  
               }
-            else if(marker_visible["marker1"] && countdown % 3 == 0)
+            else if(marker_visible["marker1"] && !marker_visible["marker3"] )
               {
                   this.model1.visible = true;
                   this.model2.visible = false;
-                  isShowed = true;
+                  this.model3.visible = false;
+                  
               }
+              else if(marker_visible["marker3"])
+              {
+                  this.model3.visible = true;
+                  this.model1.visible = false;;
+                  this.model2.visible = false;
+                  if(mixer)
+                  {
+                 mixer.clipAction(clips).play();
+                 mixer.update(deltaTime/1000) ;
+                  }
+              }
+
+
+
         
         } });
 
-
-//******************************************************************          
-          
           
           
           
@@ -175,8 +212,8 @@ video{
 
 <template>
 <div class="landscape:hidden">
-    <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
-      <img src="@/assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
+    <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-3">
+      <img id="logo" src="" class="hidden"/>
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
           <img src="@/assets/icons/back_to_home.svg" />
@@ -211,15 +248,14 @@ video{
         position = "1 0 0" 
         scale = "0.75 0.75 0.75" 
         rotation = "0 90 270" 
-        gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
+        :gltf-model="getPath('models/upDownSideCity2.glb')" ></a-entity> 
       </a-marker>
  
       <a-marker type="barcode" id="marker2" value="8" check-marker-sculp>
-       <a-entity id = "model2" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
+       <a-entity id = "model2" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " :gltf-model="getPath('models/upDownSideCity2.glb')" ></a-entity> 
       </a-marker>
-         
       <a-marker type="barcode" id="marker3" value="24" check-marker-sculp>
-       <a-entity id = "model3" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " gltf-model="https://cdn.glitch.global/3aef7b54-ea23-46e6-9d89-ddf520796843/upDownSideCity2.glb?v=1675404942814" ></a-entity> 
+       <a-entity id = "model3" visible ="false" gesture-handler position = "0 1.5 0" scale = "0.05 0.05 0.05 "  :gltf-model="getPath('models/auditorium.glb')" do-rotation></a-entity> 
       </a-marker>
 
        <a-entity  spawn-virtual></a-entity> 

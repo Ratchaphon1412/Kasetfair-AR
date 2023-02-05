@@ -10,7 +10,16 @@ import ARDropdown from '@/components/ARDropdown.vue';
 var screenshot;
 var localstream;
 
+const getPath = (path) => {
+	return new URL(`../assets/${path}`, import.meta.url).href;
+};
+
 export default {
+  mounted (){
+    var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
+    const logo = document.getElementById('logo');
+    logo.src += logoSource;
+  },
   components: {ARDropdown},
   methods: {
     stopVideo() {
@@ -56,7 +65,7 @@ export default {
       console.log("capture")
       const video = document.getElementsByTagName("video")[0];
       const canvas = document.createElement("canvas");
-      const logo = document.getElementById("logo");
+      const logo = document.getElementById('logo');
 
       var width = video.videoWidth,
         height = video.videoHeight;
@@ -65,17 +74,20 @@ export default {
 
       // วาด video กับโมเดล AR ที่ขึ้นบนจอ ลงบน canvas เปล่าๆ
       // var screenshot;
-      // canvas.getContext("2d").drawImage(logo, 0, 0, 809, 750);
       canvas.getContext("2d").drawImage(video, 0, 0, width, height);
       var imgData = document
-        .querySelector("a-scene")
-        .components.screenshot.getCanvas("perspective");
-      canvas.getContext("2d").drawImage(imgData, -100, 0, width +200, height);
+      .querySelector("a-scene")
+      .components.screenshot.getCanvas("perspective");
+      canvas.getContext("2d").drawImage(imgData, -200, 0, width +300, height);
+
+      var logoWidth = 106, logoHeight = 173;
+      var scaleLogo = 30;
+      canvas.getContext("2d").drawImage(logo,
+      width - (logoWidth - scaleLogo) - (logoWidth - scaleLogo) / 2,
+      height - (logoHeight - scaleLogo) - (logoHeight - scaleLogo) / 4,
+      logoWidth - scaleLogo,
+      logoHeight - scaleLogo);
       screenshot = canvas.toDataURL("image/png");
-
-  
-
-
       localStorage.setItem('screenshot', screenshot);
       this.stopVideo();
        this.$router.push({ path: "share", params: { screenshot }}).then(() => { this.$router.go() })
@@ -92,14 +104,10 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
       let spawn = false;//check if model spawn on camera 
       let despawn = false;//check if time for model to despawn
       let respawn =false;//check if model is too far
-      let switchingDelay = 0;//delay if some marker are lost track and have to change model
       let currentPosition = new THREE.Vector3(0,0,0);//current model position
       let newPosition = new THREE.Vector3(0,0,0);//new model position that too far from current position 
       let center = new THREE.Vector3(0,0,0);//center between current and new     
       let rotationCheckCount = 0;//number of time that check rotation
-      let playAnimation = false;//check if need to run animation for not
-      let mixer;//animation-mixer
-      let clips;//animation that going to play
       let scale = 0.1;
 
       
@@ -107,8 +115,8 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //    using when marker is too far away
       let distance = 0.5;//Distance between current point to center point || center to new
       let addX = 0;// extra x axis value
-      let addY = 5;// extra y axis value
-      let countdown = 225;//Delay time without tracking before model disappear
+      let addY = -1;// extra y axis value
+      let countdown = 20;//Delay time without tracking before model disappear
  
 // ----------------------------------------------------------------------------------------------------        
 //    keep check each marker   
@@ -127,15 +135,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
       });
 // ----------------------------------------------------------------------------------------------------         
 
-//  take animation that need to play from model into mixer && clips     
-     AFRAME.registerComponent('take-premium-animation', {
-        init: function() {
-        this.el.addEventListener("model-loaded", evt => 
-          {
-            mixer = new THREE.AnimationMixer(this.el.components['gltf-model'].model);
-            clips = this.el.components['gltf-model'].model.animations[0];
-          })
-        }})
+
 
 // ----------------------------------------------------------------------------------------------------  
 
@@ -165,14 +165,12 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
             {
                 console.log("Reset!!!!");
                 this.falseModel.visible =false;          
-                switchingDelay = 0;
 
                 isShowed = false;
                 reset = false;
                 spawn = false;
                 despawn = false;  
                 respawn =false;
-                playAnimation = false;
                 center.copy(0,0,0);
                 newPosition.copy(0,0,0);
                 currentPosition.copy(0,0,0);
@@ -197,15 +195,14 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
                     this.el1.object3D.getWorldPosition(this.p2);
                     pseudoXPos = ((this.p1.x + this.p2.x ) /2 )+ addX;
                     pseudoYPos = ((this.p1.y + this.p2.y ) /2 )+ addY;
-                    pseudoZPos = ((this.p1.z + this.p2.z) / 2 )-15;
+                    pseudoZPos = ((this.p1.z + this.p2.z) / 2 ) - 20;
                 }
              else 
                {
-                    if(marker_visible["marker1"]) {this.el1.object3D.getWorldPosition(this.p1);}
-                    else if(marker_visible["marker2"]) {this.el1.object3D.getWorldPosition(this.p1);}                
-                    pseudoXPos = this.p1.x + addX; 
-                    pseudoYPos = this.p1.y + 3 + addY;
-                    pseudoZPos = this.p1.z - 15;
+                    if(marker_visible["marker1"]) {this.el1.object3D.getWorldPosition(this.p1); pseudoXPos = this.p1.x + addX + 1; }
+                    else if(marker_visible["marker2"]) {this.el1.object3D.getWorldPosition(this.p1);pseudoXPos = this.p1.x + addX - 1;}                 
+                    pseudoYPos = this.p1.y + addY;
+                    pseudoZPos = this.p1.z- 20;
                 }
             
                  let vectorOriginPosition = new THREE.Vector3(0,0,0);
@@ -239,6 +236,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
                           }
                             this.falseModel.position.x = vectorOriginPosition.getComponent(0);
                             this.falseModel.position.y = vectorOriginPosition.getComponent(1);
+                            // this.falseModel.position.z = vectorOriginPosition.getComponent(2);
                             currentPosition.copy(vectorOriginPosition);
                             leftTime = countdown;
                     }
@@ -300,24 +298,22 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
           
   
 //  for model appear in camera to do something
-          if(spawn && (leftTime % 2 ==0 || leftTime ==0))
+          if(spawn )
             {
               
               this.falseModel.scale.set(scale,scale,scale);
-              playAnimation = true;
               scale += 0.01;
               this.falseModel.visible = true;
-              if(scale >= 1)
+              if(scale >= 0.5)
                 {
                   spawn = false; 
                 }            
             }
           
 //  for model to do something before disappear from camera 
-          if(despawn & (leftTime % 2 ==0 || leftTime ==0))
+          if(despawn)
             {
               this.falseModel.scale.set(scale,scale,scale);
-              playAnimation = false;
               scale -= 0.01;
               if(scale <= 0.01)
                 {
@@ -325,17 +321,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
                   reset = true;                
                 }    
             }
-//   Running / stop animation
-           if (mixer && playAnimation)
-           {
-              mixer.clipAction(clips).play();
-              mixer.update(deltaTime/1000) ;
-            }
-           else if(!playAnimation && mixer)
-            {
-              mixer.update(0) ;
-            }
-// ****************************************************************************************************          
+// ***************************************************************************************          
           
           
           
@@ -366,7 +352,7 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
-      <img src="@/assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
+      <img id="logo" src="" class="hidden"/>
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
           <img src="@/assets/icons/back_to_home.svg" />

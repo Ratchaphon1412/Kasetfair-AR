@@ -8,8 +8,18 @@ import ARDropdown from '@/components/ARDropdown.vue';
 var screenshot;
 var localstream;
 
+const getPath = (path) => {
+	return new URL(`../assets/${path}`, import.meta.url).href;
+};
+
 export default {
   components: {ARDropdown},
+  mounted (){
+    
+    var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
+    const logo = document.getElementById('logo');
+    logo.src += logoSource;
+  },
   methods: {
     stopVideo() {
       const vid = document.getElementsByTagName("video")[0];
@@ -54,7 +64,7 @@ export default {
       console.log("capture")
       const video = document.getElementsByTagName("video")[0];
       const canvas = document.createElement("canvas");
-      const logo = document.getElementById("logo");
+      const logo = document.getElementById('logo');
 
       var width = video.videoWidth,
         height = video.videoHeight;
@@ -63,17 +73,20 @@ export default {
 
       // วาด video กับโมเดล AR ที่ขึ้นบนจอ ลงบน canvas เปล่าๆ
       // var screenshot;
-      // canvas.getContext("2d").drawImage(logo, 0, 0, 809, 750);
       canvas.getContext("2d").drawImage(video, 0, 0, width, height);
       var imgData = document
-        .querySelector("a-scene")
-        .components.screenshot.getCanvas("perspective");
-      canvas.getContext("2d").drawImage(imgData, 0, 0, width +200, height);
+      .querySelector("a-scene")
+      .components.screenshot.getCanvas("perspective");
+      canvas.getContext("2d").drawImage(imgData, -200, 0, width +300, height);
+
+      var logoWidth = 106, logoHeight = 173;
+      var scaleLogo = 30;
+      canvas.getContext("2d").drawImage(logo,
+      width - (logoWidth - scaleLogo) - (logoWidth - scaleLogo) / 2,
+      height - (logoHeight - scaleLogo) - (logoHeight - scaleLogo) / 4,
+      logoWidth - scaleLogo,
+      logoHeight - scaleLogo);
       screenshot = canvas.toDataURL("image/png");
-
-  
-
-
       localStorage.setItem('screenshot', screenshot);
       this.stopVideo();
        this.$router.push({ path: "share", params: { screenshot }}).then(() => { this.$router.go() })
@@ -189,7 +202,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
           
 // *************************************************************************************************** 
 //        compute position / rotation / newest material that should be   
-          if(( marker_visible["marker2"] &&  (marker_visible["marker1"] )) || (marker_visible["marker3"] || marker_visible["marker4"]))
+          if(( marker_visible["marker2"] ||  (marker_visible["marker1"] )) && (marker_visible["marker3"] || marker_visible["marker4"]))
           { 
 //        Search for 2nd tracker to compute rotation sort by tracking efficiency 
               if(marker_visible["marker3"]) {this.el3.object3D.getWorldPosition(this.p2);}
@@ -368,8 +381,8 @@ video{
 
 <template>
 <div class="landscape:hidden">
-    <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
-      <img src="../assets/images/frames/ar2.png" class="hidden" id="logo" width="0" height="0">
+    <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-3">
+      <img id="logo" src="" class="hidden"/>
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
           <img src="../assets/icons/back_to_home.svg" />

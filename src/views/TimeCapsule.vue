@@ -5,10 +5,10 @@ import { getAsset } from '@/utils';
 <template>
     <div id="app">
       <!-- ปุ่มย้อนกลับ -->
-      <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
+      <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-3">
         <div>
           <router-link :to="{ name: 'home'}">
-            <button type="button" class="py-2 px-2">
+            <button type="button" class="py-2 px-2" @click="stopCameraStream()">
               <img src="@/assets/icons/back_to_home.svg" />
             </button>
         </router-link>

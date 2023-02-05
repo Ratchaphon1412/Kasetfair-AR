@@ -46,12 +46,12 @@ const router = createRouter({
     {  
       path: '/ar2',
       name: 'ar2',
-      component: () => import('@/views/ImageTrackCow.vue')
+      component: () => import('@/views/MarkerMedical.vue')
     },
     {
       path: '/ar3',
       name: 'ar3',
-      component: () => import('@/views/MarkerMedical.vue')
+      component: () => import('@/views/ImageTrackCow.vue')
     },
     {
       path: '/ar4',
