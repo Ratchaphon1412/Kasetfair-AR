@@ -382,10 +382,10 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-3">
-      <img id="logo" src="" class="hidden"/>
+      <img id="logo" class="hidden"/>
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
-          <img src="../assets/icons/back_to_home.svg" />
+          <img src="@/assets/icons/back_to_home.svg" />
         </button>
       </div>
       <div class="p-2 justify-self-end">
@@ -395,7 +395,7 @@ video{
 
     <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute">
       <button type="button" @click="capture()" class="scale-75">
-        <img src="../assets/icons/icon.camera.svg"/>
+        <img src="@/assets/icons/icon.camera.svg"/>
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
