@@ -55,8 +55,8 @@ async function shareFile() {
         py-3
       "
     >
-      <div class="flex px-3">
-        <button type="button" class="py-2 px-2" @click="$router.go(-1)">
+      <div class="flex px-2">
+        <button type="button" class="py-2" @click="$router.go(-1)">
           <img src="../assets/icons/back_to_home.svg" />
         </button>
       </div>
@@ -70,12 +70,10 @@ async function shareFile() {
       style="position: absolute"
     >
       <div class="grid grid-cols-3 gap-10">
-        <router-link :to="{ name: 'ar0' }">
-          <button type="button" class="scale-75">
+          <button type="button" class="scale-75" @click="$router.go(-1)">
             <img src="../assets/icons/ARselect_icon.svg" />
           <h1 class="text-center font-bold">ลอง AR อื่นๆ</h1>
         </button>
-        </router-link>
         <button type="button" @click="saveFile()" class="scale-75">
           <img src="../assets/icons/save_icon.svg" />
           <h1 class="text-center font-bold">บันทึก</h1>
