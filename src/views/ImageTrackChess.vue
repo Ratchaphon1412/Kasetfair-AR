@@ -1,23 +1,25 @@
 <script setup>
 const getPath = (path) => {
-	return new URL(`../assets/${path}`, import.meta.url).href;
+  return new URL(`../assets/${path}`, import.meta.url).href;
 };
 </script>
 
 <script>
-import ARDropdown from '@/components/ARDropdown.vue';
+import ARDropdown from "@/components/ARDropdown.vue";
 var screenshot;
 var localstream;
 
 const getPath = (path) => {
-	return new URL(`../assets/${path}`, import.meta.url).href;
+  return new URL(`../assets/${path}`, import.meta.url).href;
 };
 
 export default {
-  components: {ARDropdown},
-  mounted (){
-    var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
-    const logo = document.getElementById('logo');
+  components: { ARDropdown },
+  mounted() {
+    var logoSource = getPath(
+      "images/watermark/logo" + Math.floor((Math.random() * 10) % 4) + ".png"
+    );
+    const logo = document.getElementById("logo");
     logo.src += logoSource;
   },
   methods: {
@@ -26,14 +28,14 @@ export default {
       const mediaStream = vid.srcObject;
       const tracks = mediaStream.getTracks();
       tracks[0].stop();
-      tracks.forEach(track => track.stop())
+      tracks.forEach((track) => track.stop());
     },
     capture() {
       // document.querySelector("video").pause();
-      console.log("capture")
+      console.log("capture");
       const video = document.getElementsByTagName("video")[0];
       const canvas = document.createElement("canvas");
-      const logo = document.getElementById('logo');
+      const logo = document.getElementById("logo");
 
       var width = video.videoWidth,
         height = video.videoHeight;
@@ -44,150 +46,183 @@ export default {
       // var screenshot;
       canvas.getContext("2d").drawImage(video, 0, 0, width, height);
       var imgData = document
-      .querySelector("a-scene")
-      .components.screenshot.getCanvas("perspective");
-      canvas.getContext("2d").drawImage(imgData, -200, 0, width +300, height);
+        .querySelector("a-scene")
+        .components.screenshot.getCanvas("perspective");
+      canvas.getContext("2d").drawImage(imgData, -200, 0, width + 300, height);
 
-      var logoWidth = 106, logoHeight = 173;
+      var logoWidth = 106,
+        logoHeight = 173;
       var scaleLogo = 30;
-      canvas.getContext("2d").drawImage(logo,
-      width - (logoWidth - scaleLogo) - (logoWidth - scaleLogo) / 2,
-      height - (logoHeight - scaleLogo) - (logoHeight - scaleLogo) / 4,
-      logoWidth - scaleLogo,
-      logoHeight - scaleLogo);
+      canvas
+        .getContext("2d")
+        .drawImage(
+          logo,
+          width - (logoWidth - scaleLogo) - (logoWidth - scaleLogo) / 2,
+          height - (logoHeight - scaleLogo) - (logoHeight - scaleLogo) / 4,
+          logoWidth - scaleLogo,
+          logoHeight - scaleLogo
+        );
       screenshot = canvas.toDataURL("image/png");
-      localStorage.setItem('screenshot', screenshot);
+      localStorage.setItem("screenshot", screenshot);
       this.stopVideo();
-       this.$router.push({ path: "share", params: { screenshot }}).then(() => { this.$router.go() })
+      this.$router.push({ path: "share", params: { screenshot } }).then(() => {
+        this.$router.go();
+      });
     },
-    home(){
+    home() {
       window.close();
-    }
+    },
   },
 };
+let marker_visible = { animatedMarker: false };
+AFRAME.registerComponent("check-marker", {
+  init: function () {
+    let el = this.el;
+
+    el.addEventListener("markerFound", function () {
+      marker_visible[el.id] = true;
+      console.log(el.id + " found");
+    });
+
+    el.addEventListener("markerLost", function () {
+      marker_visible[el.id] = false;
+      console.log(el.id + " lost");
+    });
+  },
+});
 </script>
 
 <style>
 a-scene {
   height: 100vh;
 }
-body{
+body {
   overflow: hidden;
 }
-video{
+video {
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause{
+#pause, #tracker {
   width: 100%;
   height: 100px;
-  margin-top: 200px ;
+  margin-top: 200px;
   opacity: 75%;
 }
 </style>
 
 <template>
-<div class="landscape:hidden">
-    <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-3">
-      <img id="logo"  class="hidden"/>
+  <div class="landscape:hidden">
+    <div
+      class="
+        z-10
+        absolute
+        inset-x-0
+        top-0
+        grid grid-cols-2
+        justify-items-stretch
+        py-3
+      "
+    >
+      <img id="logo" class="hidden" />
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
           <img src="@/assets/icons/back_to_home.svg" />
         </button>
       </div>
       <div class="p-2 justify-self-end">
-        <a-r-dropdown/>
+        <a-r-dropdown />
       </div>
     </div>
 
-    <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute">
+    <div
+      class="bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center"
+      style="position: absolute"
+    >
       <button type="button" @click="capture()" class="scale-75">
-        <img src="@/assets/icons/icon.camera.svg"/>
+        <img src="@/assets/icons/icon.camera.svg" />
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
-       
-      <a-scene
-        embedded
-        vr-mode-ui="enabled: false;"
-        loading-screen="enabled: false;"
-        renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
-        id="scene"
-        gesture-detector
+    <a-scene
+      embedded
+      vr-mode-ui="enabled: false;"
+      loading-screen="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+      id="scene"
+      gesture-detector
+    >
+      <a-marker
+        id="animatedMarker"
+        type="pattern"
+        preset="custom"
+        :url="getPath('80logo/finallogo_v2.patt')"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        cursor="fuse: false; rayOrigin: mouse;"
+        check-marker
       >
-        <a-marker
-          id="animated-marker"
-          type="pattern"
-          preset="custom"
-          :url="getPath('80logo/finallogo_v2.patt')"
-          raycaster="objects: .clickable"
-          emitevents="true"
-          cursor="fuse: false; rayOrigin: mouse;"
-        >
         <!--นาคแดง-->
-          <a-entity
-            id="red-nak"
-            :gltf-model="getPath('models/chess_pieces/red_nakv2.gltf')"
-            class="clickable"
-            gesture-handler
-            position="0 0 -1.6"
-            rotation="-115 -30 0"
-            scale="0.9 0.9 0.9"
-          ></a-entity>
+        <a-entity
+          id="red-nak"
+          :gltf-model="getPath('models/chess_pieces/red_nakv2.gltf')"
+          class="clickable"
+          gesture-handler
+          position="0 0 -1.6"
+          rotation="-115 -30 0"
+          scale="0.9 0.9 0.9"
+        ></a-entity>
         <!--ขุนแดง-->
-          <a-entity
-            id="red-khun"
-            :gltf-model="getPath('models/chess_pieces/red_khun.gltf')"
-            class="clickable"
-            gesture-handler
-            position="1.9 0 0.7"
-            rotation="-100 0 30"
-            scale="0.9 0.9 0.9"
-          ></a-entity>
+        <a-entity
+          id="red-khun"
+          :gltf-model="getPath('models/chess_pieces/red_khun.gltf')"
+          class="clickable"
+          gesture-handler
+          position="1.9 0 0.7"
+          rotation="-100 0 30"
+          scale="0.9 0.9 0.9"
+        ></a-entity>
         <!--เบี้ยแดง-->
         <a-entity
-            id="red-chib"
-            :gltf-model="getPath('models/chess_pieces/red_chib.gltf')"
-            class="clickable"
-            gesture-handler
-            position="-1.5 0 1.3"
-            rotation="-90 -60 0"
-            scale="0.9 0.9 0.9"
-          ></a-entity>
+          id="red-chib"
+          :gltf-model="getPath('models/chess_pieces/red_chib.gltf')"
+          class="clickable"
+          gesture-handler
+          position="-1.5 0 1.3"
+          rotation="-90 -60 0"
+          scale="0.9 0.9 0.9"
+        ></a-entity>
         <!--ม้าขาว-->
         <a-entity
-            id="white_horse"
-            :gltf-model="getPath('models/chess_pieces/white_horse_v2.gltf')"
-            class="clickable"
-            gesture-handler
-            position="0.2 0 2"
-            rotation="-111 90 -100"
-            scale="0.9 0.9 0.9"
-          ></a-entity>
+          id="white_horse"
+          :gltf-model="getPath('models/chess_pieces/white_horse_v2.gltf')"
+          class="clickable"
+          gesture-handler
+          position="0.2 0 2"
+          rotation="-111 90 -100"
+          scale="0.9 0.9 0.9"
+        ></a-entity>
         <!--เรือขาว-->
         <a-entity
-            id="white_ship"
-            :gltf-model="getPath('models/chess_pieces/white_ship.gltf')"
-            class="clickable"
-            gesture-handler
-            position="-1.2 0 -0.6"
-            rotation="-30 0 30"
-            scale="0.9 0.9 0.9"
-          ></a-entity>
-
-        </a-marker>
-        <a-entity camera></a-entity>
-      </a-scene>
-</div>
-<div class="portrait:hidden">
-
+          id="white_ship"
+          :gltf-model="getPath('models/chess_pieces/white_ship.gltf')"
+          class="clickable"
+          gesture-handler
+          position="-1.2 0 -0.6"
+          rotation="-30 0 30"
+          scale="0.9 0.9 0.9"
+        ></a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </div>
+  <div class="portrait:hidden">
     <div class="flex h-screen justify-center items-center">
-    <div id ="pause" class="text-center bg-[#AFC2AC]"> 
-        <h1 class=" text-3xl">กรุณาใช้มือถือในแนวตั้ง</h1>
-        <h1 class=" text-3xl">Please use your phone in portrait mode</h1>
+      <div id="pause" class="text-center bg-[#AFC2AC]">
+        <h1 class="text-3xl">กรุณาใช้มือถือในแนวตั้ง</h1>
+        <h1 class="text-3xl">Please use your phone in portrait mode</h1>
+      </div>
     </div>
   </div>
-  
-</div>
 </template>
