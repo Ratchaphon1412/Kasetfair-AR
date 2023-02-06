@@ -96,7 +96,9 @@ export default {
     }
   },
 };
-AFRAME.registerComponent("check-marker-cow", {
+
+
+AFRAME.registerComponent("check-marker-arrows", {
   init: function () {
     let el = this.el;
     var track = document.getElementById('tracker');
@@ -182,17 +184,18 @@ video{
           raycaster="objects: .clickable"
           emitevents="true"
           cursor="fuse: false; rayOrigin: mouse;"
-          check-marker-cow
+          check-marker-arrows
         >
         <!--ลูกศร-->
           <a-entity
-            id="cow-model"
-            :gltf-model="getPath('models/Cow_v2.gltf')"
+            id="arrows-model"
+            :gltf-model="getPath('models/arrows.glb')"
+            gesture-detector
             class="clickable"
-            gesture-handler
-            position="0 0 1.5"
-            rotation="90 90 -90"
+            position="4 0 3"
+            rotation="-90 90 -90"
             scale="0.8 0.8 0.8"
+            animation-mixer
           ></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
