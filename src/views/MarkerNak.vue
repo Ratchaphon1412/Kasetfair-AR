@@ -440,7 +440,7 @@ video{
         gesture-handler 
         rotation ="10 340 0" 
         take-animation 
-        :gltf-model="getPath('models/naga-wave-green.glb')" 
+        :gltf-model="getPath('models/naka_green_animation_version150.glb')" 
       ></a-entity>
 
       <a-entity id = "camera" camera  ></a-entity>
