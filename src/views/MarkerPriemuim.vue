@@ -275,12 +275,12 @@ video{
         gesture-detector
       >
       <a-marker type="barcode" id="marker1" value="14" check-marker-premium>
-        <a-entity id = "left-model" visible = "false"  gesture-handler position ="2 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/Human_left.glb')" ></a-entity>
+        <a-entity id = "left-model" visible = "false"  gesture-handler position ="2 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/Human_left_v2.glb')" ></a-entity>
       </a-marker>
     
       <a-marker type="barcode" id="marker2" value="8" check-marker-premium>
-        <a-entity visible = "false" id = "right-model" gesture-handler position ="-1 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/Human_right.glb')" ></a-entity>
-        <a-entity visible = "false" id = "model" gesture-handler position ="-2 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/people_GLTF.gltf')" ></a-entity>
+        <a-entity visible = "false" id = "right-model" gesture-handler position ="-1 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/Human_right_v2.glb')" ></a-entity>
+        <a-entity visible = "false" id = "model" gesture-handler position ="-2 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/people_GLB_v2.glb')" ></a-entity>
       </a-marker>
                   
       <a-entity id = "camera" camera  ></a-entity>
