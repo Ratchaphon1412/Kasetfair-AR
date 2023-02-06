@@ -13,6 +13,15 @@ const getPath = (path) => {
 	return new URL(`../assets/${path}`, import.meta.url).href;
 };
 
+let refreshModel = true;
+let xradModel1 = 0;
+let yradModel1 = 90;
+let zradModel1 = 270;
+let xradModel2 = 0;
+let yradModel2 = 90;
+let zradModel2 = 270;
+
+
 export default {
   components: {ARDropdown},
   mounted (){
@@ -91,6 +100,31 @@ export default {
       this.stopVideo();
        this.$router.push({ path: "share", params: { screenshot }}).then(() => { this.$router.go() })
     },
+    refresh()
+    {
+      if(refreshModel)
+      {
+        xradModel1 = 0;
+        yradModel1 = 45;
+        zradModel1 = 220;
+
+        xradModel2 = 330;
+        yradModel2 = 120;
+        zradModel2 = 220;
+        refreshModel = false;
+      }
+      else
+      {        
+        xradModel1 = 0;
+        yradModel1 = 90;
+        zradModel1 = 270;
+
+        xradModel2 = 0;
+        yradModel2 = 90;
+        zradModel2 = 270;
+        refreshModel = true;
+      }
+    },
     home(){
       window.close();
     }
@@ -99,6 +133,7 @@ export default {
 let marker_visible = { marker1: false, marker2: false ,marker3 : false};
       let mixer;//animation-mixer
       let clips;//animation that going to play
+
 
       
 
@@ -120,14 +155,19 @@ let marker_visible = { marker1: false, marker2: false ,marker3 : false};
           let el = this.el;
           var track = document.getElementById('tracker');
           el.addEventListener("markerFound", function() {
-            track.style.display = 'none'; 
             marker_visible[el.id] = true;
+            if(marker_visible["marker1"] || marker_visible["marker2"] || marker_visible["marker3"])
+            {
+              track.style.display = 'none';
+            }
           });
 
           el.addEventListener("markerLost", function() {
-            track.style.display = 'block';
-            console.log("Lost");
             marker_visible[el.id] = false;
+            if((!marker_visible["marker1"] && !marker_visible["marker2"]) && !marker_visible["marker3"])
+            {
+              track.style.display = 'block';
+            }
           });
           
         }
@@ -162,6 +202,9 @@ let marker_visible = { marker1: false, marker2: false ,marker3 : false};
                   this.model2.visible = true;
                   this.model1.visible = false;
                   this.model3.visible = false;
+                  this.model2.rotation.x = THREE.MathUtils.degToRad(xradModel2);
+                  this.model2.rotation.y = THREE.MathUtils.degToRad(yradModel2);
+                  this.model2.rotation.z = THREE.MathUtils.degToRad(zradModel2);
                   
               }
             else if(marker_visible["marker1"] && !marker_visible["marker3"] )
@@ -169,7 +212,9 @@ let marker_visible = { marker1: false, marker2: false ,marker3 : false};
                   this.model1.visible = true;
                   this.model2.visible = false;
                   this.model3.visible = false;
-                  
+                  this.model1.rotation.x = THREE.MathUtils.degToRad(xradModel1);
+                  this.model1.rotation.y = THREE.MathUtils.degToRad(yradModel1);
+                  this.model1.rotation.z = THREE.MathUtils.degToRad(zradModel1);
               }
               else if(marker_visible["marker3"])
               {
@@ -178,8 +223,8 @@ let marker_visible = { marker1: false, marker2: false ,marker3 : false};
                   this.model2.visible = false;
                   if(mixer)
                   {
-                 mixer.clipAction(clips).play();
-                 mixer.update(deltaTime/1000) ;
+                    mixer.clipAction(clips).play();
+                    mixer.update(deltaTime/1000) ;
                   }
               }
 
@@ -228,7 +273,7 @@ video{
     </div>
 
     <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute">
-      <button type="button" @click="capture()" class="scale-75">
+      <button type="button" @click="refresh()" class="scale-75">
         <img src="@/assets/icons/icon.camera.svg"/>
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
@@ -255,20 +300,18 @@ video{
         gesture-handler 
         position = "1 0 0" 
         scale = "0.75 0.75 0.75" 
-        rotation = "0 90 270" 
+        rotation = "0 0 0" 
         :gltf-model="getPath('models/upDownSideCity2.glb')" ></a-entity> 
       </a-marker>
  
       <a-marker type="barcode" id="marker2" value="8" check-marker-sculp>
-       <a-entity id = "model2" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " :gltf-model="getPath('models/upDownSideCity2.glb')" ></a-entity> 
+       <a-entity id = "model2" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 0 0" :gltf-model="getPath('models/upDownSideCity2.glb')" ></a-entity> 
       </a-marker>
       <a-marker type="barcode" id="marker3" value="24" check-marker-sculp>
        <a-entity id = "model3" visible ="false" gesture-handler position = "0 1.5 0" scale = "0.05 0.05 0.05 "  :gltf-model="getPath('models/auditorium.glb')" do-rotation></a-entity> 
       </a-marker>
 
        <a-entity  spawn-virtual></a-entity> 
-
-                  
       <a-entity id = "camera" camera  ></a-entity>
 
 
