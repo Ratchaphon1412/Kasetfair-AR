@@ -4,7 +4,6 @@ const getPath = (path) => {
 };
 </script>
 
-
 <script>
 import ARDropdown from '@/components/ARDropdown.vue';
 var screenshot;
@@ -15,12 +14,12 @@ const getPath = (path) => {
 };
 
 export default {
+  components: {ARDropdown},
   mounted (){
     var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
     const logo = document.getElementById('logo');
     logo.src += logoSource;
   },
-  components: {ARDropdown},
   methods: {
     stopVideo() {
       const vid = document.getElementsByTagName("video")[0];
@@ -97,65 +96,22 @@ export default {
     }
   },
 };
-    let marker_visible = { marker1: false, marker2: false };
+AFRAME.registerComponent("checkmarkercow", {
+  init: function () {
+    let el = this.el;
+    var track = document.getElementById('tracker');
 
-// ----------------------------------------------------------------------------------------------------        
-//    keep check each marker   
-      AFRAME.registerComponent("check-marker-medi", {
-        init: function() {
-          let el = this.el;
-          var track = document.getElementById('tracker');
-          el.addEventListener("markerFound", function() {
-            track.style.display = 'none';
-            marker_visible[el.id] = true;
-          });
+    el.addEventListener("markerFound", function () {
+      track.style.display = 'none'; 
+      console.log(el.id + " found");
+    });
 
-          el.addEventListener("markerLost", function() {
-            track.style.display = 'block';
-            marker_visible[el.id] = false;
-            if(!marker_visible["marker2"] && !marker_visible["marker1"])
-            {
-              isShowed = false;
-              scale = 0.01;
-            }          
-          });
-          
-        }
-      });
-// ----------------------------------------------------------------------------------------------------         
-
-
-
-// ----------------------------------------------------------------------------------------------------  
-
-//      compute model location / playAnimation  or not /phone rotation 
-        AFRAME.registerComponent("spawn-building", {
-          init: function() {
-//        search for markers    
-          this.el1 = document.querySelector("#marker1");
-          this.el2 = document.querySelector("#marker2");
-          
-
-           
-//        make models spawn at vectorOrigin          
-          this.model = document.querySelector("#model").object3D;
-
-            
-
-          },
-          
-//   main thing        
-     tick: function() 
-        {
- 
-          if( marker_visible["marker2"] && marker_visible["marker1"]){   this.model.visible =true;}
-
-          
-          
-          
-          
-          
-        }});
+    el.addEventListener("markerLost", function () {
+      track.style.display = 'block';
+      console.log(el.id + " lost");
+    });
+  },
+});
 </script>
 
 <style>
@@ -214,18 +170,42 @@ video{
         vr-mode-ui="enabled: false;"
         loading-screen="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
         id="scene"
         gesture-detector
       >
-      <a-marker type="barcode" id="marker1" value="14" check-marker-medi></a-marker>
-    
-      <a-marker type="barcode" id="marker2" value="8" check-marker-medi>
-        <a-entity visible = "false" id = "model"  gesture-handler position ="-3 -3 -3" scale ="0.1 0.1 0.1" rotation = "-45 0 0"  :gltf-model="getPath('models/hospital_bulding_v2.glb')" ></a-entity>
-      </a-marker>
-                  
-      <a-entity id = "camera" camera  ></a-entity>
-      <a-entity spawn-building></a-entity>
+        <a-marker
+          id="animated-marker"
+          type="pattern"
+          preset="custom"
+          :url="getPath('80logo/finallogo_v2.patt')"
+          raycaster="objects: .clickable"
+          emitevents="true"
+          cursor="fuse: false; rayOrigin: mouse;"
+          checkmarkercow
+        >
+        <!--วัว-->
+          <a-entity
+            id="cow-model"
+            :gltf-model="getPath('models/Cow_v2.gltf')"
+            class="clickable"
+            gesture-handler
+            position="0 0 1.5"
+            rotation="90 90 -90"
+            scale="0.8 0.8 0.8"
+          ></a-entity>
+        <!--กระบะนม-->
+          <a-entity
+            id="milk-crate-model"
+            :gltf-model="getPath('models/milk_crate_v2.gltf')"
+            class="clickable"
+            gesture-handler
+            position="1.4 1 2.5"
+            rotation="90 90 -90"
+            scale="0.8 0.8 0.8"
+          ></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
       </a-scene>
 </div>
 <div class="portrait:hidden">
