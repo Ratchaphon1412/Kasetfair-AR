@@ -267,13 +267,18 @@ video{
           <img src="@/assets/icons/back_to_home.svg" />
         </button>
       </div>
-      <div class="p-2 justify-self-end">
-        <a-r-dropdown/>
+      <div class="grid grid-flow-row-dense grid-cols-2 gap-10">
+        <div class="p-2 justify-self-start w-full border bg-[#57855E] text-white border-none rounded-md">
+          <button @click="refresh">รีเฟรชตำแหน่ง</button>
+        </div>
+        <div class="p-2 justify-self-end">
+          <a-r-dropdown/>
+        </div>
       </div>
     </div>
 
     <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute">
-      <button type="button" @click="refresh()" class="scale-75">
+      <button type="button" @click="capture()" class="scale-75">
         <img src="@/assets/icons/icon.camera.svg"/>
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>

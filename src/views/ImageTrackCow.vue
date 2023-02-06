@@ -96,6 +96,22 @@ export default {
     }
   },
 };
+AFRAME.registerComponent("check-marker-cow", {
+  init: function () {
+    let el = this.el;
+    var track = document.getElementById('tracker');
+
+    el.addEventListener("markerFound", function () {
+      track.style.display = 'none'; 
+      console.log(el.id + " found");
+    });
+
+    el.addEventListener("markerLost", function () {
+      track.style.display = 'block';
+      console.log(el.id + " lost");
+    });
+  },
+});
 </script>
 
 <style>
@@ -160,7 +176,7 @@ video{
           raycaster="objects: .clickable"
           emitevents="true"
           cursor="fuse: false; rayOrigin: mouse;"
-          check-marker
+          check-marker-cow
         >
         <!--วัว-->
           <a-entity
