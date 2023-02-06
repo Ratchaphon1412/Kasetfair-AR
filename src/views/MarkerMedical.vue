@@ -164,12 +164,12 @@ video{
         >
           <a-entity
             id="med-model"
-            :gltf-model="getPath('models/MedBuildingsv3.gltf')"
+            :gltf-model="getPath('models/hospital_bulding_v2.glb')"
             class="clickable"
             gesture-handler
-            position="0 0 -1.5"
-            rotation="90 0 -180"
-            scale="0.01 0.01 0.01"
+            position="0 0 0"
+            rotation="-90 0 0"
+            scale="0.04 0.04 0.04"
           ></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
