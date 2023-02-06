@@ -70,6 +70,11 @@ const router = createRouter({
       component: () => import('@/views/Markersculpture.vue')
     },
     {
+      path: '/ar8',
+      name: 'ar8',
+      component: () => window.location.href = 'https://kanompangg.github.io/Kaset-Fair-Location-Based-AR/'
+    },
+    {
       path: '/time-capsule',
       name: 'time-capsule',
       component: () => import('@/views/TimeCapsule.vue')
