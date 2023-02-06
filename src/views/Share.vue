@@ -95,7 +95,7 @@ async function shareFile() {
 <style>
 #image1 {
   display: block;
-  margin-top: 2em;
+  margin-top: 4em;
   margin-left: auto;
   margin-right: auto;
   height: 20em;
