@@ -111,13 +111,11 @@ export default {
           });
 
           el.addEventListener("markerLost", function() {
-            track.style.display = 'block';
-            marker_visible[el.id] = false;
-            if(!marker_visible["marker2"] && !marker_visible["marker1"])
+            marker_visible[el.id] = false;      
+            if(!marker_visible["marker1"] &&  !marker_visible["marker2"])
             {
-              isShowed = false;
-              scale = 0.01;
-            }          
+              track.style.display = 'block';
+            }
           });
           
         }
@@ -136,11 +134,13 @@ export default {
           this.el2 = document.querySelector("#marker2");
           
 
-           
+          this.p1  = new THREE.Vector3(0,0,0);
 //        make models spawn at vectorOrigin          
-          this.model = document.querySelector("#model").object3D;
-
-            
+          this.model1 = document.querySelector("#model1").object3D;
+          this.model2 = document.querySelector("#model2").object3D;
+          // this.model.rotation.x = THREE.MathUtils.degToRad(0);
+          // this.model.rotation.y = THREE.MathUtils.degToRad(0);
+          // this.model.rotation.z = THREE.MathUtils.degToRad(0);
 
           },
           
@@ -148,12 +148,17 @@ export default {
      tick: function() 
         {
  
-          if( marker_visible["marker2"] && marker_visible["marker1"]){   this.model.visible =true;}
+          if( marker_visible["marker1"])
+          {
+            this.model1.visible =true;
+            this.model2.visible =false;
 
-          
-          
-          
-          
+          }
+          else if(marker_visible["marker2"] )
+          {
+            this.model2.visible =true;
+            this.model1.visible =false;
+          }
           
         }});
 </script>
@@ -218,12 +223,16 @@ video{
         id="scene"
         gesture-detector
       >
-      <a-marker type="barcode" id="marker1" value="14" check-marker-medi></a-marker>
+      <a-marker type="barcode" id="marker1" value="14" check-marker-medi>
+        <a-entity visible = "false" id = "model1"  gesture-handler position ="2 0 0" scale ="0.075 0.075 0.075" rotation = "-37.5 45 -30"  :gltf-model="getPath('models/hospital_bulding_v2.glb')" ></a-entity>
+      </a-marker>
     
       <a-marker type="barcode" id="marker2" value="8" check-marker-medi>
-        <a-entity visible = "false" id = "model"  gesture-handler position ="-3 -3 -3" scale ="0.1 0.1 0.1" rotation = "-45 0 0"  :gltf-model="getPath('models/hospital_bulding_v2.glb')" ></a-entity>
+        <a-entity visible = "false" id = "model2"  gesture-handler position ="-2 0 0" scale ="0.075 0.075 0.075" rotation = "-37.5 45 -30"  :gltf-model="getPath('models/hospital_bulding_v2.glb')" ></a-entity>
+
       </a-marker>
-                  
+
+      <!--315 315 35-->                  
       <a-entity id = "camera" camera  ></a-entity>
       <a-entity spawn-building></a-entity>
       </a-scene>
@@ -243,4 +252,4 @@ video{
   </div>
   
 </div>
-</template>
+</template> 
