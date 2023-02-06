@@ -50,8 +50,8 @@ export default {
         .components.screenshot.getCanvas("perspective");
       canvas.getContext("2d").drawImage(imgData, -200, 0, width + 300, height);
 
-      var logoWidth = 106,
-        logoHeight = 173;
+      var logoWidth = 170,
+        logoHeight = 170;
       var scaleLogo = 30;
       canvas
         .getContext("2d")
