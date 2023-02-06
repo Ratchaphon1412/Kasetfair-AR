@@ -250,10 +250,16 @@ video{
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause, #tracker{
+#pause {
   width: 100%;
   height: 100px;
-  margin-top: 200px ;
+  margin-top: 400px;
+  opacity: 75%;
+}
+#tracker{
+  width: 100%;
+  height: 100px;
+  margin-top: 200px;
   opacity: 75%;
 }
 </style>
@@ -267,8 +273,8 @@ video{
           <img src="@/assets/icons/back_to_home.svg" />
         </button>
       </div>
-      <div class="grid grid-flow-row-dense grid-cols-2 gap-10">
-        <div class="p-2 justify-self-start w-full border bg-[#57855E] text-white border-none rounded-md">
+      <div class="grid grid-flow-row-dense grid-cols-2 gap-3">
+        <div class="p-2 w-full border bg-[#57855E] text-white border-none rounded-md my-auto">
           <button @click="refresh">รีเฟรชตำแหน่ง</button>
         </div>
         <div class="p-2 justify-self-end">
