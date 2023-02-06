@@ -250,10 +250,16 @@ video{
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause, #tracker{
+#pause {
   width: 100%;
   height: 100px;
-  margin-top: 200px ;
+  margin-top: 400px;
+  opacity: 75%;
+}
+#tracker{
+  width: 100%;
+  height: 100px;
+  margin-top: 200px;
   opacity: 75%;
 }
 </style>
