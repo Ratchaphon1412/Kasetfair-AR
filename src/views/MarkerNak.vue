@@ -108,7 +108,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
       let center = new THREE.Vector3(0,0,0);//center between current and new     
       let rotationCheckCount = 0;//number of time that check rotation
       let additionX = 2;//defualt addition x for each roation
-      let additionY = 1;//defualt addition y for each roation
+      let additionY = 9;//defualt addition y for each roation
       let playAnimation = false;//check if need to run animation for not
       let mixer;//animation-mixer
       let clips;//animation that going to play
@@ -118,8 +118,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //    Custom Value 
 //    using when marker is too far away
       let distance = 0.5;//Distance between current point to center point || center to new
-      let countdown = 20
-      ;//Delay time without tracking before model disappear
+      let countdown = 20;//Delay time without tracking before model disappear
  
 // ----------------------------------------------------------------------------------------------------        
 //    keep check each marker   
@@ -173,6 +172,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //   main thing        
      tick: function(time, deltaTime) 
         {
+          var track = document.getElementById('tracker');
           // if((!marker_visible["marker2"] &&  !marker_visible["marker1"] && !marker_visible["marker2"] && !marker_visible["marker1"]))
           // {
           //   this.falseModel.visible = false;
@@ -204,12 +204,14 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //        compute position / rotation / newest material that should be   
           if(( marker_visible["marker2"] ||  (marker_visible["marker1"] )) && (marker_visible["marker3"] || marker_visible["marker4"]))
           { 
+            track.style.display = 'none';
 //        Search for 2nd tracker to compute rotation sort by tracking efficiency 
-              if(marker_visible["marker3"]) {this.el3.object3D.getWorldPosition(this.p2);}
-              else if(marker_visible["marker4"]){this.el4.object3D.getWorldPosition(this.p2);}
+              if(marker_visible["marker3"]) {this.el3.object3D.getWorldPosition(this.p2); track.style.display = 'none';}
+              else if(marker_visible["marker4"]){this.el4.object3D.getWorldPosition(this.p2); track.style.display = 'none';}
               
-              if(marker_visible["marker1"]) {this.el1.object3D.getWorldPosition(this.p1);}
-              else if(marker_visible["marker2"]){this.el2.object3D.getWorldPosition(this.p1);}
+              if(marker_visible["marker1"]) {this.el1.object3D.getWorldPosition(this.p1); track.style.display = 'none';}
+              else if(marker_visible["marker2"]){this.el2.object3D.getWorldPosition(this.p1); track.style.display = 'none';}
+              else{track.style.display = 'block';}
 
 //         Using Diferrence to compute phone rotation
               let pseudoXPos = 0;
@@ -217,7 +219,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               let pseudoZPos = 0;
 
               pseudoXPos = this.p1.x + additionX;
-              pseudoYPos = this.p2.y + additionY  + 6;
+              pseudoYPos = this.p2.y + additionY;
               pseudoZPos = ((this.p1.z + this.p2.z) / 2 ) - 50;
 
 
@@ -321,7 +323,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               playAnimation = true;
               scale += 0.01;
               this.falseModel.visible = true;
-              if(scale >= 2)
+              if(scale >= 1.7)
                 {
                   spawn = false; 
                 }            
@@ -371,7 +373,7 @@ video{
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause{
+#pause, #tracker{
   width: 100%;
   height: 100px;
   margin-top: 200px ;
@@ -382,10 +384,10 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-3">
-      <img id="logo" src="" class="hidden"/>
+      <img id="logo" class="hidden"/>
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
-          <img src="../assets/icons/back_to_home.svg" />
+          <img src="@/assets/icons/back_to_home.svg" />
         </button>
       </div>
       <div class="p-2 justify-self-end">
@@ -395,9 +397,14 @@ video{
 
     <div class=" bg-[#AFC2AC] bg-nav z-10 inset-x-0 bottom-0 flex justify-center" style="position: absolute">
       <button type="button" @click="capture()" class="scale-75">
-        <img src="../assets/icons/icon.camera.svg"/>
+        <img src="@/assets/icons/icon.camera.svg"/>
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
+    </div>
+    <div id="tracker" class="flex h-screen justify-center items-center">
+      <div id="tracker" class="text-center bg-[#AFC2AC]">
+        <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
+      </div>
     </div>
        
       <a-scene
@@ -405,7 +412,7 @@ video{
         vr-mode-ui="enabled: false;"
         loading-screen="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
         id="scene"
         gesture-detector
       >
@@ -421,7 +428,7 @@ video{
         id = "false-model" 
         visible="false" 
         gesture-handler 
-        rotation ="10 350 0" 
+        rotation ="20 350 0" 
         take-animation 
         :gltf-model="getPath('models/naga.glb')" 
       ></a-entity>

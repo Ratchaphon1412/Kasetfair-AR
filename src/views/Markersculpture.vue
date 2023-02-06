@@ -13,6 +13,15 @@ const getPath = (path) => {
 	return new URL(`../assets/${path}`, import.meta.url).href;
 };
 
+let refreshModel = true;
+let xradModel1 = 0;
+let yradModel1 = 90;
+let zradModel1 = 270;
+let xradModel2 = 0;
+let yradModel2 = 90;
+let zradModel2 = 270;
+
+
 export default {
   components: {ARDropdown},
   mounted (){
@@ -91,6 +100,31 @@ export default {
       this.stopVideo();
        this.$router.push({ path: "share", params: { screenshot }}).then(() => { this.$router.go() })
     },
+    refresh()
+    {
+      if(refreshModel)
+      {
+        xradModel1 = 0;
+        yradModel1 = 45;
+        zradModel1 = 220;
+
+        xradModel2 = 330;
+        yradModel2 = 120;
+        zradModel2 = 220;
+        refreshModel = false;
+      }
+      else
+      {        
+        xradModel1 = 0;
+        yradModel1 = 90;
+        zradModel1 = 270;
+
+        xradModel2 = 0;
+        yradModel2 = 90;
+        zradModel2 = 270;
+        refreshModel = true;
+      }
+    },
     home(){
       window.close();
     }
@@ -99,6 +133,7 @@ export default {
 let marker_visible = { marker1: false, marker2: false ,marker3 : false};
       let mixer;//animation-mixer
       let clips;//animation that going to play
+
 
       
 
@@ -118,13 +153,21 @@ let marker_visible = { marker1: false, marker2: false ,marker3 : false};
       AFRAME.registerComponent("check-marker-sculp", {
         init: function() {
           let el = this.el;
+          var track = document.getElementById('tracker');
           el.addEventListener("markerFound", function() {
             marker_visible[el.id] = true;
+            if(marker_visible["marker1"] || marker_visible["marker2"] || marker_visible["marker3"])
+            {
+              track.style.display = 'none';
+            }
           });
 
           el.addEventListener("markerLost", function() {
-            console.log("Lost");
             marker_visible[el.id] = false;
+            if((!marker_visible["marker1"] && !marker_visible["marker2"]) && !marker_visible["marker3"])
+            {
+              track.style.display = 'block';
+            }
           });
           
         }
@@ -159,6 +202,9 @@ let marker_visible = { marker1: false, marker2: false ,marker3 : false};
                   this.model2.visible = true;
                   this.model1.visible = false;
                   this.model3.visible = false;
+                  this.model2.rotation.x = THREE.MathUtils.degToRad(xradModel2);
+                  this.model2.rotation.y = THREE.MathUtils.degToRad(yradModel2);
+                  this.model2.rotation.z = THREE.MathUtils.degToRad(zradModel2);
                   
               }
             else if(marker_visible["marker1"] && !marker_visible["marker3"] )
@@ -166,7 +212,9 @@ let marker_visible = { marker1: false, marker2: false ,marker3 : false};
                   this.model1.visible = true;
                   this.model2.visible = false;
                   this.model3.visible = false;
-                  
+                  this.model1.rotation.x = THREE.MathUtils.degToRad(xradModel1);
+                  this.model1.rotation.y = THREE.MathUtils.degToRad(yradModel1);
+                  this.model1.rotation.z = THREE.MathUtils.degToRad(zradModel1);
               }
               else if(marker_visible["marker3"])
               {
@@ -175,8 +223,8 @@ let marker_visible = { marker1: false, marker2: false ,marker3 : false};
                   this.model2.visible = false;
                   if(mixer)
                   {
-                 mixer.clipAction(clips).play();
-                 mixer.update(deltaTime/1000) ;
+                    mixer.clipAction(clips).play();
+                    mixer.update(deltaTime/1000) ;
                   }
               }
 
@@ -202,7 +250,7 @@ video{
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause{
+#pause, #tracker{
   width: 100%;
   height: 100px;
   margin-top: 200px ;
@@ -213,14 +261,19 @@ video{
 <template>
 <div class="landscape:hidden">
     <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-3">
-      <img id="logo" src="" class="hidden"/>
+      <img id="logo" class="hidden"/>
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
           <img src="@/assets/icons/back_to_home.svg" />
         </button>
       </div>
-      <div class="p-2 justify-self-end">
-        <a-r-dropdown/>
+      <div class="grid grid-flow-row-dense grid-cols-2 gap-10">
+        <div class="p-2 justify-self-start w-full border bg-[#57855E] text-white border-none rounded-md">
+          <button @click="refresh">รีเฟรชตำแหน่ง</button>
+        </div>
+        <div class="p-2 justify-self-end">
+          <a-r-dropdown/>
+        </div>
       </div>
     </div>
 
@@ -230,13 +283,18 @@ video{
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
+    <div id="tracker" class="flex h-screen justify-center items-center">
+      <div id="tracker" class="text-center bg-[#AFC2AC]">
+        <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
+      </div>
+    </div>
        
       <a-scene
         embedded
         vr-mode-ui="enabled: false;"
         loading-screen="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight:1024;"
         id="scene"
         gesture-detector
       >
@@ -247,20 +305,18 @@ video{
         gesture-handler 
         position = "1 0 0" 
         scale = "0.75 0.75 0.75" 
-        rotation = "0 90 270" 
+        rotation = "0 0 0" 
         :gltf-model="getPath('models/upDownSideCity2.glb')" ></a-entity> 
       </a-marker>
  
       <a-marker type="barcode" id="marker2" value="8" check-marker-sculp>
-       <a-entity id = "model2" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 90 270 " :gltf-model="getPath('models/upDownSideCity2.glb')" ></a-entity> 
+       <a-entity id = "model2" visible ="false" gesture-handler position = "-1 0 0" scale = "0.75 0.75 0.75 " rotation = "0 0 0" :gltf-model="getPath('models/upDownSideCity2.glb')" ></a-entity> 
       </a-marker>
       <a-marker type="barcode" id="marker3" value="24" check-marker-sculp>
        <a-entity id = "model3" visible ="false" gesture-handler position = "0 1.5 0" scale = "0.05 0.05 0.05 "  :gltf-model="getPath('models/auditorium.glb')" do-rotation></a-entity> 
       </a-marker>
 
        <a-entity  spawn-virtual></a-entity> 
-
-                  
       <a-entity id = "camera" camera  ></a-entity>
 
 
