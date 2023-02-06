@@ -96,6 +96,22 @@ export default {
     }
   },
 };
+AFRAME.registerComponent("check-marker-medi", {
+  init: function () {
+    let el = this.el;
+    var track = document.getElementById('tracker');
+
+    el.addEventListener("markerFound", function () {
+      track.style.display = 'none'; 
+      console.log(el.id + " found");
+    });
+
+    el.addEventListener("markerLost", function () {
+      track.style.display = 'block';
+      console.log(el.id + " lost");
+    });
+  },
+});
 </script>
 
 <style>
@@ -109,7 +125,7 @@ video{
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause{
+#pause, #tracker{
   width: 100%;
   height: 100px;
   margin-top: 200px ;
@@ -137,13 +153,18 @@ video{
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
+    <div id="tracker" class="flex h-screen justify-center items-center">
+      <div id="tracker" class="text-center bg-[#AFC2AC]">
+        <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
+      </div>
+    </div>
        
       <a-scene
         embedded
         vr-mode-ui="enabled: false;"
         loading-screen="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
         id="scene"
         gesture-detector
       >
@@ -155,15 +176,16 @@ video{
           raycaster="objects: .clickable"
           emitevents="true"
           cursor="fuse: false; rayOrigin: mouse;"
+          check-marker-medi
         >
           <a-entity
             id="med-model"
-            :gltf-model="getPath('models/MedBuildingsv3.gltf')"
+            :gltf-model="getPath('models/hospital_bulding_v2.glb')"
             class="clickable"
             gesture-handler
-            position="0 0 -1.5"
-            rotation="90 0 -180"
-            scale="0.01 0.01 0.01"
+            position="0 0 0"
+            rotation="-90 0 0"
+            scale="0.04 0.04 0.04"
           ></a-entity>
         </a-marker>
         <a-entity camera></a-entity>

@@ -96,6 +96,22 @@ export default {
     }
   },
 };
+AFRAME.registerComponent("check-marker-cow", {
+  init: function () {
+    let el = this.el;
+    var track = document.getElementById('tracker');
+
+    el.addEventListener("markerFound", function () {
+      track.style.display = 'none'; 
+      console.log(el.id + " found");
+    });
+
+    el.addEventListener("markerLost", function () {
+      track.style.display = 'block';
+      console.log(el.id + " lost");
+    });
+  },
+});
 </script>
 
 <style>
@@ -137,13 +153,18 @@ video{
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
+    <div id="tracker" class="flex h-screen justify-center items-center">
+      <div id="tracker" class="text-center bg-[#AFC2AC]">
+        <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
+      </div>
+    </div>
        
       <a-scene
         embedded
         vr-mode-ui="enabled: false;"
         loading-screen="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
         id="scene"
         gesture-detector
       >
@@ -155,6 +176,7 @@ video{
           raycaster="objects: .clickable"
           emitevents="true"
           cursor="fuse: false; rayOrigin: mouse;"
+          check-marker-cow
         >
         <!--วัว-->
           <a-entity

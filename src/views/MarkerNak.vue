@@ -107,8 +107,8 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
       let newPosition = new THREE.Vector3(0,0,0);//new model position that too far from current position 
       let center = new THREE.Vector3(0,0,0);//center between current and new     
       let rotationCheckCount = 0;//number of time that check rotation
-      let additionX = 2;//defualt addition x for each roation
-      let additionY = 1;//defualt addition y for each roation
+      let additionX = -2;//defualt addition x for each roation
+      let additionY = 8.5;//defualt addition y for each roation
       let playAnimation = false;//check if need to run animation for not
       let mixer;//animation-mixer
       let clips;//animation that going to play
@@ -118,8 +118,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //    Custom Value 
 //    using when marker is too far away
       let distance = 0.5;//Distance between current point to center point || center to new
-      let countdown = 20
-      ;//Delay time without tracking before model disappear
+      let countdown = 50;//Delay time without tracking before model disappear
  
 // ----------------------------------------------------------------------------------------------------        
 //    keep check each marker   
@@ -173,6 +172,8 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //   main thing        
      tick: function(time, deltaTime) 
         {
+          console.log(isTooFast)
+          var track = document.getElementById('tracker');
           // if((!marker_visible["marker2"] &&  !marker_visible["marker1"] && !marker_visible["marker2"] && !marker_visible["marker1"]))
           // {
           //   this.falseModel.visible = false;
@@ -190,9 +191,11 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
                 despawn = false;  
                 isTooFast =false;
                 playAnimation = false;
+                scale = 0.1;
                 center.copy(0,0,0);
                 newPosition.copy(0,0,0);
                 currentPosition.copy(0,0,0);
+
               //  this.falseModel.rotation.x = THREE.MathUtils.degToRad(0);
               //  this.falseModel.rotation.y = THREE.MathUtils.degToRad(0);
               //  this.falseModel.rotation.z = THREE.MathUtils.degToRad(270);
@@ -204,12 +207,14 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //        compute position / rotation / newest material that should be   
           if(( marker_visible["marker2"] ||  (marker_visible["marker1"] )) && (marker_visible["marker3"] || marker_visible["marker4"]))
           { 
+            track.style.display = 'none';
 //        Search for 2nd tracker to compute rotation sort by tracking efficiency 
-              if(marker_visible["marker3"]) {this.el3.object3D.getWorldPosition(this.p2);}
-              else if(marker_visible["marker4"]){this.el4.object3D.getWorldPosition(this.p2);}
+              if(marker_visible["marker3"]) {this.el3.object3D.getWorldPosition(this.p2); track.style.display = 'none';}
+              else if(marker_visible["marker4"]){this.el4.object3D.getWorldPosition(this.p2); track.style.display = 'none';}
               
-              if(marker_visible["marker1"]) {this.el1.object3D.getWorldPosition(this.p1);}
-              else if(marker_visible["marker2"]){this.el2.object3D.getWorldPosition(this.p1);}
+              if(marker_visible["marker1"]) {this.el1.object3D.getWorldPosition(this.p1); track.style.display = 'none';}
+              else if(marker_visible["marker2"]){this.el2.object3D.getWorldPosition(this.p1); track.style.display = 'none';}
+              else{track.style.display = 'block';}
 
 //         Using Diferrence to compute phone rotation
               let pseudoXPos = 0;
@@ -217,12 +222,12 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               let pseudoZPos = 0;
 
               pseudoXPos = this.p1.x + additionX;
-              pseudoYPos = this.p2.y + additionY  + 6;
+              pseudoYPos = this.p2.y + additionY;
               pseudoZPos = ((this.p1.z + this.p2.z) / 2 ) - 50;
 
 
 // If new position is too far model will slide to it 
-                if((leftTime < countdown - 1)  && isTooFast == false && leftTime != 0 && ( rotationCheckCount % 5  != 0 || rotationCheckCount   <= 2))
+                if((leftTime < countdown - 1)  && isTooFast == false && leftTime != 0 )
                   { 
                     if(currentPosition.distanceTo(new THREE.Vector3(pseudoXPos,pseudoYPos,pseudoZPos)) > distance * 2  )
                     {   
@@ -235,13 +240,14 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
                     }
                   }
 // else -> normal tracking
-                  else if(!isTooFast  && !despawn)
+                  else if(!isTooFast)
                     {
                       if(!isShowed)
                           {
                             this.falseModel.position.z = pseudoZPos;
                             spawn = true;
                             isShowed = true;
+                            
                           }
                         if(this.falseModel.position.z - pseudoZPos >= 1 ||  this.falseModel.position.z - pseudoZPos <= -1)
                           {this.falseModel.position.z = (pseudoZPos + pseudoZPos ) / 2;}
@@ -303,10 +309,12 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
             {
               if(leftTime % 50 == 0 && leftTime != countdown)  { console.log("timeLeft : " + leftTime); }
               leftTime -= 1;
+              
             }        
           else if(leftTime <= 0 && isShowed )
             {
                 console.log("deSpawning model");
+                isShowed = false;
                 despawn = true;                
             }
 // ***************************************************************************************************           
@@ -319,19 +327,19 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               
               this.falseModel.scale.set(scale,scale,scale);
               playAnimation = true;
-              scale += 0.01;
+              scale += 0.03;
               this.falseModel.visible = true;
-              if(scale >= 2)
+              if(scale >= 2.8)
                 {
                   spawn = false; 
                 }            
             }
           
 //  for model to do something before disappear from camera 
-          if(despawn )
+          if(despawn)
             {
               this.falseModel.scale.set(scale,scale,scale);
-              scale -= 0.02;
+              scale -= 0.05;
               if(scale <= 0.01)
                 {
                   playAnimation = false;
@@ -347,7 +355,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
             }
            else if(!playAnimation && mixer)
             {
-              mixer.update(0) ;
+              mixer.update(0);
             }
 
 
@@ -371,7 +379,7 @@ video{
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause{
+#pause, #tracker{
   width: 100%;
   height: 100px;
   margin-top: 200px ;
@@ -399,31 +407,34 @@ video{
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
+    <div id="tracker" class="flex h-screen justify-center items-center">
+      <div id="tracker" class="text-center bg-[#AFC2AC]">
+        <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
+      </div>
+    </div>
        
       <a-scene
         embedded
         vr-mode-ui="enabled: false;"
         loading-screen="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
         id="scene"
         gesture-detector
       >
+
       <a-marker type="barcode" id="marker1" value="14" check-marker-naka></a-marker>
-    
       <a-marker type="barcode" id="marker2" value="8" check-marker-naka></a-marker>
-    
       <a-marker type="barcode" id="marker3" value="60" check-marker-naka></a-marker>
-    
       <a-marker type="barcode" id="marker4" value="58" check-marker-naka></a-marker>
  
       <a-entity 
         id = "false-model" 
         visible="false" 
         gesture-handler 
-        rotation ="10 350 0" 
+        rotation ="10 340 0" 
         take-animation 
-        :gltf-model="getPath('models/naga.glb')" 
+        :gltf-model="getPath('models/naga-wave-green.glb')" 
       ></a-entity>
 
       <a-entity id = "camera" camera  ></a-entity>

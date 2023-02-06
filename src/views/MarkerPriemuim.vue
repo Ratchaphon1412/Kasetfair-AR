@@ -109,11 +109,14 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
       AFRAME.registerComponent("check-marker-premium", {
         init: function() {
           let el = this.el;
+          var track = document.getElementById('tracker');
           el.addEventListener("markerFound", function() {
+            track.style.display = 'none';
             marker_visible[el.id] = true;
           });
 
           el.addEventListener("markerLost", function() {
+            track.style.display = 'block';
             marker_visible[el.id] = false;
             if(!marker_visible["marker2"] && !marker_visible["marker1"])
             {
@@ -228,7 +231,7 @@ video{
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause{
+#pause, #tracker{
   width: 100%;
   height: 100px;
   margin-top: 200px ;
@@ -238,7 +241,7 @@ video{
 
 <template>
 <div class="landscape:hidden">
-    <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-7">
+    <div class="z-10 absolute inset-x-0 top-0 grid grid-cols-2 justify-items-stretch py-3">
       <img id="logo" class="hidden"/>
       <div>
         <button type="button" class="py-2 px-2" @click="home()">
@@ -256,23 +259,28 @@ video{
         <h1 class="text-center font-bold">ถ่ายภาพ</h1>
       </button>
     </div>
+    <div id="tracker" class="flex h-screen justify-center items-center">
+      <div id="tracker" class="text-center bg-[#AFC2AC]">
+        <h1 class="text-3xl pt-5">กรุณาหันกล้องไปทางโลโก้</h1>
+      </div>
+    </div>
        
       <a-scene
         embedded
         vr-mode-ui="enabled: false;"
         loading-screen="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
         id="scene"
         gesture-detector
       >
       <a-marker type="barcode" id="marker1" value="14" check-marker-premium>
-        <a-entity id = "left-model" visible = "false"  gesture-handler position ="2 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/Human_left.glb')" ></a-entity>
+        <a-entity id = "left-model" visible = "false"  gesture-handler position ="2 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/Human_left_v2.glb')" ></a-entity>
       </a-marker>
     
       <a-marker type="barcode" id="marker2" value="8" check-marker-premium>
-        <a-entity visible = "false" id = "right-model" gesture-handler position ="-1 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/Human_right.glb')" ></a-entity>
-        <a-entity visible = "false" id = "model" gesture-handler position ="-2 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/people_GLTF.gltf')" ></a-entity>
+        <a-entity visible = "false" id = "right-model" gesture-handler position ="-1 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/Human_right_v2.glb')" ></a-entity>
+        <a-entity visible = "false" id = "model" gesture-handler position ="-2 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/people_GLB_v2.glb')" ></a-entity>
       </a-marker>
                   
       <a-entity id = "camera" camera  ></a-entity>
