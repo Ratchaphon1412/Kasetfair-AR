@@ -426,6 +426,7 @@ video{
         renderer="logarithmicDepthBuffer: true;"
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
         id="scene"
+        reflection="directionalLight:a-light#dirlight;"
         gesture-detector
       >
 
@@ -433,6 +434,8 @@ video{
       <a-marker type="barcode" id="marker2" value="8" check-marker-naka></a-marker>
       <a-marker type="barcode" id="marker3" value="60" check-marker-naka></a-marker>
       <a-marker type="barcode" id="marker4" value="58" check-marker-naka></a-marker>
+
+      <a-light id="dirlight" intensity="2" light="castShadow:true;type:directional" position="1 -1 8"></a-light>
  
       <a-entity 
         id = "false-model" 
