@@ -15,7 +15,8 @@ const arList = ref([
 	{ 'text': 'คณะแพทย์', 'route': 'ar2' },
 	{ 'text': 'KU Milk', 'route': 'ar3' },
 	{ 'text': 'พรีเมียม', 'route': 'ar4' },
-	{ 'text': 'ตึกฟิสิกส์', 'route': 'ar8' },
+	{ 'text': 'ด้านล่างฟิสิกส์', 'route': 'ar5' },
+	{ 'text': 'ด้านบนฟิสิกส์', 'route': 'ar8' },
 	{ 'text': 'คณะวิศวะ', 'route': 'arx' },
 ])
 
@@ -45,8 +46,10 @@ const getRouteName = (routeName: string): string => {
 			return 'คณะแพทย์';
 		case 'ar4':
 			return 'พรีเมียม';
+		case 'ar5':
+			return 'ด้านล่างตึกฟิสิกส์';
 		case 'ar8':
-			return 'ตึกฟิสิกส์';
+			return 'ด้านบนตึกฟิสิกส์';
 		case 'arx':
 			return 'คณะวิศวะ';
 		default:

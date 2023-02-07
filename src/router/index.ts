@@ -59,6 +59,11 @@ const router = createRouter({
       component: () => import('@/views/MarkerPriemuim.vue')
     },
     {
+      path: '/ar5',
+      name: 'ar5',
+      component: () => import('@/views/MarkerArrow.vue')
+    },
+    {
       path: '/share',
       name: 'share',
       props: ['preview'],
