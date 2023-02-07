@@ -80,7 +80,7 @@ export default {
       .components.screenshot.getCanvas("perspective");
       canvas.getContext("2d").drawImage(imgData, -200, 0, width +300, height);
 
-      var logoWidth = 106, logoHeight = 173;
+      var logoWidth = 170, logoHeight = 170;
       var scaleLogo = 30;
       canvas.getContext("2d").drawImage(logo,
       width - (logoWidth - scaleLogo) - (logoWidth - scaleLogo) / 2,
@@ -135,30 +135,55 @@ export default {
           
 
           this.p1  = new THREE.Vector3(0,0,0);
+          this.p2 = new THREE.Vector3(0,0,0);
 //        make models spawn at vectorOrigin          
-          this.model1 = document.querySelector("#model1").object3D;
-          this.model2 = document.querySelector("#model2").object3D;
-          // this.model.rotation.x = THREE.MathUtils.degToRad(0);
-          // this.model.rotation.y = THREE.MathUtils.degToRad(0);
-          // this.model.rotation.z = THREE.MathUtils.degToRad(0);
+          this.model = document.querySelector("#model").object3D;
+          // this.model2 = document.querySelector("#model2").object3D;
+
 
           },
           
 //   main thing        
      tick: function() 
         {
- 
-          if( marker_visible["marker1"])
+          if(marker_visible["marker1"] || marker_visible["marker2"])
           {
-            this.model1.visible =true;
-            this.model2.visible =false;
+          
+          if(marker_visible["marker1"] && marker_visible["marker2"])
+          {
+            this.el1.object3D.getWorldPosition(this.p1);
+            this.el2.object3D.getWorldPosition(this.p2);
 
+            this.model.position.x = ((this.p1.x + this.p2.x) / 2 );
+            this.model.position.y = ((this.p1.y + this.p2.y) / 2 ) - 1;
+            this.model.position.z = ((this.p1.z + this.p2.z) / 2 ) - 10;
+            
+            this.model.visible = true;
           }
-          else if(marker_visible["marker2"] )
-          {
-            this.model2.visible =true;
-            this.model1.visible =false;
-          }
+          // else
+          // {
+          //   if( marker_visible["marker1"])
+          //   {
+          //     this.el1.object3D.getWorldPosition(this.p1);
+          //   }
+          //   else if(marker_visible["marker2"] )
+          //   {
+          //     this.el2.object3D.getWorldPosition(this.p1);
+          //   }
+            
+          //   this.model.position.x = this.p1.x;
+          //   this.model.position.y = this.p1.y;
+          //   this.model.position.z = this.p1.z;
+          //   this.model.visible = true;
+
+          // }
+        }
+        else 
+        {
+          this.model.visible = false;
+        }
+        
+
           
         }});
 </script>
@@ -223,14 +248,11 @@ video{
         id="scene"
         gesture-detector
       >
-      <a-marker type="barcode" id="marker1" value="14" check-marker-medi>
-        <a-entity visible = "false" id = "model1"  gesture-handler position ="2 0 0" scale ="0.075 0.075 0.075" rotation = "-37.5 45 -30"  :gltf-model="getPath('models/hospital_bulding_v2.glb')" ></a-entity>
-      </a-marker>
-    
-      <a-marker type="barcode" id="marker2" value="8" check-marker-medi>
-        <a-entity visible = "false" id = "model2"  gesture-handler position ="-2 0 0" scale ="0.075 0.075 0.075" rotation = "-37.5 45 -30"  :gltf-model="getPath('models/hospital_bulding_v2.glb')" ></a-entity>
+      <a-entity visible = "false" id = "model"  gesture-handler position ="0 0 0" scale ="0.025 0.025 0.025" rotation = "0 0 0"  :gltf-model="getPath('models/hospital_bulding.glb')" ></a-entity>
 
-      </a-marker>
+      <a-marker type="barcode" id="marker1" value="14" check-marker-medi></a-marker>
+    
+      <a-marker type="barcode" id="marker2" value="8" check-marker-medi></a-marker>
 
       <!--315 315 35-->                  
       <a-entity id = "camera" camera  ></a-entity>
@@ -240,7 +262,7 @@ video{
 <div class="portrait:hidden">
   <!--
   <div class="z-10 absolute inset-0 flex h-screen">
-    <h1>PAUSE SCREEN 123456789</h1>
+    <h1>PAUSE SCREEN 123456789</h1>0 0 0
   </div>
   -->
 
