@@ -311,7 +311,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               leftTime -= 1;
               
             }        
-          else if(leftTime <= 0 && isShowed )
+          else if(leftTime <= 0 && ((!marker_visible["marker2"] &&  !marker_visible["marker1"] && !marker_visible["marker3"] && !marker_visible["marker4"])) )
             {
                 console.log("deSpawning model");
                 isShowed = false;
@@ -329,7 +329,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               playAnimation = true;
               scale += 0.03;
               this.falseModel.visible = true;
-              if(scale >= 2.8)
+              if(scale >= 3)
                 {
                   spawn = false; 
                 }            
