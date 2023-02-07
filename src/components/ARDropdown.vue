@@ -12,10 +12,11 @@ const icon = ref("fa-caret-down");
 const arList = ref([
 	{ 'text': 'สระพระพิรุณ', 'route': 'ar0' },
 	{ 'text': '๓ บูรพาจารย์', 'route': 'ar1' },
-	{ 'text': 'คณะแพทย์', 'route': 'ar2' },
-	{ 'text': 'KU Milk', 'route': 'ar3' },
+	{ 'text': 'KU Milk', 'route': 'ar2' },
+	{ 'text': 'คณะแพทย์', 'route': 'ar3' },
 	{ 'text': 'พรีเมียม', 'route': 'ar4' },
-	{ 'text': 'ตึกฟิสิกส์', 'route': 'ar8' },
+	{ 'text': 'ด้านล่างตึกฟิสิกส์', 'route': 'ar5' },
+	{ 'text': 'ด้านบนตึกฟิสิกส์', 'route': 'ar8' },
 	{ 'text': 'คณะวิศวะ', 'route': 'arx' },
 ])
 
@@ -40,13 +41,15 @@ const getRouteName = (routeName: string): string => {
 		case 'ar1':
 			return '๓ บูรพาจารย์';
 		case 'ar3':
-			return 'KU Milk';
-		case 'ar2':
 			return 'คณะแพทย์';
+		case 'ar2':
+			return 'KU Milk';
 		case 'ar4':
 			return 'พรีเมียม';
+		case 'ar5':
+			return 'ด้านล่างตึกฟิสิกส์';
 		case 'ar8':
-			return 'ตึกฟิสิกส์';
+			return 'ด้านบนตึกฟิสิกส์';
 		case 'arx':
 			return 'คณะวิศวะ';
 		default:

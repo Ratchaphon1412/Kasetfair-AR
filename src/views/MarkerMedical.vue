@@ -62,7 +62,7 @@ export default {
     },
     capture() {
       // document.querySelector("video").pause();
-      console.log("capture")
+      // console.log("capture")
       const video = document.getElementsByTagName("video")[0];
       const canvas = document.createElement("canvas");
       const logo = document.getElementById('logo');
