@@ -79,7 +79,7 @@ export default {
       .components.screenshot.getCanvas("perspective");
       canvas.getContext("2d").drawImage(imgData, -200, 0, width +300, height);
 
-      var logoWidth = 106, logoHeight = 173;
+      var logoWidth = 170, logoHeight = 170;
       var scaleLogo = 30;
       canvas.getContext("2d").drawImage(logo,
       width - (logoWidth - scaleLogo) - (logoWidth - scaleLogo) / 2,
@@ -311,7 +311,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               leftTime -= 1;
               
             }        
-          else if(leftTime <= 0 && isShowed )
+          else if(leftTime <= 0 && ((!marker_visible["marker2"] &&  !marker_visible["marker1"] && !marker_visible["marker3"] && !marker_visible["marker4"])) )
             {
                 console.log("deSpawning model");
                 isShowed = false;
@@ -329,7 +329,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
               playAnimation = true;
               scale += 0.03;
               this.falseModel.visible = true;
-              if(scale >= 2.8)
+              if(scale >= 3)
                 {
                   spawn = false; 
                 }            
@@ -379,10 +379,16 @@ video{
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause, #tracker{
+#pause {
   width: 100%;
   height: 100px;
-  margin-top: 200px ;
+  margin-top: 400px;
+  opacity: 75%;
+}
+#tracker{
+  width: 100%;
+  height: 100px;
+  margin-top: 200px;
   opacity: 75%;
 }
 </style>
@@ -420,6 +426,7 @@ video{
         renderer="logarithmicDepthBuffer: true;"
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
         id="scene"
+        reflection="directionalLight:a-light#dirlight;"
         gesture-detector
       >
 
@@ -427,6 +434,8 @@ video{
       <a-marker type="barcode" id="marker2" value="8" check-marker-naka></a-marker>
       <a-marker type="barcode" id="marker3" value="60" check-marker-naka></a-marker>
       <a-marker type="barcode" id="marker4" value="58" check-marker-naka></a-marker>
+
+      <a-light id="dirlight" intensity="2" light="castShadow:true;type:directional" position="1 -1 8"></a-light>
  
       <a-entity 
         id = "false-model" 
@@ -434,7 +443,7 @@ video{
         gesture-handler 
         rotation ="10 340 0" 
         take-animation 
-        :gltf-model="getPath('models/naga-wave-green.glb')" 
+        :gltf-model="getPath('models/naka_green_animation_version150.glb')" 
       ></a-entity>
 
       <a-entity id = "camera" camera  ></a-entity>

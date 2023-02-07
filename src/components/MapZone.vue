@@ -12,7 +12,7 @@
     >
       <img
         class="justify-items-center w-auto h-auto max-w- max-h-full"
-        src="@/assets/images/FinalMapKasetFair.svg"
+        src="@/assets/images/map_AR.png"
         alt=""
       />
     </div>

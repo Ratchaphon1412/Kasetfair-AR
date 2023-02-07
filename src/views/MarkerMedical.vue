@@ -4,6 +4,7 @@ const getPath = (path) => {
 };
 </script>
 
+
 <script>
 import ARDropdown from '@/components/ARDropdown.vue';
 var screenshot;
@@ -14,12 +15,12 @@ const getPath = (path) => {
 };
 
 export default {
-  components: {ARDropdown},
   mounted (){
     var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
     const logo = document.getElementById('logo');
     logo.src += logoSource;
   },
+  components: {ARDropdown},
   methods: {
     stopVideo() {
       const vid = document.getElementsByTagName("video")[0];
@@ -96,22 +97,70 @@ export default {
     }
   },
 };
-AFRAME.registerComponent("check-marker-medi", {
-  init: function () {
-    let el = this.el;
-    var track = document.getElementById('tracker');
+    let marker_visible = { marker1: false, marker2: false };
 
-    el.addEventListener("markerFound", function () {
-      track.style.display = 'none'; 
-      console.log(el.id + " found");
-    });
+// ----------------------------------------------------------------------------------------------------        
+//    keep check each marker   
+      AFRAME.registerComponent("check-marker-medi", {
+        init: function() {
+          let el = this.el;
+          var track = document.getElementById('tracker');
+          el.addEventListener("markerFound", function() {
+            track.style.display = 'none';
+            marker_visible[el.id] = true;
+          });
 
-    el.addEventListener("markerLost", function () {
-      track.style.display = 'block';
-      console.log(el.id + " lost");
-    });
-  },
-});
+          el.addEventListener("markerLost", function() {
+            marker_visible[el.id] = false;      
+            if(!marker_visible["marker1"] &&  !marker_visible["marker2"])
+            {
+              track.style.display = 'block';
+            }
+          });
+          
+        }
+      });
+// ----------------------------------------------------------------------------------------------------         
+
+
+
+// ----------------------------------------------------------------------------------------------------  
+
+//      compute model location / playAnimation  or not /phone rotation 
+        AFRAME.registerComponent("spawn-building", {
+          init: function() {
+//        search for markers    
+          this.el1 = document.querySelector("#marker1");
+          this.el2 = document.querySelector("#marker2");
+          
+
+          this.p1  = new THREE.Vector3(0,0,0);
+//        make models spawn at vectorOrigin          
+          this.model1 = document.querySelector("#model1").object3D;
+          this.model2 = document.querySelector("#model2").object3D;
+          // this.model.rotation.x = THREE.MathUtils.degToRad(0);
+          // this.model.rotation.y = THREE.MathUtils.degToRad(0);
+          // this.model.rotation.z = THREE.MathUtils.degToRad(0);
+
+          },
+          
+//   main thing        
+     tick: function() 
+        {
+ 
+          if( marker_visible["marker1"])
+          {
+            this.model1.visible =true;
+            this.model2.visible =false;
+
+          }
+          else if(marker_visible["marker2"] )
+          {
+            this.model2.visible =true;
+            this.model1.visible =false;
+          }
+          
+        }});
 </script>
 
 <style>
@@ -125,10 +174,16 @@ video{
   margin-left: 0px !important;
   object-fit: cover;
 }
-#pause, #tracker{
+#pause {
   width: 100%;
   height: 100px;
-  margin-top: 200px ;
+  margin-top: 400px;
+  opacity: 75%;
+}
+#tracker{
+  width: 100%;
+  height: 100px;
+  margin-top: 200px;
   opacity: 75%;
 }
 </style>
@@ -164,31 +219,22 @@ video{
         vr-mode-ui="enabled: false;"
         loading-screen="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
         id="scene"
         gesture-detector
       >
-        <a-marker
-          id="animated-marker"
-          type="pattern"
-          preset="custom"
-          :url="getPath('80logo/finallogo_v2.patt')"
-          raycaster="objects: .clickable"
-          emitevents="true"
-          cursor="fuse: false; rayOrigin: mouse;"
-          check-marker-medi
-        >
-          <a-entity
-            id="med-model"
-            :gltf-model="getPath('models/hospital_bulding_v2.glb')"
-            class="clickable"
-            gesture-handler
-            position="0 0 0"
-            rotation="-90 0 0"
-            scale="0.04 0.04 0.04"
-          ></a-entity>
-        </a-marker>
-        <a-entity camera></a-entity>
+      <a-marker type="barcode" id="marker1" value="14" check-marker-medi>
+        <a-entity visible = "false" id = "model1"  gesture-handler position ="2 0 0" scale ="0.075 0.075 0.075" rotation = "-37.5 45 -30"  :gltf-model="getPath('models/hospital_bulding_v2.glb')" ></a-entity>
+      </a-marker>
+    
+      <a-marker type="barcode" id="marker2" value="8" check-marker-medi>
+        <a-entity visible = "false" id = "model2"  gesture-handler position ="-2 0 0" scale ="0.075 0.075 0.075" rotation = "-37.5 45 -30"  :gltf-model="getPath('models/hospital_bulding_v2.glb')" ></a-entity>
+
+      </a-marker>
+
+      <!--315 315 35-->                  
+      <a-entity id = "camera" camera  ></a-entity>
+      <a-entity spawn-building></a-entity>
       </a-scene>
 </div>
 <div class="portrait:hidden">
@@ -206,4 +252,4 @@ video{
   </div>
   
 </div>
-</template>
+</template> 
