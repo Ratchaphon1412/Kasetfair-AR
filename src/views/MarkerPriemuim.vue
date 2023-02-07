@@ -16,7 +16,7 @@ const getPath = (path) => {
 
 export default {
   mounted (){
-    var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
+    var logoSource = getPath("images/watermark/logo1.png");
     const logo = document.getElementById('logo');
     logo.src += logoSource;
   },

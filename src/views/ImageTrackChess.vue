@@ -17,7 +17,7 @@ export default {
   components: { ARDropdown },
   mounted() {
     var logoSource = getPath(
-      "images/watermark/logo" + Math.floor((Math.random() * 10) % 4) + ".png"
+      "images/watermark/logo3.png"
     );
     const logo = document.getElementById("logo");
     logo.src += logoSource;
