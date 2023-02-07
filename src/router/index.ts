@@ -43,20 +43,20 @@ const router = createRouter({
       name: 'ar1',
       component: () => import('@/views/ImageTrackChess.vue')
     },
-    {  
+    {
       path: '/ar2',
       name: 'ar2',
-      component: () => import('@/views/ImageTrackCow.vue')
+      component: () => import('@/views/MarkerPriemuim.vue')
     },
-    {
+    {  
       path: '/ar3',
       name: 'ar3',
-      component: () => import('@/views/MarkerMedical.vue')
+      component: () => import('@/views/ImageTrackCow.vue')
     },
     {
       path: '/ar4',
       name: 'ar4',
-      component: () => import('@/views/MarkerPriemuim.vue')
+      component: () => import('@/views/MarkerMedical.vue')
     },
     {
       path: '/ar5',

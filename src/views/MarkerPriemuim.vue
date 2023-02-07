@@ -4,7 +4,6 @@ const getPath = (path) => {
 };
 </script>
 
-
 <script>
 import ARDropdown from '@/components/ARDropdown.vue';
 var screenshot;
@@ -15,12 +14,12 @@ const getPath = (path) => {
 };
 
 export default {
+  components: {ARDropdown},
   mounted (){
     var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
     const logo = document.getElementById('logo');
     logo.src += logoSource;
   },
-  components: {ARDropdown},
   methods: {
     stopVideo() {
       const vid = document.getElementsByTagName("video")[0];
@@ -62,7 +61,7 @@ export default {
     },
     capture() {
       // document.querySelector("video").pause();
-      // console.log("capture")
+      console.log("capture")
       const video = document.getElementsByTagName("video")[0];
       const canvas = document.createElement("canvas");
       const logo = document.getElementById('logo');
@@ -97,127 +96,22 @@ export default {
     }
   },
 };
-let marker_visible = { marker1: false, marker2: false , marker3: false, marker4: false};
-      let isShowed = false;//check if model show or not
-      let spawn = false;//check if model spawn on camera 
-      let scale = 0.01;
+AFRAME.registerComponent("check-marker-premium", {
+  init: function () {
+    let el = this.el;
+    var track = document.getElementById('tracker');
 
-      
+    el.addEventListener("markerFound", function () {
+      track.style.display = 'none'; 
+      // console.log(el.id + " found");
+    });
 
-// ----------------------------------------------------------------------------------------------------        
-//    keep check each marker   
-      AFRAME.registerComponent("check-marker-premium", {
-        init: function() {
-          let el = this.el;
-          var track = document.getElementById('tracker');
-          el.addEventListener("markerFound", function() {
-            track.style.display = 'none';
-            marker_visible[el.id] = true;
-          });
-
-          el.addEventListener("markerLost", function() {
-            track.style.display = 'block';
-            marker_visible[el.id] = false;
-            if(!marker_visible["marker2"] && !marker_visible["marker1"])
-            {
-              isShowed = false;
-              scale = 0.01;
-            }          
-          });
-          
-        }
-      });
-// ----------------------------------------------------------------------------------------------------         
-
-
-
-// ----------------------------------------------------------------------------------------------------  
-
-//      compute model location / playAnimation  or not /phone rotation 
-        AFRAME.registerComponent("spawn-team", {
-          init: function() {
-//        search for markers    
-          this.el1 = document.querySelector("#marker1");
-          this.el2 = document.querySelector("#marker2");
-          
-//        position of marker to compute model spawn position
-          this.p1  = new THREE.Vector3(0,0,0);
-          this.p2  = new THREE.Vector3(0,0,0);
-           
-//        make models spawn at vectorOrigin          
-          this.model = document.querySelector("#model").object3D;
-          this.leftModel = document.querySelector("#left-model").object3D;
-          this.rightModel = document.querySelector("#right-model").object3D;
-            
-
-          },
-          
-//   main thing        
-     tick: function(time, deltaTime) 
-        {
-// ***************************************************************************************************           
-
-
-
-          
-// *************************************************************************************************** 
-//        compute position / rotation / newest material that should be   
-          if( marker_visible["marker2"] || marker_visible["marker1"])
-          {   
-              if(marker_visible["marker1"] && marker_visible["marker2"])
-                {
-                  this.model.visible =true;
-                  this.leftModel.visible = false;
-                  this.rightModel.visible = false;
-                }
-             else 
-               {
-                    if(marker_visible["marker1"]) 
-                    {
-                      this.leftModel.visible = true;
-                      this.rightModel.visible = false;
-                      this.model.visible =false;
-                    }
-                    else if(marker_visible["marker2"]) 
-                    {
-                      this.leftModel.visible = false;
-                      this.rightModel.visible = true;
-                      this.model.visible =false;
-
-                    }                 
-  
-                }
-          
-
-
-                if(!isShowed) {spawn = true; isShowed = true;}
-                    
-                }
-
-// ***************************************************************************************************           
-          
-  
-//  for model appear in camera to do something
-          if(spawn )
-            {
-              
-              scale += 0.001;
-              this.model.scale.set(scale,scale,scale);
-              this.leftModel.scale.set(scale,scale,scale);
-              this.rightModel.scale.set(scale,scale,scale);
-              if(scale >= 0.1)
-                {
-                  spawn = false; 
-                }            
-            }
-          
-//  for model to do something before disappear from camera       
-          
-          
-          
-          
-          
-        }});
+    el.addEventListener("markerLost", function () {
+      track.style.display = 'block';
+      // console.log(el.id + " lost");
+    });
+  },
+});
 </script>
 
 <style>
@@ -276,21 +170,42 @@ video{
         vr-mode-ui="enabled: false;"
         loading-screen="enabled: false;"
         renderer="logarithmicDepthBuffer: true;"
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;detectionMode: mono_and_matrix; matrixCodeType: 3x3; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; sourceWidth:1024; sourceHeight:1024; displayWidth: 1024; displayHeight: 1024;"
         id="scene"
         gesture-detector
       >
-      <a-marker type="barcode" id="marker1" value="14" check-marker-premium>
-        <a-entity id = "left-model" visible = "false"  gesture-handler position ="2 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/Human_left_v2.glb')" ></a-entity>
-      </a-marker>
-    
-      <a-marker type="barcode" id="marker2" value="8" check-marker-premium>
-        <a-entity visible = "false" id = "right-model" gesture-handler position ="-1 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/Human_right_v2.glb')" ></a-entity>
-        <a-entity visible = "false" id = "model" gesture-handler position ="-2 0 0" rotation = "-45 0 0"  :gltf-model="getPath('models/people_GLB_v2.glb')" ></a-entity>
-      </a-marker>
-                  
-      <a-entity id = "camera" camera  ></a-entity>
-      <a-entity spawn-team></a-entity>
+        <a-marker
+          id="animated-marker"
+          type="pattern"
+          preset="custom"
+          :url="getPath('80logo/finallogo_v2.patt')"
+          raycaster="objects: .clickable"
+          emitevents="true"
+          cursor="fuse: false; rayOrigin: mouse;"
+          check-marker-premium
+        >
+        <!--วัว-->
+          <a-entity
+            id="cow-model"
+            :gltf-model="getPath('models/premium_cow_milk.glb')"
+            class="clickable"
+            gesture-handler
+            position="0 0 0.5"
+            rotation="-60 0 0"
+            scale="0.2 0.2 0.2"
+          ></a-entity>
+        <!--กระบะนม-->
+          <!-- <a-entity
+            id="milk-crate-model"
+            :gltf-model="getPath('models/milk_crate_v2.gltf')"
+            class="clickable"
+            gesture-handler
+            position="1.4 1 1.2"
+            rotation="90 90 -90"
+            scale="1 1 1"
+          ></a-entity> -->
+        </a-marker>
+        <a-entity camera></a-entity>
       </a-scene>
 </div>
 <div class="portrait:hidden">

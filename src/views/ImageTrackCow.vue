@@ -187,12 +187,12 @@ video{
         <!--วัว-->
           <a-entity
             id="cow-model"
-            :gltf-model="getPath('models/Cow_v2.gltf')"
+            :gltf-model="getPath('models/Cow_v2.glb')"
             class="clickable"
             gesture-handler
-            position="0 0 1.5"
+            position="0 0 0.5"
             rotation="90 90 -90"
-            scale="0.8 0.8 0.8"
+            scale="0.75 0.75 0.75"
           ></a-entity>
         <!--กระบะนม-->
           <a-entity
@@ -200,9 +200,9 @@ video{
             :gltf-model="getPath('models/milk_crate_v2.gltf')"
             class="clickable"
             gesture-handler
-            position="1.4 1 2.5"
+            position="1.4 1 1.2"
             rotation="90 90 -90"
-            scale="0.8 0.8 0.8"
+            scale="1 1 1"
           ></a-entity>
         </a-marker>
         <a-entity camera></a-entity>
