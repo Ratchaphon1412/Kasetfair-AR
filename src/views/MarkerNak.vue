@@ -61,7 +61,7 @@ export default {
     },
     capture() {
       // document.querySelector("video").pause();
-      console.log("capture")
+      // console.log("capture")
       const video = document.getElementsByTagName("video")[0];
       const canvas = document.createElement("canvas");
       const logo = document.getElementById('logo');
@@ -172,7 +172,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //   main thing        
      tick: function(time, deltaTime) 
         {
-          console.log(isTooFast)
+          // console.log(isTooFast)
           var track = document.getElementById('tracker');
           // if((!marker_visible["marker2"] &&  !marker_visible["marker1"] && !marker_visible["marker2"] && !marker_visible["marker1"]))
           // {
@@ -183,7 +183,7 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //        reset all variable value into defualt
           if(reset)
             {
-                console.log("Reset!!!!");          
+                // console.log("Reset!!!!");          
 
                 isShowed = false;
                 reset = false;
@@ -307,13 +307,13 @@ let marker_visible = { marker1: false, marker2: false , marker3: false, marker4:
 //  Delay Before Disappear      
           if(leftTime > 0 )
             {
-              if(leftTime % 50 == 0 && leftTime != countdown)  { console.log("timeLeft : " + leftTime); }
+              // if(leftTime % 50 == 0 && leftTime != countdown)  { console.log("timeLeft : " + leftTime); }
               leftTime -= 1;
               
             }        
-          else if(leftTime <= 0 && ((!marker_visible["marker2"] &&  !marker_visible["marker1"] && !marker_visible["marker3"] && !marker_visible["marker4"])) )
+          else if(leftTime <= 0 && isShowed && ((!marker_visible["marker2"] &&  !marker_visible["marker1"] && !marker_visible["marker3"] && !marker_visible["marker4"])) )
             {
-                console.log("deSpawning model");
+                // console.log("deSpawning model");
                 isShowed = false;
                 despawn = true;                
             }

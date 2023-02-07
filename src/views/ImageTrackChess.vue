@@ -81,12 +81,12 @@ AFRAME.registerComponent("check-marker", {
 
     el.addEventListener("markerFound", function () {
       track.style.display = 'none'; 
-      console.log(el.id + " found");
+      // console.log(el.id + " found");
     });
 
     el.addEventListener("markerLost", function () {
       track.style.display = 'block';
-      console.log(el.id + " lost");
+      // console.log(el.id + " lost");
     });
   },
 });
