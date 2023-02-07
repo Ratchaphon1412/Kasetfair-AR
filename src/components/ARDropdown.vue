@@ -15,8 +15,8 @@ const arList = ref([
 	{ 'text': 'KU Milk', 'route': 'ar2' },
 	{ 'text': 'คณะแพทย์', 'route': 'ar3' },
 	{ 'text': 'พรีเมียม', 'route': 'ar4' },
-	{ 'text': 'ด้านล่างฟิสิกส์', 'route': 'ar5' },
-	{ 'text': 'ด้านบนฟิสิกส์', 'route': 'ar8' },
+	{ 'text': 'ด้านล่างตึกฟิสิกส์', 'route': 'ar5' },
+	{ 'text': 'ด้านบนตึกฟิสิกส์', 'route': 'ar8' },
 	{ 'text': 'คณะวิศวะ', 'route': 'arx' },
 ])
 
