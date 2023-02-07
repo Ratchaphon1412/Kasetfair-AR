@@ -16,7 +16,7 @@ const getPath = (path) => {
 export default {
   components: {ARDropdown},
   mounted (){
-    var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
+    var logoSource = getPath("images/watermark/logo1.png");
     const logo = document.getElementById('logo');
     logo.src += logoSource;
   },
@@ -190,20 +190,20 @@ video{
             :gltf-model="getPath('models/Cow_v2.gltf')"
             class="clickable"
             gesture-handler
-            position="0 0 1.5"
+            position="0 0 0.5"
             rotation="90 90 -90"
-            scale="0.8 0.8 0.8"
+            scale="0.75 0.75 0.75"
           ></a-entity>
         <!--กระบะนม-->
-          <a-entity
+          <!-- <a-entity
             id="milk-crate-model"
             :gltf-model="getPath('models/milk_crate_v2.gltf')"
             class="clickable"
             gesture-handler
-            position="1.4 1 2.5"
+            position="1.4 1 1.2"
             rotation="90 90 -90"
-            scale="0.8 0.8 0.8"
-          ></a-entity>
+            scale="1 1 1"
+          ></a-entity> -->
         </a-marker>
         <a-entity camera></a-entity>
       </a-scene>
