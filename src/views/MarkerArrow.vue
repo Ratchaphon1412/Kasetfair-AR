@@ -189,7 +189,7 @@ video{
         <!--ลูกศร-->
           <a-entity
             id="arrows-model"
-            :gltf-model="getPath('models/arrows.glb')"
+            :gltf-model="getPath('models/arrows_v012.glb')"
             gesture-detector
             class="clickable"
             position="4 0 3"
