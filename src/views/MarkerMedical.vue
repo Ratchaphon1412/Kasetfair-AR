@@ -16,7 +16,7 @@ const getPath = (path) => {
 
 export default {
   mounted (){
-    var logoSource = getPath("images/watermark/logo" + Math.floor( (Math.random() * 10) % 4) + ".png");
+    var logoSource = getPath("images/watermark/logo80.png");
     const logo = document.getElementById('logo');
     logo.src += logoSource;
   },
@@ -81,7 +81,7 @@ export default {
       canvas.getContext("2d").drawImage(imgData, -200, 0, width +300, height);
 
       var logoWidth = 170, logoHeight = 170;
-      var scaleLogo = 30;
+      var scaleLogo = 120;
       canvas.getContext("2d").drawImage(logo,
       width - (logoWidth - scaleLogo) - (logoWidth - scaleLogo) / 2,
       height - (logoHeight - scaleLogo) - (logoHeight - scaleLogo) / 4,
